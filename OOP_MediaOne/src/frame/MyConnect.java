@@ -15,10 +15,8 @@ import static javax.swing.UIManager.getString;
 public class MyConnect {
     
     private final String className = "com.mysql.jdbc.Driver";
-    private final String url = "jdbc:mysql://localhost:3306/customer";
+    private final String url = "jdbc:mysql://localhost:3306/mydb";
     private final String user = "root";
-    private final String pass = "hoamgtb101";
-    private final String table = "dianhac";
     
     private Connection connection;
 
@@ -26,7 +24,7 @@ public class MyConnect {
     public Connection connect() {
         try {
             Class.forName(className);
-            connection = DriverManager.getConnection(url, user, pass);
+            connection = DriverManager.getConnection(url, user, "");
             System.out.println("Connect success!");
         } catch (ClassNotFoundException e) {
             System.out.println("Class not found!");

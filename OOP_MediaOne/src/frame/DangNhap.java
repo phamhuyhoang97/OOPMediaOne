@@ -42,6 +42,7 @@ public class DangNhap extends javax.swing.JFrame {
             home.panel_chucnangcon_nhanvien.setVisible(false);
             home.panel_chucnangcon_chiphi.setVisible(false);
             home.panel_chucnangcon_thongke.setVisible(false);
+            home.panel_chucnangcon_banhang.setVisible(false);
 
             // Hiển thị cái panel rỗng
             home.panel_sach.setVisible(false);

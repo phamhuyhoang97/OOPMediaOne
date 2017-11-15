@@ -23,7 +23,6 @@ public class QLNhanVien {
         private final String className = "com.mysql.jdbc.Driver";
         private final String url = "jdbc:mysql://127.0.0.1:3306/mydb";
         private final String user = "root";
-        private final String pass = "hoamgtb101";
  
         private static String table = "nhan_vien";//ten bang trong mysql
  
@@ -33,7 +32,7 @@ public class QLNhanVien {
         public void connect() {
                 try {
                         Class.forName(className);
-                        connection = DriverManager.getConnection(url, user, pass);
+                        connection = DriverManager.getConnection(url, user, "");
                         System.out.println("Connect success!");
                 } catch (ClassNotFoundException e) {
                         System.out.println("Class not found!");
