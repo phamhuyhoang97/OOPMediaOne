@@ -3,26 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package quanly;
+package model;
 
+import java.sql.*;
 import frame.MyConnect;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import model.Sach;
+import model.DiaNhac;
 
 /**
  *
  * @author Khoa Nguyen
  */
-public class QLSach {
+public class QLDiaNhac {
+
     MyConnect myConnect = new MyConnect();
 
-    public ResultSet getDataSach() {
+    public ResultSet getDataDiaNhac() {
         ResultSet rs = null;
-        String sqlCommand = "select * from sach";
+        String sqlCommand = "select * from dianhac";
         Statement st;
         try {
             st = myConnect.connect().createStatement();
@@ -33,14 +31,14 @@ public class QLSach {
         return rs;
     }
 
-    public ResultSet timID(String idSach) {
+    public ResultSet timID(String idDiaNhac) {
         ResultSet rs = null;
-        String sqlCommand = "select * from sach where idSach = ?";
+        String sqlCommand = "select * from dianhac where idDiaNhac = ?";
         PreparedStatement pst;
         try {
             pst = myConnect.connect().prepareStatement(sqlCommand);
             // replace "?" by id
-            pst.setString(1, idSach);
+            pst.setString(1, idDiaNhac);
             rs = pst.executeQuery();
         } catch (SQLException e) {
             System.out.println("select error \n" + e.toString());
@@ -48,14 +46,14 @@ public class QLSach {
         return rs;
     }
 
-    public ResultSet timTen(String tenSach) {
+    public ResultSet timTen(String tenDiaNhac) {
         ResultSet rs = null;
-        String sqlCommand = "select * from sach where tenSach = ?";
+        String sqlCommand = "select * from dianhac where tenDiaNhac = ?";
         PreparedStatement pst;
         try {
             pst = myConnect.connect().prepareStatement(sqlCommand);
             // replace "?" by id
-            pst.setString(1, tenSach);
+            pst.setString(1, tenDiaNhac);
             rs = pst.executeQuery();
         } catch (SQLException e) {
             System.out.println("select error \n" + e.toString());
@@ -63,14 +61,14 @@ public class QLSach {
         return rs;
     }
 
-    public ResultSet timTacGia(String tacGia) {
+    public ResultSet timCaSi(String tenCaSi) {
         ResultSet rs = null;
-        String sqlCommand = "select * from sach where tacGia = ?";
+        String sqlCommand = "select * from dianhac where tenCaSi = ?";
         PreparedStatement pst;
         try {
             pst = myConnect.connect().prepareStatement(sqlCommand);
             // replace "?" by id
-            pst.setString(1, tacGia);
+            pst.setString(1, tenCaSi);
             rs = pst.executeQuery();
         } catch (SQLException e) {
             System.out.println("select error \n" + e.toString());
@@ -78,14 +76,14 @@ public class QLSach {
         return rs;
     }
 
-    public ResultSet timNhaXuatBan(String nhaXuatBan) {
+    public ResultSet timTheLoai(String theLoai) {
         ResultSet rs = null;
-        String sqlCommand = "select * from sach where nhaXuatBan = ?";
+        String sqlCommand = "select * from dianhac where theLoai = ?";
         PreparedStatement pst;
         try {
             pst = myConnect.connect().prepareStatement(sqlCommand);
             // replace "?" by id
-            pst.setString(1, nhaXuatBan);
+            pst.setString(1, theLoai);
             rs = pst.executeQuery();
         } catch (SQLException e) {
             System.out.println("select error \n" + e.toString());
@@ -93,19 +91,19 @@ public class QLSach {
         return rs;
     }
 
-    public void themSach(Sach s) {
-        String sqlCommand = "insert into sach value(?, ?, ?, ?, ?, ?, ? )";
+    public void themDiaNhac(DiaNhac dn) {
+        String sqlCommand = "insert into dianhac value(?, ?, ?, ?, ?, ?, ? )";
         PreparedStatement pst;
         try {
             pst = myConnect.connect().prepareStatement(sqlCommand);
             // replace three "?" by id, Name and point of Studnet s
-            pst.setString(1, s.getIdSach());
-            pst.setString(2, s.getTenSach());
-            pst.setString(3, s.getTacGia());
-            pst.setString(4, s.getNhaXuatBan());
-            pst.setInt(5, s.getSoLuong());
-            pst.setDouble(6, s.getGiaMua());
-            pst.setDouble(7, s.getGiaBan());
+            pst.setString(1, dn.getIdDiaNhac());
+            pst.setString(2, dn.getTenDiaNhac());
+            pst.setString(3, dn.gettenCaSi());
+            pst.setString(4, dn.getTheLoai());
+            pst.setInt(5, dn.getSoLuong());
+            pst.setDouble(6, dn.getGiaMua());
+            pst.setDouble(7, dn.getGiaBan());
             if (pst.executeUpdate() > 0) {
                 System.out.println("insert success");
             } else {
@@ -116,20 +114,20 @@ public class QLSach {
         }
     }
 
-    public void suaSach(String idSach, Sach s) {
-        String sqlCommand = "update sach set tenSach = ?, tacGia = ?, nhaXuatBan = ?, soLuong = ?, "
+    public void suaDiaNhac(String idDiaNhac, DiaNhac dn) {
+        String sqlCommand = "update dianhac set tenDiaNhac = ?, tenCaSi = ?, theLoai = ?, soLuong = ?, "
                 + "giaMua = ?, giaBan =?"
-                + " where idSach = ?";
+                + " where idDiaNhac = ?";
         PreparedStatement pst;
         try {
             pst = myConnect.connect().prepareStatement(sqlCommand);
-            pst.setString(1, s.getTenSach());
-            pst.setString(2, s.getTacGia());
-            pst.setString(3, s.getNhaXuatBan());
-            pst.setInt(4, s.getSoLuong());
-            pst.setDouble(5, s.getGiaMua());
-            pst.setDouble(6, s.getGiaBan());
-            pst.setString(7, idSach);
+            pst.setString(1, dn.getTenDiaNhac());
+            pst.setString(2, dn.gettenCaSi());
+            pst.setString(3, dn.getTheLoai());
+            pst.setInt(4, dn.getSoLuong());
+            pst.setDouble(5, dn.getGiaMua());
+            pst.setDouble(6, dn.getGiaBan());
+            pst.setString(7, idDiaNhac);
             if (pst.executeUpdate() > 0) {
                 System.out.println("update success");
             } else {
@@ -140,12 +138,12 @@ public class QLSach {
         }
    }
     
-    public void xoaSach(String idSach) {
-        String sqlCommand = "delete from sach where idSach = ?";
+    public void xoaDiaNhac(String idDiaNhac) {
+        String sqlCommand = "delete from dianhac where idDiaNhac = ?";
         PreparedStatement pst;
         try {
             pst = myConnect.connect().prepareStatement(sqlCommand);
-            pst.setString(1, idSach);
+            pst.setString(1, idDiaNhac);
             if (pst.executeUpdate() > 0) {
                 System.out.println("delete success");
             } else {
