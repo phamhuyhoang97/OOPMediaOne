@@ -10,7 +10,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.NhanVien;
+import model.Employee;
 
 
 /**
@@ -18,22 +18,27 @@ import model.NhanVien;
  * @author hoang
  */
 public class ManageEmp {
-    Home home = new Home();
+    
     
     private DefaultTableModel tableModel = new DefaultTableModel();
     
     //lay du lieu o o nhap
-    public void getNhanVien(NhanVien nv){
-        nv.setId(home.tf_idnhanvien.getText().trim());
-        nv.setTenNhanVien(home.tf_tennhanvien.getText().trim());
-        nv.setSDT(home.tf_sdt.getText().trim());
-        nv.setEmail(home.tf_email.getText().trim());
-        nv.setDiaChi(home.tf_diachi.getText().trim());
-        nv.setLuongNhanVien(Double.parseDouble(home.tf_luongcoban.getText())*1000);
+    public void getData(Employee nv){
+        Home home = new Home();
+        nv.setIdEmployee(home.tf_idnhanvien.getText().trim());
+        nv.setEmployeeName(home.tf_tennhanvien.getText().trim());
+        nv.setEmployeePhone(home.tf_sdt.getText().trim());
+        nv.setEmployeeEmail(home.tf_email.getText().trim());
+        nv.setEmployeeAddress(home.tf_diachi.getText().trim());
+        nv.setEmployeeSalary(Double.parseDouble(home.tf_luongnhanvien.getText())*1000);
+        nv.setBeginDate(home.tf_ngaybatdau.getText().trim());
+        nv.setEmployeePassword(home.tf_password.getText().trim());
+        nv.setStatus(1);
+        nv.setCheckAdmin(Employee.checkAdmin.employee);
     }
     
     //luu du lieu len  DefaultTableModel de jt_hienthinhanvien doc
-    public void capNhatNhanVien(ResultSet rs){
+    public void updateData(ResultSet rs){
             try {
                 while(rs.next()){ // nếu còn đọc tiếp được một dòng dữ liệu
                     String rows[] = new String[8];
@@ -49,10 +54,10 @@ public class ManageEmp {
         }    
     
     public void deleteEmp(){
+        Home home = new Home();
         Employee nv = new Employee();
-        nv.connect();
         
-        nv.setId(home.tf_idnhanvien.getText().trim());
+        nv.setIdEmployee(home.tf_idnhanvien.getText().trim());
         //xoa thong tin nhanvien
         nv.deleteEmployee(nv);
         JOptionPane.showMessageDialog(null, "Đã xoa' nhân viên xong");
@@ -60,21 +65,20 @@ public class ManageEmp {
     
     public void changeEmp(){
         Employee nv = new Employee();
-        nv.connect();
         //them dieu kien de xet xem da co Nhan Vien nay trong database chua
         
         //them thuoc tinh NhanVien
-        getNhanVien(nv);
+        getData(nv);
         
         //them vao database
-        nv.changeEmp(nv);
+        nv.changeEmployee(nv);
         
         JOptionPane.showMessageDialog(null, "Đã sửa nhân viên xong");
     }
     
     public void showEmp(){
+        Home home = new Home();
         Employee nv = new Employee();
-        nv.connect();
         //
         String []colsName = {"ID Nhân Viên", "Họ Tên Nhân Viên", "SDT", "Email", "Địa Chỉ",
             "Lương Cơ Bản", "Hệ Số Lương", "Lương Nhân Viên"};
@@ -82,36 +86,35 @@ public class ManageEmp {
         tableModel.setRowCount(0);  //de refresh lai bang jtable
         home.jt_hienthinhanvien.setModel(tableModel);//ket noi jtalbe voi TableModel
         
-        capNhatNhanVien(nv.view());   //truy xuat du lieu len bang
+        updateData(nv.view());   //truy xuat du lieu len bang
         System.out.println("ok");
     }
            
     public void addEmp(){
         Employee nv = new Employee();
-        nv.connect();
         //them dieu kien de xet xem da co Nhan Vien nay trong database chua
         
         //them thuoc tinh NhanVien
-        getNhanVien(nv);
+        getData(nv);
         
         //them vao database
-        nv.themNhanVien(nv);
+        nv.addEmployee(nv);
         
         JOptionPane.showMessageDialog(null, "Đã thêm nhân viên xong");
     }
     
     
     public void searchEmp(){
+        Home home = new Home();
         ResultSet rs = null;
         Employee nv = new Employee();
-        nv.connect();
         
         String itemText = (String)home.jcb_timkiemnhanvien.getSelectedItem( );
         if (itemText.equals(home.jcb_timkiemnhanvien.getItemAt(0))) {
-            nv.setId(home.tf_timkiemnhanvien.getText());
+            nv.setIdEmployee(home.tf_timkiemnhanvien.getText());
             rs = nv.searchID(nv);
         } else {
-            nv.setTenNhanVien(home.tf_timkiemnhanvien.getText());
+            nv.setEmployeeName(home.tf_timkiemnhanvien.getText());
             rs = nv.searchName(nv);
         }
 
