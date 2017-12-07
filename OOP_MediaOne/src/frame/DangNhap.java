@@ -6,6 +6,9 @@
 package frame;
 import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import model.Employee;
+import oop_mediaone.OOP_MediaOne;
 
 /**
  *
@@ -17,48 +20,56 @@ public class DangNhap extends javax.swing.JFrame {
      * Creates new form DangNhap
      */
     
-    
-    public final String NAME = "admin";
-    private final String PASS = "admin";
-    
     public DangNhap() {
         initComponents();
     }
     
     public void dangnhap() {
-        if (taikhoan.getText().equals(NAME) && password.getText().equals(PASS)) {
-            this.dispose();
-            Home home = new Home();
-            home.setVisible(true);
-            home.setLocation(50,0);
+            try {
+            // TODO add your handling code here:
             
-            // Đóng hết các panel phần hiển thị:
-            home.panel_sach.setVisible(false);
-            home.panel_diaphim.setVisible(false);
-            home.panel_dianhac.setVisible(false);
-            
-            // Đóng hết các panel chức năng con:
-            home.panel_chucnangcon_khohang.setVisible(false);
-            home.panel_chucnangcon_nhanvien.setVisible(false);
-            home.panel_chucnangcon_chiphi.setVisible(false);
-            home.panel_chucnangcon_thongke.setVisible(false);
-            home.panel_chucnangcon_banhang.setVisible(false);
+            OOP_MediaOne.currentEmployee =  Employee.login(taikhoan.getText(), new String(password.getText()));
+            if (OOP_MediaOne.currentEmployee != null) {
+                this.dispose();
+                Home home = new Home();
+                home.setVisible(true);
+                home.setLocation(50,0);
 
-            // Hiển thị cái panel rỗng
-            home.panel_sach.setVisible(false);
-            home.panel_diaphim.setVisible(false);
-            home.panel_dianhac.setVisible(false);
-            home.panel_thongtinnhanvien.setVisible(false);
-            home.panel_chiphiphatsinh.setVisible(false);
-            home.panel_chiphidinhki.setVisible(false);
-            home.panel_thongketien.setVisible(false);
-            home.panel_banhang.setVisible(false);
-            home.panel_hoadon.setVisible(false);
+                // Đóng hết các panel phần hiển thị:
+                home.panel_sach.setVisible(false);
+                home.panel_diaphim.setVisible(false);
+                home.panel_dianhac.setVisible(false);
 
-        } else {
-            
+                // Đóng hết các panel chức năng con:
+                home.panel_chucnangcon_khohang.setVisible(false);
+                home.panel_chucnangcon_nhanvien.setVisible(false);
+                home.panel_chucnangcon_thongke.setVisible(false);
+                home.panel_chucnangcon_banhang.setVisible(false);
+
+                // Hiển thị cái panel rỗng
+                home.panel_sach.setVisible(false);
+                home.panel_diaphim.setVisible(false);
+                home.panel_dianhac.setVisible(false);
+                home.panel_thongtinnhanvien.setVisible(false);
+                home.panel_chiphiphatsinh.setVisible(false);
+                home.panel_chiphidinhki.setVisible(false);
+                home.panel_thongketien.setVisible(false);
+                home.panel_banhang.setVisible(false);
+                home.panel_hoadon.setVisible(false);
+                
+                if (OOP_MediaOne.currentEmployee.getCheckAdmin() == Employee.checkAdmin.employee) {
+                    home.button_quanlinhanvien.setVisible(false);
+                    home.button_chiphi.setVisible(false);
+                    home.button_thongke.setVisible(false);
         }
-
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Đăng nhập thất bại");
+            }
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Đăng nhập thất bại");
+        }
+        
     }
     
     /**
@@ -165,44 +176,7 @@ public class DangNhap extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_passwordKeyPressed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                DangNhap dangnhap = new DangNhap();
-                dangnhap.setVisible(true);
-                dangnhap.setLocation(500, 150);
-                
-                
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton button_dangnhap;

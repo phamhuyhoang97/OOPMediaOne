@@ -32,6 +32,11 @@
   </AuxValues>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="panel_home">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="66" red="66" type="rgb"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -82,12 +87,22 @@
       </Layout>
       <SubComponents>
         <Container class="javax.swing.JPanel" name="panel_chucnang1">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="66" red="66" type="rgb"/>
+            </Property>
+          </Properties>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
             <Property name="useNullLayout" type="boolean" value="true"/>
           </Layout>
           <SubComponents>
             <Container class="javax.swing.JPanel" name="panel_chucnangchinh">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="66" red="66" type="rgb"/>
+                </Property>
+              </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="0" y="0" width="1250" height="70"/>
@@ -104,55 +119,85 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="18" style="0"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/images/banhang.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Qua&#x309;n Li&#x301; Ba&#x301;n Ha&#x300;ng"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_quanlibanhangActionPerformed"/>
                   </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="button_quanlikhohang">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="18" style="0"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/images/khohang.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Qua&#x309;n Li&#x301; Kho Ha&#x300;ng"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_quanlikhohangActionPerformed"/>
                   </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="button_quanlinhanvien">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="18" style="0"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/images/nhanvien.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Qua&#x309;n Li&#x301; Nh&#xe2;n Vi&#xea;n"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_quanlinhanvienActionPerformed"/>
                   </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="button_chiphi">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="18" style="0"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/images/chiphi.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Chi Phi&#x301;"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_chiphiActionPerformed"/>
                   </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="button_thongke">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="18" style="0"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/images/thongke.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Th&#xf4;&#x301;ng K&#xea;"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_thongkeActionPerformed"/>
                   </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -322,56 +367,7 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                           <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="tf_nhaxuatban" linkSize="27" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tf_tacgia" linkSize="27" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tf_tensach" linkSize="27" min="-2" pref="149" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="tf_giabansach" linkSize="27" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="tf_giamuasach" linkSize="27" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="tf_soluongsach" linkSize="27" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="button_xoasach" linkSize="2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="button_suasach" linkSize="2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="button_themsach" linkSize="2" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" pref="555" max="32767" attributes="0"/>
-                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                               <Component id="jLabel11" min="-2" pref="69" max="-2" attributes="0"/>
@@ -383,7 +379,64 @@
                               <Component id="jcb_timkiemsach" min="-2" pref="128" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                               <Component id="button_timKiemSach" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="446" max="32767" attributes="0"/>
+                              <EmptySpace pref="460" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel3" linkSize="28" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel2" linkSize="28" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel4" linkSize="28" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="tf_nhaxuatban" linkSize="27" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tf_tacgia" linkSize="27" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tf_tensach" linkSize="27" min="-2" pref="149" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Component id="jLabel6" linkSize="28" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel5" linkSize="28" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="tf_giabansach" linkSize="27" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="tf_giamuasach" linkSize="27" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                              <Component id="jLabel7" linkSize="28" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="tf_soluongsach" linkSize="27" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="button_xoasach" linkSize="2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="button_suasach" linkSize="2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="button_themsach" linkSize="2" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" pref="543" max="32767" attributes="0"/>
+                                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -707,7 +760,7 @@
                                               <Component id="button_timKiemPhim" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="0" pref="429" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="443" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -1002,7 +1055,7 @@
                                       <Component id="button_timKiemDiaNhac" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="437" max="32767" attributes="0"/>
+                              <EmptySpace pref="451" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1224,10 +1277,13 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jSeparator4" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane4" alignment="0" pref="1230" max="32767" attributes="0"/>
-                                  <Group type="102" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="509" max="-2" attributes="0"/>
+                                      <Component id="button_xemtatcanhanvien" min="-2" pref="232" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -1254,15 +1310,19 @@
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jLabel39" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jLabel38" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel22" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="tf_diachi" linkSize="7" max="32767" attributes="0"/>
-                                                  <Component id="tf_luongcoban" max="32767" attributes="0"/>
+                                                  <Component id="tf_luongnhanvien" linkSize="7" min="-2" pref="180" max="-2" attributes="0"/>
+                                                  <Component id="tf_ngaybatdau" linkSize="7" min="-2" pref="180" max="-2" attributes="0"/>
+                                                  <Component id="tf_password" linkSize="7" min="-2" pref="180" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="jLabel40" min="-2" pref="71" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                                   <Component id="button_suanhanvien" max="32767" attributes="0"/>
                                                   <Component id="button_xoanhanvien" alignment="0" max="32767" attributes="0"/>
@@ -1273,23 +1333,16 @@
                                               <Component id="jLabel44" min="-2" pref="69" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="tf_timkiemnhanvien" min="-2" pref="289" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                                              <Component id="jLabel82" min="-2" pref="96" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="186" max="-2" attributes="0"/>
                                               <Component id="jcb_timkiemnhanvien" min="-2" pref="120" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                                               <Component id="button_timkiemnhanvien" min="-2" max="-2" attributes="0"/>
                                           </Group>
+                                          <Component id="jScrollPane4" alignment="0" min="-2" pref="1216" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="0" pref="357" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="509" max="-2" attributes="0"/>
-                              <Component id="button_xemtatcanhanvien" min="-2" pref="232" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="38" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1303,25 +1356,24 @@
                                           <Component id="jLabel34" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="tf_idnhanvien" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="tf_diachi" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel35" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="tf_tennhanvien" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel38" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="tf_luongcoban" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel40" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel36" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="tf_sdt" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="tf_email" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" attributes="0">
@@ -1331,18 +1383,27 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="button_xoanhanvien" linkSize="10" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="tf_diachi" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="tf_luongnhanvien" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel40" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="tf_ngaybatdau" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="tf_password" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                               <Component id="jSeparator4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel82" alignment="1" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel44" alignment="3" pref="27" max="32767" attributes="0"/>
-                                      <Component id="tf_timkiemnhanvien" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jcb_timkiemnhanvien" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="button_timkiemnhanvien" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel44" alignment="3" pref="27" max="32767" attributes="0"/>
+                                  <Component id="tf_timkiemnhanvien" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jcb_timkiemnhanvien" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="button_timkiemnhanvien" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jScrollPane4" min="-2" pref="174" max="-2" attributes="0"/>
@@ -1364,13 +1425,14 @@
                         <Component class="javax.swing.JTable" name="jt_hienthinhanvien">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="6" rowCount="4">
+                              <Table columnCount="7" rowCount="4">
                                 <Column editable="true" title="ID Nh&#xe2;n Vi&#xea;n" type="java.lang.String"/>
                                 <Column editable="true" title="Ho&#x323; T&#xea;n Nh&#xe2;n Vi&#xea;n" type="java.lang.String"/>
                                 <Column editable="true" title="SDT" type="java.lang.String"/>
                                 <Column editable="true" title="Email" type="java.lang.String"/>
                                 <Column editable="true" title="&#x110;i&#x323;a Chi&#x309;" type="java.lang.String"/>
                                 <Column editable="true" title="L&#x1b0;&#x1a1;ng Nh&#xe2;n Vi&#xea;n" type="java.lang.Double"/>
+                                <Column editable="true" title="Ng&#xe0;y B&#x1eaf;t &#x110;&#x1ea7;u L&#xe0;m" type="java.lang.String"/>
                               </Table>
                             </Property>
                           </Properties>
@@ -1547,20 +1609,15 @@
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel82">
+                    <Component class="javax.swing.JLabel" name="jLabel38">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="12" style="0"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Ti&#x300;m Ki&#xea;&#x301;m Theo"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel38">
-                      <Properties>
                         <Property name="text" type="java.lang.String" value="L&#x1b0;&#x1a1;ng Nh&#xe2;n Vi&#xea;n"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="tf_luongcoban">
+                    <Component class="javax.swing.JTextField" name="tf_luongnhanvien">
                       <Properties>
                         <Property name="toolTipText" type="java.lang.String" value=""/>
                       </Properties>
@@ -1597,6 +1654,32 @@
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_themnhanvienActionPerformed"/>
                       </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel1">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Tahoma" size="12" style="0"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Ng&#xe0;y B&#x1eaf;t &#x110;&#x1ea7;u"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="tf_ngaybatdau">
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel22">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Tahoma" size="12" style="0"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Password"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="tf_password">
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
@@ -1671,10 +1754,10 @@
                                               <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="0" pref="71" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="78" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="145" max="32767" attributes="0"/>
+                              <EmptySpace pref="152" max="32767" attributes="0"/>
                           </Group>
                           <Component id="jSeparator7" alignment="0" max="32767" attributes="0"/>
                       </Group>
@@ -1931,7 +2014,7 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="85" max="32767" attributes="0"/>
+                              <EmptySpace pref="99" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2216,7 +2299,7 @@
                                       <Component id="jLabel60" min="-2" pref="37" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="tf_thongkedenngay" min="-2" pref="231" max="-2" attributes="0"/>
-                                      <EmptySpace pref="55" max="32767" attributes="0"/>
+                                      <EmptySpace pref="69" max="32767" attributes="0"/>
                                       <Component id="button_tinhloinhuan" min="-2" pref="153" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                                       <Component id="jTextField14" min="-2" pref="188" max="-2" attributes="0"/>
@@ -2346,7 +2429,7 @@
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                                       <Component id="jLabel73" linkSize="22" max="32767" attributes="0"/>
-                                      <EmptySpace pref="64" max="32767" attributes="0"/>
+                                      <EmptySpace pref="78" max="32767" attributes="0"/>
                                       <Component id="tf_soluongmua" min="-2" pref="155" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
@@ -2538,7 +2621,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="566" max="-2" attributes="0"/>
                               <Component id="button_themhoadon" min="-2" pref="188" max="-2" attributes="0"/>
-                              <EmptySpace pref="496" max="32767" attributes="0"/>
+                              <EmptySpace pref="510" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
@@ -2552,7 +2635,7 @@
                                       <Component id="jComboBox2" min="-2" pref="167" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                                       <Component id="jButton28" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="386" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -2690,6 +2773,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="2"/>
             </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Ngay/Thang/Nam"/>
           </Properties>
         </Component>
@@ -2697,6 +2783,9 @@
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="MediaOne - Qua&#x309;n Li&#x301; Ba&#x301;n Ha&#x300;ng"/>
