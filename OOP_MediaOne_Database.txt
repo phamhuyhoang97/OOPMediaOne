@@ -1,0 +1,199 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`book`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`book` (
+  `idBook` VARCHAR(10) NOT NULL,
+  `bookName` VARCHAR(45) NOT NULL,
+  `bookAmount` INT NOT NULL,
+  `bookPrice` DOUBLE NOT NULL,
+  `bookCost` DOUBLE NOT NULL,
+  `bookAuthor` VARCHAR(45) NOT NULL,
+  `bookPublic` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idBook`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`film`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`film` (
+  `idFilm` VARCHAR(10) NOT NULL,
+  `filmName` VARCHAR(45) NOT NULL,
+  `filmAmount` INT NOT NULL,
+  `filmPrice` DOUBLE NOT NULL,
+  `filmCost` DOUBLE NOT NULL,
+  `filmActor` VARCHAR(45) NOT NULL,
+  `filmDirector` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idFilm`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`music`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`music` (
+  `idMusic` VARCHAR(10) NOT NULL,
+  `musicName` VARCHAR(45) NOT NULL,
+  `musicAmount` INT NOT NULL,
+  `musicPrice` DOUBLE NOT NULL,
+  `musicCost` DOUBLE NOT NULL,
+  `musicSinger` VARCHAR(45) NOT NULL,
+  `musicCategory` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idMusic`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`bill`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`bill` (
+  `idBill` VARCHAR(10) NOT NULL,
+  `billDate` DATE NOT NULL,
+  `billType` INT NOT NULL,
+  `billTotal` DOUBLE NOT NULL,
+  PRIMARY KEY (`idBill`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`bill_book`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`bill_book` (
+  `idBill` VARCHAR(10) NOT NULL,
+  `idBook` VARCHAR(10) NOT NULL,
+  `billAmount` INT NOT NULL,
+  PRIMARY KEY (`idBill`, `idBook`),
+  INDEX `fk_bill_has_book_book1_idx` (`idBook` ASC),
+  INDEX `fk_bill_has_book_bill_idx` (`idBill` ASC),
+  CONSTRAINT `fk_bill_has_book_bill`
+    FOREIGN KEY (`idBill`)
+    REFERENCES `mydb`.`bill` (`idBill`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_bill_has_book_book1`
+    FOREIGN KEY (`idBook`)
+    REFERENCES `mydb`.`book` (`idBook`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`bill_film`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`bill_film` (
+  `idBill` VARCHAR(10) NOT NULL,
+  `idFilm` VARCHAR(10) NOT NULL,
+  `billAmount` INT NOT NULL,
+  PRIMARY KEY (`idBill`, `idFilm`),
+  INDEX `fk_bill_has_film_film1_idx` (`idFilm` ASC),
+  INDEX `fk_bill_has_film_bill1_idx` (`idBill` ASC),
+  CONSTRAINT `fk_bill_has_film_bill1`
+    FOREIGN KEY (`idBill`)
+    REFERENCES `mydb`.`bill` (`idBill`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_bill_has_film_film1`
+    FOREIGN KEY (`idFilm`)
+    REFERENCES `mydb`.`film` (`idFilm`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`bill_music`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`bill_music` (
+  `idBill` VARCHAR(10) NOT NULL,
+  `idMusic` VARCHAR(10) NOT NULL,
+  `billAmount` INT NOT NULL,
+  PRIMARY KEY (`idBill`, `idMusic`),
+  INDEX `fk_bill_has_music_music1_idx` (`idMusic` ASC),
+  INDEX `fk_bill_has_music_bill1_idx` (`idBill` ASC),
+  CONSTRAINT `fk_bill_has_music_bill1`
+    FOREIGN KEY (`idBill`)
+    REFERENCES `mydb`.`bill` (`idBill`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_bill_has_music_music1`
+    FOREIGN KEY (`idMusic`)
+    REFERENCES `mydb`.`music` (`idMusic`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`employee`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`employee` (
+  `idEmployee` VARCHAR(10) NOT NULL,
+  `employeeName` VARCHAR(45) NOT NULL,
+  `employeePhone` VARCHAR(15) NOT NULL,
+  `employeeEmail` VARCHAR(45) NOT NULL,
+  `employeePassword` VARCHAR(45) NULL,
+  `employeeAddress` VARCHAR(45) NOT NULL,
+  `employeeSalary` DOUBLE NOT NULL,
+  `status` INT NOT NULL,
+  `checkAdmin` VARCHAR(20) NOT NULL,
+  `beginDate` DATE NOT NULL,
+  `endDate` DATE NOT NULL,
+  PRIMARY KEY (`idEmployee`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`employee_bill`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`employee_bill` (
+  `employee_idEmployee` VARCHAR(10) NOT NULL,
+  `bill_idBill` VARCHAR(10) NOT NULL,
+  PRIMARY KEY (`employee_idEmployee`, `bill_idBill`),
+  INDEX `fk_employee_has_bill_bill1_idx` (`bill_idBill` ASC),
+  INDEX `fk_employee_has_bill_employee1_idx` (`employee_idEmployee` ASC),
+  CONSTRAINT `fk_employee_has_bill_employee1`
+    FOREIGN KEY (`employee_idEmployee`)
+    REFERENCES `mydb`.`employee` (`idEmployee`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_employee_has_bill_bill1`
+    FOREIGN KEY (`bill_idBill`)
+    REFERENCES `mydb`.`bill` (`idBill`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`other_cost`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`other_cost` (
+  `idCost` INT NOT NULL AUTO_INCREMENT,
+  `costDate` DATE NOT NULL,
+  `costName` VARCHAR(45) NOT NULL,
+  `costMoney` DOUBLE NOT NULL,
+  `costType` INT NULL,
+  PRIMARY KEY (`idCost`))
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
