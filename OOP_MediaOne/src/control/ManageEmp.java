@@ -23,7 +23,7 @@ public class ManageEmp {
     private DefaultTableModel tableModel = new DefaultTableModel();
     
     //lay du lieu o o nhap
-    public void getNhanVien(Employee nv){
+    public void getData(Employee nv){
         Home home = new Home();
         nv.setIdEmployee(home.tf_idnhanvien.getText().trim());
         nv.setEmployeeName(home.tf_tennhanvien.getText().trim());
@@ -38,7 +38,7 @@ public class ManageEmp {
     }
     
     //luu du lieu len  DefaultTableModel de jt_hienthinhanvien doc
-    public void capNhatNhanVien(ResultSet rs){
+    public void updateData(ResultSet rs){
             try {
                 while(rs.next()){ // nếu còn đọc tiếp được một dòng dữ liệu
                     String rows[] = new String[8];
@@ -68,7 +68,7 @@ public class ManageEmp {
         //them dieu kien de xet xem da co Nhan Vien nay trong database chua
         
         //them thuoc tinh NhanVien
-        getNhanVien(nv);
+        getData(nv);
         
         //them vao database
         nv.changeEmployee(nv);
@@ -86,7 +86,7 @@ public class ManageEmp {
         tableModel.setRowCount(0);  //de refresh lai bang jtable
         home.jt_hienthinhanvien.setModel(tableModel);//ket noi jtalbe voi TableModel
         
-//        capNhatNhanVien(nv.view());   //truy xuat du lieu len bang
+        updateData(nv.view());   //truy xuat du lieu len bang
         System.out.println("ok");
     }
            
@@ -95,10 +95,10 @@ public class ManageEmp {
         //them dieu kien de xet xem da co Nhan Vien nay trong database chua
         
         //them thuoc tinh NhanVien
-        getNhanVien(nv);
+        getData(nv);
         
         //them vao database
-//        nv.addEmployee(nv);
+        nv.addEmployee(nv);
         
         JOptionPane.showMessageDialog(null, "Đã thêm nhân viên xong");
     }
@@ -112,10 +112,10 @@ public class ManageEmp {
         String itemText = (String)home.jcb_timkiemnhanvien.getSelectedItem( );
         if (itemText.equals(home.jcb_timkiemnhanvien.getItemAt(0))) {
             nv.setIdEmployee(home.tf_timkiemnhanvien.getText());
-//            rs = nv.searchID(nv);
+            rs = nv.searchID(nv);
         } else {
             nv.setEmployeeName(home.tf_timkiemnhanvien.getText());
-//            rs = nv.searchName(nv);
+            rs = nv.searchName(nv);
         }
 
         DefaultTableModel model = new DefaultTableModel();

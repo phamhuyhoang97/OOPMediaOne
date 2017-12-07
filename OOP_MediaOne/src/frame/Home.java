@@ -1936,6 +1936,7 @@ public class Home extends javax.swing.JFrame {
         jLabel45.setText("MediaOne - Quản Lí Bán Hàng");
 
         button_dangxuat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        button_dangxuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dangxuat.png"))); // NOI18N
         button_dangxuat.setText("Đăng xuất");
 
         javax.swing.GroupLayout panel_homeLayout = new javax.swing.GroupLayout(panel_home);
@@ -2092,7 +2093,7 @@ public class Home extends javax.swing.JFrame {
         panel_banhang.setVisible(false);
         panel_hoadon.setVisible(false);
         
-//        loadDataSach();
+        loadDataSach();
     }//GEN-LAST:event_button_sachActionPerformed
 
     private void button_diaphimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_diaphimActionPerformed
@@ -2121,7 +2122,7 @@ public class Home extends javax.swing.JFrame {
         panel_banhang.setVisible(false);
         panel_hoadon.setVisible(false);
         
-//        loadDataDiaPhim();
+        loadDataDiaPhim();
     }//GEN-LAST:event_button_diaphimActionPerformed
 
     private void button_dianhacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_dianhacActionPerformed
@@ -2155,7 +2156,7 @@ public class Home extends javax.swing.JFrame {
         panel_banhang.setVisible(false);
         panel_hoadon.setVisible(false);
         
-//        loadDataDiaNhac();
+        loadDataDiaNhac();
     }//GEN-LAST:event_button_dianhacActionPerformed
 
     private void button_quanlikhohangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_quanlikhohangActionPerformed
@@ -2250,53 +2251,53 @@ public class Home extends javax.swing.JFrame {
         panel_hoadon.setVisible(false);
     }//GEN-LAST:event_button_themhoadonActionPerformed
 
-////    private void loadDataSach() {
-////        // create table model
-////        //jt_hienthisach.setModel(new DefaultTableModel());
-////        DefaultTableModel model = new DefaultTableModel();
-////
-////        // get data from database
-////        ResultSet rs = quanLySach.getDataSach();
-////        try {
-////            // load column name
-////            ResultSetMetaData rsMD = rs.getMetaData();
-////            int colNumber = rsMD.getColumnCount();
-////            String[] arr = new String[colNumber];
-////            for (int i = 0; i < colNumber; i++) {
-////                arr[i] = rsMD.getColumnName(i + 1);
-////            }
-////            model.setColumnIdentifiers(arr);
-////
-////            // load data from database to table
-////            while (rs.next()) {
-////                for (int i = 0; i < colNumber; i++) {
-////                    arr[i] = rs.getString(i + 1);
-////                }
-////                model.addRow(arr);
-////            }
-////
-////        } catch (SQLException e) {
-////        }
-////        jt_hienthisach.setModel(model);
-////    }
-////
-////    private Sach getSach() {
-////
-////        String tenSach = tf_tensach.getText().trim();
-////        String tacGia = tf_tacgia.getText().trim();
-////        String nhaXuatBan = tf_nhaxuatban.getText().trim();
-////        Integer soLuong = Integer.parseInt(tf_soluongsach.getText().trim());
-////        Double giaMua = Double.parseDouble(tf_giamuasach.getText().trim());
-////        Double giaBan = Double.parseDouble(tf_giabansach.getText().trim());
-////
-////        if (idSach.equals("") || tenSach.equals("")) {
-////            return null;
-////        }
-////        Sach s = new Sach(idSach, tenSach, tacGia, nhaXuatBan, soLuong, giaMua, giaBan);
-////        return s;
-////    }
-////
-////
+    private void loadDataSach() {
+        // create table model
+        //jt_hienthisach.setModel(new DefaultTableModel());
+        DefaultTableModel model = new DefaultTableModel();
+
+        // get data from database
+        ResultSet rs = quanLySach.getDataSach();
+        try {
+            // load column name
+            ResultSetMetaData rsMD = rs.getMetaData();
+            int colNumber = rsMD.getColumnCount();
+            String[] arr = new String[colNumber];
+            for (int i = 0; i < colNumber; i++) {
+                arr[i] = rsMD.getColumnName(i + 1);
+            }
+            model.setColumnIdentifiers(arr);
+
+            // load data from database to table
+            while (rs.next()) {
+                for (int i = 0; i < colNumber; i++) {
+                    arr[i] = rs.getString(i + 1);
+                }
+                model.addRow(arr);
+            }
+
+        } catch (SQLException e) {
+        }
+        jt_hienthisach.setModel(model);
+    }
+
+    private Sach getSach() {
+
+        String tenSach = tf_tensach.getText().trim();
+        String tacGia = tf_tacgia.getText().trim();
+        String nhaXuatBan = tf_nhaxuatban.getText().trim();
+        Integer soLuong = Integer.parseInt(tf_soluongsach.getText().trim());
+        Double giaMua = Double.parseDouble(tf_giamuasach.getText().trim());
+        Double giaBan = Double.parseDouble(tf_giabansach.getText().trim());
+
+        if (idSach.equals("") || tenSach.equals("")) {
+            return null;
+        }
+        Sach s = new Sach(idSach, tenSach, tacGia, nhaXuatBan, soLuong, giaMua, giaBan);
+        return s;
+    }
+
+
     private void jcb_timkiemnhanvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_timkiemnhanvienActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcb_timkiemnhanvienActionPerformed
@@ -2314,102 +2315,102 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_button_suasachActionPerformed
 
     private void button_xoasachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_xoasachActionPerformed
-//        int row = jt_hienthisach.getSelectedRow();
-//        if (row < 0) {
-//            JOptionPane.showMessageDialog(null,
-//                    "You must select a row in table", "Error delete",
-//                    JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
-//        int select = JOptionPane.showOptionDialog(null, "Are you want delete?",
-//                "Delete", 0, JOptionPane.YES_NO_OPTION, null, null, 1);
-//        if (select == 0) {
-//            quanLySach.xoaSach((String) jt_hienthisach.getValueAt(row, 0));
-//            loadDataSach();
-//        }
+        int row = jt_hienthisach.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(null,
+                    "You must select a row in table", "Error delete",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int select = JOptionPane.showOptionDialog(null, "Are you want delete?",
+                "Delete", 0, JOptionPane.YES_NO_OPTION, null, null, 1);
+        if (select == 0) {
+            quanLySach.xoaSach((String) jt_hienthisach.getValueAt(row, 0));
+            loadDataSach();
+        }
     }//GEN-LAST:event_button_xoasachActionPerformed
 
     private void button_timKiemSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_timKiemSachActionPerformed
-//        ResultSet rs = null;
-//        String itemText = (String)jcb_timkiemsach.getSelectedItem( );
-//        if (itemText.equals(jcb_timkiemsach.getItemAt(0))) {
-//            rs = quanLySach.timID(tf_timkiemsach.getText());
-//        } else if (itemText.equals(jcb_timkiemsach.getItemAt(1))) {
-//            rs = quanLySach.timTen(tf_timkiemsach.getText());
-//        }
-//        else if (itemText.equals(jcb_timkiemsach.getItemAt(2))) {
-//            rs = quanLySach.timTacGia(tf_timkiemsach.getText());
-//        }
-//        else if (itemText.equals(jcb_timkiemsach.getItemAt(3))) {
-//            rs = quanLySach.timNhaXuatBan(tf_timkiemsach.getText());
-//        }
-//
-//        DefaultTableModel model = new DefaultTableModel();
-//        try {
-//            ResultSetMetaData rsMD = rs.getMetaData();
-//            int colNumber = rsMD.getColumnCount();
-//            String[] arr = new String[colNumber];
-//            for (int i = 0; i < colNumber; i++) {
-//                arr[i] = rsMD.getColumnName(i + 1);
-//            }
-//            model.setColumnIdentifiers(arr);
-//
-//            while (rs.next()) {
-//                for (int i = 0; i < colNumber; i++) {
-//                    arr[i] = rs.getString(i + 1);
-//                }
-//                model.addRow(arr);
-//            }
-//
-//        } catch (SQLException e) {
-//        }
-//        jt_hienthisach.setModel(model);
+        ResultSet rs = null;
+        String itemText = (String)jcb_timkiemsach.getSelectedItem( );
+        if (itemText.equals(jcb_timkiemsach.getItemAt(0))) {
+            rs = quanLySach.timID(tf_timkiemsach.getText());
+        } else if (itemText.equals(jcb_timkiemsach.getItemAt(1))) {
+            rs = quanLySach.timTen(tf_timkiemsach.getText());
+        }
+        else if (itemText.equals(jcb_timkiemsach.getItemAt(2))) {
+            rs = quanLySach.timTacGia(tf_timkiemsach.getText());
+        }
+        else if (itemText.equals(jcb_timkiemsach.getItemAt(3))) {
+            rs = quanLySach.timNhaXuatBan(tf_timkiemsach.getText());
+        }
+
+        DefaultTableModel model = new DefaultTableModel();
+        try {
+            ResultSetMetaData rsMD = rs.getMetaData();
+            int colNumber = rsMD.getColumnCount();
+            String[] arr = new String[colNumber];
+            for (int i = 0; i < colNumber; i++) {
+                arr[i] = rsMD.getColumnName(i + 1);
+            }
+            model.setColumnIdentifiers(arr);
+
+            while (rs.next()) {
+                for (int i = 0; i < colNumber; i++) {
+                    arr[i] = rs.getString(i + 1);
+                }
+                model.addRow(arr);
+            }
+
+        } catch (SQLException e) {
+        }
+        jt_hienthisach.setModel(model);
     }//GEN-LAST:event_button_timKiemSachActionPerformed
-//
-//    private void loadDataDiaPhim() {
-//        // create table model
-//        //jt_hienthisach.setModel(new DefaultTableModel());
-//        DefaultTableModel model = new DefaultTableModel();
-//
-//        // get data from database
-//        ResultSet rs = quanLyDiaPhim.getDataDiaPhim();
-//        try {
-//            // load column name
-//            ResultSetMetaData rsMD = rs.getMetaData();
-//            int colNumber = rsMD.getColumnCount();
-//            String[] arr = new String[colNumber];
-//            for (int i = 0; i < colNumber; i++) {
-//                arr[i] = rsMD.getColumnName(i + 1);
-//            }
-//            model.setColumnIdentifiers(arr);
-//
-//            // load data from database to table
-//            while (rs.next()) {
-//                for (int i = 0; i < colNumber; i++) {
-//                    arr[i] = rs.getString(i + 1);
-//                }
-//                model.addRow(arr);
-//            }
-//
-//        } catch (SQLException e) {
-//        }
-//        jt_hienthidiaphim.setModel(model);
-//    }
-//
-//    private DiaPhim getDiaPhim() {
-//
-//        String tenDiaPhim = tf_tendiaphim.getText().trim();
-//        String dienVien = tf_dienvien.getText().trim();
-//        String daoDien = tf_daodien.getText().trim();
-//        Integer soLuong = Integer.parseInt(tf_soluongdiaphim.getText().trim());
-//        Double giaMua = Double.parseDouble(tf_giamuadiaphim.getText().trim());
-//        Double giaBan = Double.parseDouble(tf_giabandiaphim.getText().trim());
-//
-//        DiaPhim dp = new DiaPhim(null, tenDiaPhim, dienVien, daoDien, soLuong, giaMua, giaBan);
-//        return dp;
-//    }
-//    
-//    
+
+    private void loadDataDiaPhim() {
+        // create table model
+        //jt_hienthisach.setModel(new DefaultTableModel());
+        DefaultTableModel model = new DefaultTableModel();
+
+        // get data from database
+        ResultSet rs = quanLyDiaPhim.getDataDiaPhim();
+        try {
+            // load column name
+            ResultSetMetaData rsMD = rs.getMetaData();
+            int colNumber = rsMD.getColumnCount();
+            String[] arr = new String[colNumber];
+            for (int i = 0; i < colNumber; i++) {
+                arr[i] = rsMD.getColumnName(i + 1);
+            }
+            model.setColumnIdentifiers(arr);
+
+            // load data from database to table
+            while (rs.next()) {
+                for (int i = 0; i < colNumber; i++) {
+                    arr[i] = rs.getString(i + 1);
+                }
+                model.addRow(arr);
+            }
+
+        } catch (SQLException e) {
+        }
+        jt_hienthidiaphim.setModel(model);
+    }
+
+    private DiaPhim getDiaPhim() {
+
+        String tenDiaPhim = tf_tendiaphim.getText().trim();
+        String dienVien = tf_dienvien.getText().trim();
+        String daoDien = tf_daodien.getText().trim();
+        Integer soLuong = Integer.parseInt(tf_soluongdiaphim.getText().trim());
+        Double giaMua = Double.parseDouble(tf_giamuadiaphim.getText().trim());
+        Double giaBan = Double.parseDouble(tf_giabandiaphim.getText().trim());
+
+        DiaPhim dp = new DiaPhim(null, tenDiaPhim, dienVien, daoDien, soLuong, giaMua, giaBan);
+        return dp;
+    }
+    
+    
     private void button_themdiaphimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_themdiaphimActionPerformed
         
     }//GEN-LAST:event_button_themdiaphimActionPerformed
@@ -2419,101 +2420,101 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_button_suadiaphimActionPerformed
 
     private void button_xoadiaphimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_xoadiaphimActionPerformed
-//        int row = jt_hienthidiaphim.getSelectedRow();
-//        if (row < 0) {
-//            JOptionPane.showMessageDialog(null,
-//                    "You must select a row in table", "Error delete",
-//                    JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
-//        int select = JOptionPane.showOptionDialog(null, "Are you want delete?",
-//                "Delete", 0, JOptionPane.YES_NO_OPTION, null, null, 1);
-//        if (select == 0) {
-//            quanLyDiaPhim.xoaDiaPhim((String) jt_hienthidiaphim.getValueAt(row, 0));
-//            loadDataDiaPhim();
-//        }
+        int row = jt_hienthidiaphim.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(null,
+                    "You must select a row in table", "Error delete",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int select = JOptionPane.showOptionDialog(null, "Are you want delete?",
+                "Delete", 0, JOptionPane.YES_NO_OPTION, null, null, 1);
+        if (select == 0) {
+            quanLyDiaPhim.xoaDiaPhim((String) jt_hienthidiaphim.getValueAt(row, 0));
+            loadDataDiaPhim();
+        }
     }//GEN-LAST:event_button_xoadiaphimActionPerformed
 
     private void button_timKiemPhimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_timKiemPhimActionPerformed
-//        ResultSet rs = null;
-//        String itemText = (String)jcb_timkiemdiaphim.getSelectedItem( );
-//        if (itemText.equals(jcb_timkiemdiaphim.getItemAt(0))) {
-//            rs = quanLyDiaPhim.timID(tf_timkiemdiaphim.getText());
-//        } else if (itemText.equals(jcb_timkiemdiaphim.getItemAt(1))) {
-//            rs = quanLyDiaPhim.timTen(tf_timkiemdiaphim.getText());
-//        }
-//        else if (itemText.equals(jcb_timkiemdiaphim.getItemAt(2))) {
-//            rs = quanLyDiaPhim.timDienVien(tf_timkiemdiaphim.getText());
-//        }
-//        else if (itemText.equals(jcb_timkiemdiaphim.getItemAt(3))) {
-//            rs = quanLyDiaPhim.timDaoDien(tf_timkiemdiaphim.getText());
-//        }
-//
-//        DefaultTableModel model = new DefaultTableModel();
-//        try {
-//            ResultSetMetaData rsMD = rs.getMetaData();
-//            int colNumber = rsMD.getColumnCount();
-//            String[] arr = new String[colNumber];
-//            for (int i = 0; i < colNumber; i++) {
-//                arr[i] = rsMD.getColumnName(i + 1);
-//            }
-//            model.setColumnIdentifiers(arr);
-//
-//            while (rs.next()) {
-//                for (int i = 0; i < colNumber; i++) {
-//                    arr[i] = rs.getString(i + 1);
-//                }
-//                model.addRow(arr);
-//            }
-//
-//        } catch (SQLException e) {
-//        }
-//        jt_hienthidiaphim.setModel(model);
+        ResultSet rs = null;
+        String itemText = (String)jcb_timkiemdiaphim.getSelectedItem( );
+        if (itemText.equals(jcb_timkiemdiaphim.getItemAt(0))) {
+            rs = quanLyDiaPhim.timID(tf_timkiemdiaphim.getText());
+        } else if (itemText.equals(jcb_timkiemdiaphim.getItemAt(1))) {
+            rs = quanLyDiaPhim.timTen(tf_timkiemdiaphim.getText());
+        }
+        else if (itemText.equals(jcb_timkiemdiaphim.getItemAt(2))) {
+            rs = quanLyDiaPhim.timDienVien(tf_timkiemdiaphim.getText());
+        }
+        else if (itemText.equals(jcb_timkiemdiaphim.getItemAt(3))) {
+            rs = quanLyDiaPhim.timDaoDien(tf_timkiemdiaphim.getText());
+        }
+
+        DefaultTableModel model = new DefaultTableModel();
+        try {
+            ResultSetMetaData rsMD = rs.getMetaData();
+            int colNumber = rsMD.getColumnCount();
+            String[] arr = new String[colNumber];
+            for (int i = 0; i < colNumber; i++) {
+                arr[i] = rsMD.getColumnName(i + 1);
+            }
+            model.setColumnIdentifiers(arr);
+
+            while (rs.next()) {
+                for (int i = 0; i < colNumber; i++) {
+                    arr[i] = rs.getString(i + 1);
+                }
+                model.addRow(arr);
+            }
+
+        } catch (SQLException e) {
+        }
+        jt_hienthidiaphim.setModel(model);
     }//GEN-LAST:event_button_timKiemPhimActionPerformed
-//
-//    private void loadDataDiaNhac() {
-//        // create table model
-//        //jt_hienthisach.setModel(new DefaultTableModel());
-//        DefaultTableModel model = new DefaultTableModel();
-//
-//        // get data from database
-//        ResultSet rs = quanLyDiaNhac.getDataDiaNhac();
-//        try {
-//            // load column name
-//            ResultSetMetaData rsMD = rs.getMetaData();
-//            int colNumber = rsMD.getColumnCount();
-//            String[] arr = new String[colNumber];
-//            for (int i = 0; i < colNumber; i++) {
-//                arr[i] = rsMD.getColumnName(i + 1);
-//            }
-//            model.setColumnIdentifiers(arr);
-//
-//            // load data from database to table
-//            while (rs.next()) {
-//                for (int i = 0; i < colNumber; i++) {
-//                    arr[i] = rs.getString(i + 1);
-//                }
-//                model.addRow(arr);
-//            }
-//
-//        } catch (SQLException e) {
-//        }
-//        jt_hienthidianhac.setModel(model);
-//    }
-//
-//    private DiaNhac getDiaNhac() {
-//
-//        String tenDiaNhac = tf_tendianhac.getText().trim();
-//        String caSi = tf_casi.getText().trim();
-//        String theLoai = tf_theloai.getText().trim();
-//        Integer soLuong = Integer.parseInt(tf_soluongdianhac.getText().trim());
-//        Double giaMua = Double.parseDouble(tf_giamuadianhac.getText().trim());
-//        Double giaBan = Double.parseDouble(tf_giabandianhac.getText().trim());
-//
-//        DiaNhac dn = new DiaNhac(null, tenDiaNhac, caSi, theLoai, soLuong, giaMua, giaBan);
-//        return dn;
-//    }
-//    
+
+    private void loadDataDiaNhac() {
+        // create table model
+        //jt_hienthisach.setModel(new DefaultTableModel());
+        DefaultTableModel model = new DefaultTableModel();
+
+        // get data from database
+        ResultSet rs = quanLyDiaNhac.getDataDiaNhac();
+        try {
+            // load column name
+            ResultSetMetaData rsMD = rs.getMetaData();
+            int colNumber = rsMD.getColumnCount();
+            String[] arr = new String[colNumber];
+            for (int i = 0; i < colNumber; i++) {
+                arr[i] = rsMD.getColumnName(i + 1);
+            }
+            model.setColumnIdentifiers(arr);
+
+            // load data from database to table
+            while (rs.next()) {
+                for (int i = 0; i < colNumber; i++) {
+                    arr[i] = rs.getString(i + 1);
+                }
+                model.addRow(arr);
+            }
+
+        } catch (SQLException e) {
+        }
+        jt_hienthidianhac.setModel(model);
+    }
+
+    private DiaNhac getDiaNhac() {
+
+        String tenDiaNhac = tf_tendianhac.getText().trim();
+        String caSi = tf_casi.getText().trim();
+        String theLoai = tf_theloai.getText().trim();
+        Integer soLuong = Integer.parseInt(tf_soluongdianhac.getText().trim());
+        Double giaMua = Double.parseDouble(tf_giamuadianhac.getText().trim());
+        Double giaBan = Double.parseDouble(tf_giabandianhac.getText().trim());
+
+        DiaNhac dn = new DiaNhac(null, tenDiaNhac, caSi, theLoai, soLuong, giaMua, giaBan);
+        return dn;
+    }
+    
     private void button_themdianhacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_themdianhacActionPerformed
         
     }//GEN-LAST:event_button_themdianhacActionPerformed
@@ -2523,56 +2524,56 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_button_suadianhacActionPerformed
 
     private void button_xoadianhacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_xoadianhacActionPerformed
-//        int row = jt_hienthidianhac.getSelectedRow();
-//        if (row < 0) {
-//            JOptionPane.showMessageDialog(null,
-//                    "You must select a row in table", "Error delete",
-//                    JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
-//        int select = JOptionPane.showOptionDialog(null, "Are you want delete?",
-//                "Delete", 0, JOptionPane.YES_NO_OPTION, null, null, 1);
-//        if (select == 0) {
-//            quanLyDiaNhac.xoaDiaNhac((String) jt_hienthidianhac.getValueAt(row, 0));
-//            loadDataDiaNhac();
-//        }
+        int row = jt_hienthidianhac.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(null,
+                    "You must select a row in table", "Error delete",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int select = JOptionPane.showOptionDialog(null, "Are you want delete?",
+                "Delete", 0, JOptionPane.YES_NO_OPTION, null, null, 1);
+        if (select == 0) {
+            quanLyDiaNhac.xoaDiaNhac((String) jt_hienthidianhac.getValueAt(row, 0));
+            loadDataDiaNhac();
+        }
     }//GEN-LAST:event_button_xoadianhacActionPerformed
 
     private void button_timKiemDiaNhacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_timKiemDiaNhacActionPerformed
-//        ResultSet rs = null;
-//        String itemText = (String)jcb_timkiemdianhac.getSelectedItem( );
-//        if (itemText.equals(jcb_timkiemdianhac.getItemAt(0))) {
-//            rs = quanLyDiaNhac.timID(tf_timkiemdianhac.getText());
-//        } else if (itemText.equals(jcb_timkiemdianhac.getItemAt(1))) {
-//            rs = quanLyDiaNhac.timTen(tf_timkiemdianhac.getText());
-//        }
-//        else if (itemText.equals(jcb_timkiemdianhac.getItemAt(2))) {
-//            rs = quanLyDiaNhac.timCaSi(tf_timkiemdianhac.getText());
-//        }
-//        else if (itemText.equals(jcb_timkiemdianhac.getItemAt(3))) {
-//            rs = quanLyDiaNhac.timTheLoai(tf_timkiemdianhac.getText());
-//        }
-//
-//        DefaultTableModel model = new DefaultTableModel();
-//        try {
-//            ResultSetMetaData rsMD = rs.getMetaData();
-//            int colNumber = rsMD.getColumnCount();
-//            String[] arr = new String[colNumber];
-//            for (int i = 0; i < colNumber; i++) {
-//                arr[i] = rsMD.getColumnName(i + 1);
-//            }
-//            model.setColumnIdentifiers(arr);
-//
-//            while (rs.next()) {
-//                for (int i = 0; i < colNumber; i++) {
-//                    arr[i] = rs.getString(i + 1);
-//                }
-//                model.addRow(arr);
-//            }
-//
-//        } catch (SQLException e) {
-//        }
-//        jt_hienthidianhac.setModel(model);
+        ResultSet rs = null;
+        String itemText = (String)jcb_timkiemdianhac.getSelectedItem( );
+        if (itemText.equals(jcb_timkiemdianhac.getItemAt(0))) {
+            rs = quanLyDiaNhac.timID(tf_timkiemdianhac.getText());
+        } else if (itemText.equals(jcb_timkiemdianhac.getItemAt(1))) {
+            rs = quanLyDiaNhac.timTen(tf_timkiemdianhac.getText());
+        }
+        else if (itemText.equals(jcb_timkiemdianhac.getItemAt(2))) {
+            rs = quanLyDiaNhac.timCaSi(tf_timkiemdianhac.getText());
+        }
+        else if (itemText.equals(jcb_timkiemdianhac.getItemAt(3))) {
+            rs = quanLyDiaNhac.timTheLoai(tf_timkiemdianhac.getText());
+        }
+
+        DefaultTableModel model = new DefaultTableModel();
+        try {
+            ResultSetMetaData rsMD = rs.getMetaData();
+            int colNumber = rsMD.getColumnCount();
+            String[] arr = new String[colNumber];
+            for (int i = 0; i < colNumber; i++) {
+                arr[i] = rsMD.getColumnName(i + 1);
+            }
+            model.setColumnIdentifiers(arr);
+
+            while (rs.next()) {
+                for (int i = 0; i < colNumber; i++) {
+                    arr[i] = rs.getString(i + 1);
+                }
+                model.addRow(arr);
+            }
+
+        } catch (SQLException e) {
+        }
+        jt_hienthidianhac.setModel(model);
     }//GEN-LAST:event_button_timKiemDiaNhacActionPerformed
     
 /*Quan Ly Nhan Vien */
@@ -2653,34 +2654,34 @@ public class Home extends javax.swing.JFrame {
     public javax.swing.JButton button_quanlikhohang;
     public javax.swing.JButton button_quanlinhanvien;
     private javax.swing.JButton button_sach;
-    private javax.swing.JButton button_suadianhac;
-    private javax.swing.JButton button_suadiaphim;
+    public javax.swing.JButton button_suadianhac;
+    public javax.swing.JButton button_suadiaphim;
     public javax.swing.JButton button_suanhanvien;
-    private javax.swing.JButton button_suasach;
+    public javax.swing.JButton button_suasach;
     private javax.swing.JButton button_thanhtoan;
     private javax.swing.JButton button_themchiphidinhki;
     private javax.swing.JButton button_themchiphiphatsinh;
-    private javax.swing.JButton button_themdianhac;
-    private javax.swing.JButton button_themdiaphim;
+    public javax.swing.JButton button_themdianhac;
+    public javax.swing.JButton button_themdiaphim;
     private javax.swing.JButton button_themhoadon;
     public javax.swing.JButton button_themnhanvien;
-    private javax.swing.JButton button_themsach;
+    public javax.swing.JButton button_themsach;
     private javax.swing.JButton button_themvaogiohang;
     public javax.swing.JButton button_thongke;
-    private javax.swing.JButton button_timKiemDiaNhac;
-    private javax.swing.JButton button_timKiemPhim;
-    private javax.swing.JButton button_timKiemSach;
+    public javax.swing.JButton button_timKiemDiaNhac;
+    public javax.swing.JButton button_timKiemPhim;
+    public javax.swing.JButton button_timKiemSach;
     public javax.swing.JButton button_timkiemnhanvien;
     private javax.swing.JButton button_tinhloinhuan;
     private javax.swing.JButton button_xemchiphiphatsinh;
     public javax.swing.JButton button_xemtatcanhanvien;
     private javax.swing.JButton button_xemthongke;
     private javax.swing.JButton button_xoachiphidinhki;
-    private javax.swing.JButton button_xoadianhac;
-    private javax.swing.JButton button_xoadiaphim;
+    public javax.swing.JButton button_xoadianhac;
+    public javax.swing.JButton button_xoadiaphim;
     private javax.swing.JButton button_xoakhoigiohang;
     public javax.swing.JButton button_xoanhanvien;
-    private javax.swing.JButton button_xoasach;
+    public javax.swing.JButton button_xoasach;
     private javax.swing.JButton jButton28;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -2758,9 +2759,9 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel81;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    public javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JScrollPane jScrollPane2;
+    public javax.swing.JScrollPane jScrollPane3;
     public javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
@@ -2778,17 +2779,17 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JComboBox<String> jcb_timkiemdianhac;
-    private javax.swing.JComboBox<String> jcb_timkiemdiaphim;
+    public javax.swing.JComboBox<String> jcb_timkiemdianhac;
+    public javax.swing.JComboBox<String> jcb_timkiemdiaphim;
     public javax.swing.JComboBox<String> jcb_timkiemnhanvien;
-    private javax.swing.JComboBox<String> jcb_timkiemsach;
+    public javax.swing.JComboBox<String> jcb_timkiemsach;
     private javax.swing.JTable jt_chiphidinhki;
     private javax.swing.JTable jt_chiphiphatsinh;
     private javax.swing.JTable jt_chitiethoadon;
-    private javax.swing.JTable jt_hienthidianhac;
-    private javax.swing.JTable jt_hienthidiaphim;
+    public javax.swing.JTable jt_hienthidianhac;
+    public javax.swing.JTable jt_hienthidiaphim;
     public javax.swing.JTable jt_hienthinhanvien;
-    private javax.swing.JTable jt_hienthisach;
+    public javax.swing.JTable jt_hienthisach;
     private javax.swing.JTable jt_hoadon;
     private javax.swing.JTable jt_thongke;
     public javax.swing.JPanel panel_banhang;
@@ -2810,39 +2811,39 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel panel_show;
     public javax.swing.JPanel panel_thongketien;
     public javax.swing.JPanel panel_thongtinnhanvien;
-    private javax.swing.JTextField tf_casi;
+    public javax.swing.JTextField tf_casi;
     private javax.swing.JTextField tf_chiphidinhkidenngay;
     private javax.swing.JTextField tf_chiphidinhkitungay;
     private javax.swing.JTextField tf_chiphiphatsinhdenngay;
     private javax.swing.JTextField tf_chiphiphatsinhtungay;
-    private javax.swing.JTextField tf_daodien;
+    public javax.swing.JTextField tf_daodien;
     public javax.swing.JTextField tf_diachi;
-    private javax.swing.JTextField tf_dienvien;
+    public javax.swing.JTextField tf_dienvien;
     public javax.swing.JTextField tf_email;
-    private javax.swing.JTextField tf_giabandianhac;
-    private javax.swing.JTextField tf_giabandiaphim;
-    private javax.swing.JTextField tf_giabansach;
-    private javax.swing.JTextField tf_giamuadianhac;
-    private javax.swing.JTextField tf_giamuadiaphim;
-    private javax.swing.JTextField tf_giamuasach;
+    public javax.swing.JTextField tf_giabandianhac;
+    public javax.swing.JTextField tf_giabandiaphim;
+    public javax.swing.JTextField tf_giabansach;
+    public javax.swing.JTextField tf_giamuadianhac;
+    public javax.swing.JTextField tf_giamuadiaphim;
+    public javax.swing.JTextField tf_giamuasach;
     public javax.swing.JTextField tf_idnhanvien;
     public javax.swing.JTextField tf_luongnhanvien;
     public javax.swing.JTextField tf_ngaybatdau;
-    private javax.swing.JTextField tf_nhaxuatban;
+    public javax.swing.JTextField tf_nhaxuatban;
     public javax.swing.JTextField tf_password;
     public javax.swing.JTextField tf_sdt;
-    private javax.swing.JTextField tf_soluongdianhac;
-    private javax.swing.JTextField tf_soluongdiaphim;
+    public javax.swing.JTextField tf_soluongdianhac;
+    public javax.swing.JTextField tf_soluongdiaphim;
     private javax.swing.JTextField tf_soluongmua;
-    private javax.swing.JTextField tf_soluongsach;
-    private javax.swing.JTextField tf_tacgia;
+    public javax.swing.JTextField tf_soluongsach;
+    public javax.swing.JTextField tf_tacgia;
     private javax.swing.JTextField tf_tenchiphiphatsinh;
-    private javax.swing.JTextField tf_tendianhac;
-    private javax.swing.JTextField tf_tendiaphim;
+    public javax.swing.JTextField tf_tendianhac;
+    public javax.swing.JTextField tf_tendiaphim;
     public javax.swing.JTextField tf_tennhanvien;
-    private javax.swing.JTextField tf_tensach;
+    public javax.swing.JTextField tf_tensach;
     private javax.swing.JTextField tf_tensanphammua;
-    private javax.swing.JTextField tf_theloai;
+    public javax.swing.JTextField tf_theloai;
     private javax.swing.JTextField tf_thoigianchiphiphatsinh;
     private javax.swing.JTextField tf_thongkedenngay;
     private javax.swing.JTextField tf_thongketungay;
@@ -2850,11 +2851,11 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTextField tf_tiendien;
     private javax.swing.JTextField tf_tienthietbi;
     private javax.swing.JTextField tf_tienthuecuahang;
-    private javax.swing.JTextField tf_timkiemdianhac;
-    private javax.swing.JTextField tf_timkiemdiaphim;
+    public javax.swing.JTextField tf_timkiemdianhac;
+    public javax.swing.JTextField tf_timkiemdiaphim;
     private javax.swing.JTextField tf_timkiemhoadon;
     public javax.swing.JTextField tf_timkiemnhanvien;
-    private javax.swing.JTextField tf_timkiemsach;
+    public javax.swing.JTextField tf_timkiemsach;
     private javax.swing.JTextField tf_tongchiphidinhki;
     private javax.swing.JTextField tf_tongchiphiphatsinh;
     private javax.swing.JTextField tf_tongluongnhanvien;
