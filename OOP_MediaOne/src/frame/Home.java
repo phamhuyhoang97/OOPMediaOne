@@ -9,17 +9,22 @@ import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import javax.accessibility.AccessibleContext;
 import javax.swing.ComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRootPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import model.DiaNhac;
 import model.DiaPhim;
 import model.NhanVien;
 import model.Sach;
-import quanly.QLDiaNhac;
-import quanly.QLDiaPhim;
-import quanly.QLNhanVien;
-import quanly.QLSach;
+import control.ManageEmp;
 
 /**
  *
@@ -27,9 +32,7 @@ import quanly.QLSach;
  */
 public class Home extends javax.swing.JFrame {
 
-    QLSach quanLySach = new QLSach();
-    QLDiaPhim quanLyDiaPhim = new QLDiaPhim();
-    QLDiaNhac quanLyDiaNhac = new QLDiaNhac();
+    
     private boolean isUpdate = false;
     private DefaultTableModel tableModel = new DefaultTableModel();
     
@@ -264,11 +267,9 @@ public class Home extends javax.swing.JFrame {
         panel_hoadon = new javax.swing.JPanel();
         jLabel78 = new javax.swing.JLabel();
         tf_timkiemhoadon = new javax.swing.JTextField();
-        button_chitiethoadon = new javax.swing.JButton();
         jScrollPane9 = new javax.swing.JScrollPane();
         jt_hoadon = new javax.swing.JTable();
         button_themhoadon = new javax.swing.JButton();
-        jLabel74 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
         jButton28 = new javax.swing.JButton();
         jSeparator8 = new javax.swing.JSeparator();
@@ -406,7 +407,7 @@ public class Home extends javax.swing.JFrame {
 
         panel_chucnangcon.add(panel_chucnangcon_thongke);
 
-        panel_chucnangcon_banhang.setLayout(new java.awt.GridLayout());
+        panel_chucnangcon_banhang.setLayout(new java.awt.GridLayout(1, 0));
 
         jLabel47.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel47.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1838,6 +1839,11 @@ public class Home extends javax.swing.JFrame {
         jLabel75.setText("Tổng Tiền");
 
         tf_tongtien.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_tongtien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_tongtienActionPerformed(evt);
+            }
+        });
 
         jLabel76.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel76.setText("(nghìn đồng)");
@@ -1916,7 +1922,7 @@ public class Home extends javax.swing.JFrame {
                     .addGroup(panel_banhangLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(button_xoakhoigiohang, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(411, Short.MAX_VALUE))
+                .addContainerGap(186, Short.MAX_VALUE))
         );
 
         panel_banhangLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel72, jLabel73, jLabel75});
@@ -1929,9 +1935,6 @@ public class Home extends javax.swing.JFrame {
         jLabel78.setText("Tìm Kiếm");
 
         tf_timkiemhoadon.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        button_chitiethoadon.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        button_chitiethoadon.setText("Chi Tiết");
 
         jt_hoadon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1962,9 +1965,6 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        jLabel74.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel74.setText("Tìm kiếm theo");
-
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID Hóa Đơn", "Ngày Xuất Hóa Đơn" }));
 
         jButton28.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -1975,28 +1975,23 @@ public class Home extends javax.swing.JFrame {
         panel_hoadonLayout.setHorizontalGroup(
             panel_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_hoadonLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panel_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_hoadonLayout.createSequentialGroup()
-                        .addComponent(jLabel78, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tf_timkiemhoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
-                        .addComponent(jLabel74)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78)
-                        .addComponent(jButton28)
-                        .addContainerGap(396, Short.MAX_VALUE))
-                    .addGroup(panel_hoadonLayout.createSequentialGroup()
-                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 979, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(button_chitiethoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40))))
-            .addGroup(panel_hoadonLayout.createSequentialGroup()
                 .addGap(566, 566, 566)
                 .addComponent(button_themhoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(496, Short.MAX_VALUE))
+            .addGroup(panel_hoadonLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panel_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane9)
+                    .addGroup(panel_hoadonLayout.createSequentialGroup()
+                        .addComponent(jLabel78, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(tf_timkiemhoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(136, 136, 136)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(jButton28)
+                        .addGap(0, 386, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         panel_hoadonLayout.setVerticalGroup(
             panel_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2005,17 +2000,12 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(panel_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel78, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tf_timkiemhoadon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel74)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton28, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGroup(panel_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_hoadonLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel_hoadonLayout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(button_chitiethoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tf_timkiemhoadon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton28)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(110, 110, 110)
                 .addComponent(button_themhoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(184, 184, 184))
@@ -3001,19 +2991,13 @@ public class Home extends javax.swing.JFrame {
         
     
     private void button_xoanhanvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_xoanhanvienActionPerformed
-        NhanVien nv = new NhanVien();
-        QLNhanVien qlnv = new QLNhanVien();
-        qlnv.connect();
-        
-        nv.setId(tf_idnhanvien.getText().trim());
-        //xoa thong tin nhanvien
-        qlnv.xoaNhanVien(nv);
-        JOptionPane.showMessageDialog(null, "Đã xoa' nhân viên xong");
+        control.ManageEmp manageEmp = new ManageEmp();
+        manageEmp.deleteEmp();
     }//GEN-LAST:event_button_xoanhanvienActionPerformed
 
     private void button_suanhanvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_suanhanvienActionPerformed
         NhanVien nv = new NhanVien();
-        QLNhanVien qlnv = new QLNhanVien();
+        ManageEmp qlnv = new ManageEmp();
         qlnv.connect();
         //them dieu kien de xet xem da co Nhan Vien nay trong database chua
         
@@ -3028,7 +3012,7 @@ public class Home extends javax.swing.JFrame {
 
     private void button_xemtatcanhanvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_xemtatcanhanvienActionPerformed
         NhanVien nv = new NhanVien();
-        QLNhanVien qlnv = new QLNhanVien();
+        ManageEmp qlnv = new ManageEmp();
         qlnv.connect();
         //
         String []colsName = {"ID Nhân Viên", "Họ Tên Nhân Viên", "SDT", "Email", "Địa Chỉ",
@@ -3043,7 +3027,7 @@ public class Home extends javax.swing.JFrame {
 
     private void button_themnhanvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_themnhanvienActionPerformed
         NhanVien nv = new NhanVien();
-        QLNhanVien qlnv = new QLNhanVien();
+        ManageEmp qlnv = new ManageEmp();
         qlnv.connect();
         //them dieu kien de xet xem da co Nhan Vien nay trong database chua
         
@@ -3059,7 +3043,7 @@ public class Home extends javax.swing.JFrame {
     private void button_timkiemnhanvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_timkiemnhanvienActionPerformed
         ResultSet rs = null;
         NhanVien nv = new NhanVien();
-        QLNhanVien qlnv = new QLNhanVien();
+        ManageEmp qlnv = new ManageEmp();
         qlnv.connect();
         
         String itemText = (String)jcb_timkiemnhanvien.getSelectedItem( );
@@ -3095,6 +3079,10 @@ public class Home extends javax.swing.JFrame {
         model.setColumnIdentifiers(colsName);  // đặt tiêu đề cột cho tableModel
         jt_hienthinhanvien.setModel(model);
     }//GEN-LAST:event_button_timkiemnhanvienActionPerformed
+
+    private void tf_tongtienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_tongtienActionPerformed
+//        tf_tongtien.setEditable(false);
+    }//GEN-LAST:event_tf_tongtienActionPerformed
 
 
     /**
@@ -3134,6 +3122,1214 @@ public class Home extends javax.swing.JFrame {
 //        });
 //    }
 
+    public QLSach getQuanLySach() {
+        return quanLySach;
+    }
+
+    public void setQuanLySach(QLSach quanLySach) {
+        this.quanLySach = quanLySach;
+    }
+
+    public QLDiaPhim getQuanLyDiaPhim() {
+        return quanLyDiaPhim;
+    }
+
+    public void setQuanLyDiaPhim(QLDiaPhim quanLyDiaPhim) {
+        this.quanLyDiaPhim = quanLyDiaPhim;
+    }
+
+    public QLDiaNhac getQuanLyDiaNhac() {
+        return quanLyDiaNhac;
+    }
+
+    public void setQuanLyDiaNhac(QLDiaNhac quanLyDiaNhac) {
+        this.quanLyDiaNhac = quanLyDiaNhac;
+    }
+
+    public boolean isIsUpdate() {
+        return isUpdate;
+    }
+
+    public void setIsUpdate(boolean isUpdate) {
+        this.isUpdate = isUpdate;
+    }
+
+    public DefaultTableModel getTableModel() {
+        return tableModel;
+    }
+
+    public void setTableModel(DefaultTableModel tableModel) {
+        this.tableModel = tableModel;
+    }
+
+    public JButton getButton_canceldianhac() {
+        return button_canceldianhac;
+    }
+
+    public void setButton_canceldianhac(JButton button_canceldianhac) {
+        this.button_canceldianhac = button_canceldianhac;
+    }
+
+    public JButton getButton_canceldiaphim() {
+        return button_canceldiaphim;
+    }
+
+    public void setButton_canceldiaphim(JButton button_canceldiaphim) {
+        this.button_canceldiaphim = button_canceldiaphim;
+    }
+
+    public JButton getButton_cancelsach() {
+        return button_cancelsach;
+    }
+
+    public void setButton_cancelsach(JButton button_cancelsach) {
+        this.button_cancelsach = button_cancelsach;
+    }
+
+    public JButton getButton_chiphi() {
+        return button_chiphi;
+    }
+
+    public void setButton_chiphi(JButton button_chiphi) {
+        this.button_chiphi = button_chiphi;
+    }
+
+    public JButton getButton_chiphidinhki() {
+        return button_chiphidinhki;
+    }
+
+    public void setButton_chiphidinhki(JButton button_chiphidinhki) {
+        this.button_chiphidinhki = button_chiphidinhki;
+    }
+
+    public JButton getButton_chiphiphatsinh() {
+        return button_chiphiphatsinh;
+    }
+
+    public void setButton_chiphiphatsinh(JButton button_chiphiphatsinh) {
+        this.button_chiphiphatsinh = button_chiphiphatsinh;
+    }
+
+    public JButton getButton_dangxuat() {
+        return button_dangxuat;
+    }
+
+    public void setButton_dangxuat(JButton button_dangxuat) {
+        this.button_dangxuat = button_dangxuat;
+    }
+
+    public JButton getButton_dianhac() {
+        return button_dianhac;
+    }
+
+    public void setButton_dianhac(JButton button_dianhac) {
+        this.button_dianhac = button_dianhac;
+    }
+
+    public JButton getButton_diaphim() {
+        return button_diaphim;
+    }
+
+    public void setButton_diaphim(JButton button_diaphim) {
+        this.button_diaphim = button_diaphim;
+    }
+
+    public JButton getButton_okdianhac() {
+        return button_okdianhac;
+    }
+
+    public void setButton_okdianhac(JButton button_okdianhac) {
+        this.button_okdianhac = button_okdianhac;
+    }
+
+    public JButton getButton_okdiaphim() {
+        return button_okdiaphim;
+    }
+
+    public void setButton_okdiaphim(JButton button_okdiaphim) {
+        this.button_okdiaphim = button_okdiaphim;
+    }
+
+    public JButton getButton_oksach() {
+        return button_oksach;
+    }
+
+    public void setButton_oksach(JButton button_oksach) {
+        this.button_oksach = button_oksach;
+    }
+
+    public JButton getButton_quanlibanhang() {
+        return button_quanlibanhang;
+    }
+
+    public void setButton_quanlibanhang(JButton button_quanlibanhang) {
+        this.button_quanlibanhang = button_quanlibanhang;
+    }
+
+    public JButton getButton_quanlikhohang() {
+        return button_quanlikhohang;
+    }
+
+    public void setButton_quanlikhohang(JButton button_quanlikhohang) {
+        this.button_quanlikhohang = button_quanlikhohang;
+    }
+
+    public JButton getButton_quanlinhanvien() {
+        return button_quanlinhanvien;
+    }
+
+    public void setButton_quanlinhanvien(JButton button_quanlinhanvien) {
+        this.button_quanlinhanvien = button_quanlinhanvien;
+    }
+
+    public JButton getButton_sach() {
+        return button_sach;
+    }
+
+    public void setButton_sach(JButton button_sach) {
+        this.button_sach = button_sach;
+    }
+
+    public JButton getButton_suadianhac() {
+        return button_suadianhac;
+    }
+
+    public void setButton_suadianhac(JButton button_suadianhac) {
+        this.button_suadianhac = button_suadianhac;
+    }
+
+    public JButton getButton_suadiaphim() {
+        return button_suadiaphim;
+    }
+
+    public void setButton_suadiaphim(JButton button_suadiaphim) {
+        this.button_suadiaphim = button_suadiaphim;
+    }
+
+    public JButton getButton_suanhanvien() {
+        return button_suanhanvien;
+    }
+
+    public void setButton_suanhanvien(JButton button_suanhanvien) {
+        this.button_suanhanvien = button_suanhanvien;
+    }
+
+    public JButton getButton_suasach() {
+        return button_suasach;
+    }
+
+    public void setButton_suasach(JButton button_suasach) {
+        this.button_suasach = button_suasach;
+    }
+
+    public JButton getButton_thanhtoan() {
+        return button_thanhtoan;
+    }
+
+    public void setButton_thanhtoan(JButton button_thanhtoan) {
+        this.button_thanhtoan = button_thanhtoan;
+    }
+
+    public JButton getButton_themchiphidinhki() {
+        return button_themchiphidinhki;
+    }
+
+    public void setButton_themchiphidinhki(JButton button_themchiphidinhki) {
+        this.button_themchiphidinhki = button_themchiphidinhki;
+    }
+
+    public JButton getButton_themchiphiphatsinh() {
+        return button_themchiphiphatsinh;
+    }
+
+    public void setButton_themchiphiphatsinh(JButton button_themchiphiphatsinh) {
+        this.button_themchiphiphatsinh = button_themchiphiphatsinh;
+    }
+
+    public JButton getButton_themdianhac() {
+        return button_themdianhac;
+    }
+
+    public void setButton_themdianhac(JButton button_themdianhac) {
+        this.button_themdianhac = button_themdianhac;
+    }
+
+    public JButton getButton_themdiaphim() {
+        return button_themdiaphim;
+    }
+
+    public void setButton_themdiaphim(JButton button_themdiaphim) {
+        this.button_themdiaphim = button_themdiaphim;
+    }
+
+    public JButton getButton_themhoadon() {
+        return button_themhoadon;
+    }
+
+    public void setButton_themhoadon(JButton button_themhoadon) {
+        this.button_themhoadon = button_themhoadon;
+    }
+
+    public JButton getButton_themnhanvien() {
+        return button_themnhanvien;
+    }
+
+    public void setButton_themnhanvien(JButton button_themnhanvien) {
+        this.button_themnhanvien = button_themnhanvien;
+    }
+
+    public JButton getButton_themsach() {
+        return button_themsach;
+    }
+
+    public void setButton_themsach(JButton button_themsach) {
+        this.button_themsach = button_themsach;
+    }
+
+    public JButton getButton_themvaogiohang() {
+        return button_themvaogiohang;
+    }
+
+    public void setButton_themvaogiohang(JButton button_themvaogiohang) {
+        this.button_themvaogiohang = button_themvaogiohang;
+    }
+
+    public JButton getButton_thongke() {
+        return button_thongke;
+    }
+
+    public void setButton_thongke(JButton button_thongke) {
+        this.button_thongke = button_thongke;
+    }
+
+    public JButton getButton_timKiemDiaNhac() {
+        return button_timKiemDiaNhac;
+    }
+
+    public void setButton_timKiemDiaNhac(JButton button_timKiemDiaNhac) {
+        this.button_timKiemDiaNhac = button_timKiemDiaNhac;
+    }
+
+    public JButton getButton_timKiemPhim() {
+        return button_timKiemPhim;
+    }
+
+    public void setButton_timKiemPhim(JButton button_timKiemPhim) {
+        this.button_timKiemPhim = button_timKiemPhim;
+    }
+
+    public JButton getButton_timKiemSach() {
+        return button_timKiemSach;
+    }
+
+    public void setButton_timKiemSach(JButton button_timKiemSach) {
+        this.button_timKiemSach = button_timKiemSach;
+    }
+
+    public JButton getButton_timkiemnhanvien() {
+        return button_timkiemnhanvien;
+    }
+
+    public void setButton_timkiemnhanvien(JButton button_timkiemnhanvien) {
+        this.button_timkiemnhanvien = button_timkiemnhanvien;
+    }
+
+    public JButton getButton_tinhloinhuan() {
+        return button_tinhloinhuan;
+    }
+
+    public void setButton_tinhloinhuan(JButton button_tinhloinhuan) {
+        this.button_tinhloinhuan = button_tinhloinhuan;
+    }
+
+    public JButton getButton_xemchiphiphatsinh() {
+        return button_xemchiphiphatsinh;
+    }
+
+    public void setButton_xemchiphiphatsinh(JButton button_xemchiphiphatsinh) {
+        this.button_xemchiphiphatsinh = button_xemchiphiphatsinh;
+    }
+
+    public JButton getButton_xemtatcanhanvien() {
+        return button_xemtatcanhanvien;
+    }
+
+    public void setButton_xemtatcanhanvien(JButton button_xemtatcanhanvien) {
+        this.button_xemtatcanhanvien = button_xemtatcanhanvien;
+    }
+
+    public JButton getButton_xemthongke() {
+        return button_xemthongke;
+    }
+
+    public void setButton_xemthongke(JButton button_xemthongke) {
+        this.button_xemthongke = button_xemthongke;
+    }
+
+    public JButton getButton_xoachiphidinhki() {
+        return button_xoachiphidinhki;
+    }
+
+    public void setButton_xoachiphidinhki(JButton button_xoachiphidinhki) {
+        this.button_xoachiphidinhki = button_xoachiphidinhki;
+    }
+
+    public JButton getButton_xoadianhac() {
+        return button_xoadianhac;
+    }
+
+    public void setButton_xoadianhac(JButton button_xoadianhac) {
+        this.button_xoadianhac = button_xoadianhac;
+    }
+
+    public JButton getButton_xoadiaphim() {
+        return button_xoadiaphim;
+    }
+
+    public void setButton_xoadiaphim(JButton button_xoadiaphim) {
+        this.button_xoadiaphim = button_xoadiaphim;
+    }
+
+    public JButton getButton_xoakhoigiohang() {
+        return button_xoakhoigiohang;
+    }
+
+    public void setButton_xoakhoigiohang(JButton button_xoakhoigiohang) {
+        this.button_xoakhoigiohang = button_xoakhoigiohang;
+    }
+
+    public JButton getButton_xoanhanvien() {
+        return button_xoanhanvien;
+    }
+
+    public void setButton_xoanhanvien(JButton button_xoanhanvien) {
+        this.button_xoanhanvien = button_xoanhanvien;
+    }
+
+    public JButton getButton_xoasach() {
+        return button_xoasach;
+    }
+
+    public void setButton_xoasach(JButton button_xoasach) {
+        this.button_xoasach = button_xoasach;
+    }
+
+    public JButton getjButton28() {
+        return jButton28;
+    }
+
+    public void setjButton28(JButton jButton28) {
+        this.jButton28 = jButton28;
+    }
+
+    public JComboBox<String> getjComboBox2() {
+        return jComboBox2;
+    }
+
+    public void setjComboBox2(JComboBox<String> jComboBox2) {
+        this.jComboBox2 = jComboBox2;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    public JScrollPane getjScrollPane2() {
+        return jScrollPane2;
+    }
+
+    public void setjScrollPane2(JScrollPane jScrollPane2) {
+        this.jScrollPane2 = jScrollPane2;
+    }
+
+    public JScrollPane getjScrollPane3() {
+        return jScrollPane3;
+    }
+
+    public void setjScrollPane3(JScrollPane jScrollPane3) {
+        this.jScrollPane3 = jScrollPane3;
+    }
+
+    public JScrollPane getjScrollPane4() {
+        return jScrollPane4;
+    }
+
+    public void setjScrollPane4(JScrollPane jScrollPane4) {
+        this.jScrollPane4 = jScrollPane4;
+    }
+
+    public JScrollPane getjScrollPane5() {
+        return jScrollPane5;
+    }
+
+    public void setjScrollPane5(JScrollPane jScrollPane5) {
+        this.jScrollPane5 = jScrollPane5;
+    }
+
+    public JScrollPane getjScrollPane6() {
+        return jScrollPane6;
+    }
+
+    public void setjScrollPane6(JScrollPane jScrollPane6) {
+        this.jScrollPane6 = jScrollPane6;
+    }
+
+    public JScrollPane getjScrollPane7() {
+        return jScrollPane7;
+    }
+
+    public void setjScrollPane7(JScrollPane jScrollPane7) {
+        this.jScrollPane7 = jScrollPane7;
+    }
+
+    public JScrollPane getjScrollPane8() {
+        return jScrollPane8;
+    }
+
+    public void setjScrollPane8(JScrollPane jScrollPane8) {
+        this.jScrollPane8 = jScrollPane8;
+    }
+
+    public JScrollPane getjScrollPane9() {
+        return jScrollPane9;
+    }
+
+    public void setjScrollPane9(JScrollPane jScrollPane9) {
+        this.jScrollPane9 = jScrollPane9;
+    }
+
+    public JTextField getjTextField14() {
+        return jTextField14;
+    }
+
+    public void setjTextField14(JTextField jTextField14) {
+        this.jTextField14 = jTextField14;
+    }
+
+    public JTextField getjTextField6() {
+        return jTextField6;
+    }
+
+    public void setjTextField6(JTextField jTextField6) {
+        this.jTextField6 = jTextField6;
+    }
+
+    public JTextField getjTextField7() {
+        return jTextField7;
+    }
+
+    public void setjTextField7(JTextField jTextField7) {
+        this.jTextField7 = jTextField7;
+    }
+
+    public JComboBox<String> getJcb_timkiemdianhac() {
+        return jcb_timkiemdianhac;
+    }
+
+    public void setJcb_timkiemdianhac(JComboBox<String> jcb_timkiemdianhac) {
+        this.jcb_timkiemdianhac = jcb_timkiemdianhac;
+    }
+
+    public JComboBox<String> getJcb_timkiemdiaphim() {
+        return jcb_timkiemdiaphim;
+    }
+
+    public void setJcb_timkiemdiaphim(JComboBox<String> jcb_timkiemdiaphim) {
+        this.jcb_timkiemdiaphim = jcb_timkiemdiaphim;
+    }
+
+    public JComboBox<String> getJcb_timkiemnhanvien() {
+        return jcb_timkiemnhanvien;
+    }
+
+    public void setJcb_timkiemnhanvien(JComboBox<String> jcb_timkiemnhanvien) {
+        this.jcb_timkiemnhanvien = jcb_timkiemnhanvien;
+    }
+
+    public JComboBox<String> getJcb_timkiemsach() {
+        return jcb_timkiemsach;
+    }
+
+    public void setJcb_timkiemsach(JComboBox<String> jcb_timkiemsach) {
+        this.jcb_timkiemsach = jcb_timkiemsach;
+    }
+
+    public JTable getJt_chiphidinhki() {
+        return jt_chiphidinhki;
+    }
+
+    public void setJt_chiphidinhki(JTable jt_chiphidinhki) {
+        this.jt_chiphidinhki = jt_chiphidinhki;
+    }
+
+    public JTable getJt_chiphiphatsinh() {
+        return jt_chiphiphatsinh;
+    }
+
+    public void setJt_chiphiphatsinh(JTable jt_chiphiphatsinh) {
+        this.jt_chiphiphatsinh = jt_chiphiphatsinh;
+    }
+
+    public JTable getJt_chitiethoadon() {
+        return jt_chitiethoadon;
+    }
+
+    public void setJt_chitiethoadon(JTable jt_chitiethoadon) {
+        this.jt_chitiethoadon = jt_chitiethoadon;
+    }
+
+    public JTable getJt_hienthidianhac() {
+        return jt_hienthidianhac;
+    }
+
+    public void setJt_hienthidianhac(JTable jt_hienthidianhac) {
+        this.jt_hienthidianhac = jt_hienthidianhac;
+    }
+
+    public JTable getJt_hienthidiaphim() {
+        return jt_hienthidiaphim;
+    }
+
+    public void setJt_hienthidiaphim(JTable jt_hienthidiaphim) {
+        this.jt_hienthidiaphim = jt_hienthidiaphim;
+    }
+
+    public JTable getJt_hienthinhanvien() {
+        return jt_hienthinhanvien;
+    }
+
+    public void setJt_hienthinhanvien(JTable jt_hienthinhanvien) {
+        this.jt_hienthinhanvien = jt_hienthinhanvien;
+    }
+
+    public JTable getJt_hienthisach() {
+        return jt_hienthisach;
+    }
+
+    public void setJt_hienthisach(JTable jt_hienthisach) {
+        this.jt_hienthisach = jt_hienthisach;
+    }
+
+    public JTable getJt_hoadon() {
+        return jt_hoadon;
+    }
+
+    public void setJt_hoadon(JTable jt_hoadon) {
+        this.jt_hoadon = jt_hoadon;
+    }
+
+    public JTable getJt_thongke() {
+        return jt_thongke;
+    }
+
+    public void setJt_thongke(JTable jt_thongke) {
+        this.jt_thongke = jt_thongke;
+    }
+
+    public JPanel getPanel_banhang() {
+        return panel_banhang;
+    }
+
+    public void setPanel_banhang(JPanel panel_banhang) {
+        this.panel_banhang = panel_banhang;
+    }
+
+    public JPanel getPanel_chiphidinhki() {
+        return panel_chiphidinhki;
+    }
+
+    public void setPanel_chiphidinhki(JPanel panel_chiphidinhki) {
+        this.panel_chiphidinhki = panel_chiphidinhki;
+    }
+
+    public JPanel getPanel_chiphiphatsinh() {
+        return panel_chiphiphatsinh;
+    }
+
+    public void setPanel_chiphiphatsinh(JPanel panel_chiphiphatsinh) {
+        this.panel_chiphiphatsinh = panel_chiphiphatsinh;
+    }
+
+    public JPanel getPanel_chucnang1() {
+        return panel_chucnang1;
+    }
+
+    public void setPanel_chucnang1(JPanel panel_chucnang1) {
+        this.panel_chucnang1 = panel_chucnang1;
+    }
+
+    public JPanel getPanel_chucnangchinh() {
+        return panel_chucnangchinh;
+    }
+
+    public void setPanel_chucnangchinh(JPanel panel_chucnangchinh) {
+        this.panel_chucnangchinh = panel_chucnangchinh;
+    }
+
+    public JPanel getPanel_chucnangcon() {
+        return panel_chucnangcon;
+    }
+
+    public void setPanel_chucnangcon(JPanel panel_chucnangcon) {
+        this.panel_chucnangcon = panel_chucnangcon;
+    }
+
+    public JPanel getPanel_chucnangcon_banhang() {
+        return panel_chucnangcon_banhang;
+    }
+
+    public void setPanel_chucnangcon_banhang(JPanel panel_chucnangcon_banhang) {
+        this.panel_chucnangcon_banhang = panel_chucnangcon_banhang;
+    }
+
+    public JPanel getPanel_chucnangcon_chiphi() {
+        return panel_chucnangcon_chiphi;
+    }
+
+    public void setPanel_chucnangcon_chiphi(JPanel panel_chucnangcon_chiphi) {
+        this.panel_chucnangcon_chiphi = panel_chucnangcon_chiphi;
+    }
+
+    public JPanel getPanel_chucnangcon_khohang() {
+        return panel_chucnangcon_khohang;
+    }
+
+    public void setPanel_chucnangcon_khohang(JPanel panel_chucnangcon_khohang) {
+        this.panel_chucnangcon_khohang = panel_chucnangcon_khohang;
+    }
+
+    public JPanel getPanel_chucnangcon_nhanvien() {
+        return panel_chucnangcon_nhanvien;
+    }
+
+    public void setPanel_chucnangcon_nhanvien(JPanel panel_chucnangcon_nhanvien) {
+        this.panel_chucnangcon_nhanvien = panel_chucnangcon_nhanvien;
+    }
+
+    public JPanel getPanel_chucnangcon_thongke() {
+        return panel_chucnangcon_thongke;
+    }
+
+    public void setPanel_chucnangcon_thongke(JPanel panel_chucnangcon_thongke) {
+        this.panel_chucnangcon_thongke = panel_chucnangcon_thongke;
+    }
+
+    public JPanel getPanel_dianhac() {
+        return panel_dianhac;
+    }
+
+    public void setPanel_dianhac(JPanel panel_dianhac) {
+        this.panel_dianhac = panel_dianhac;
+    }
+
+    public JPanel getPanel_diaphim() {
+        return panel_diaphim;
+    }
+
+    public void setPanel_diaphim(JPanel panel_diaphim) {
+        this.panel_diaphim = panel_diaphim;
+    }
+
+    public JPanel getPanel_hienthi() {
+        return panel_hienthi;
+    }
+
+    public void setPanel_hienthi(JPanel panel_hienthi) {
+        this.panel_hienthi = panel_hienthi;
+    }
+
+    public JPanel getPanel_hoadon() {
+        return panel_hoadon;
+    }
+
+    public void setPanel_hoadon(JPanel panel_hoadon) {
+        this.panel_hoadon = panel_hoadon;
+    }
+
+    public JPanel getPanel_home() {
+        return panel_home;
+    }
+
+    public void setPanel_home(JPanel panel_home) {
+        this.panel_home = panel_home;
+    }
+
+    public JPanel getPanel_sach() {
+        return panel_sach;
+    }
+
+    public void setPanel_sach(JPanel panel_sach) {
+        this.panel_sach = panel_sach;
+    }
+
+    public JPanel getPanel_show() {
+        return panel_show;
+    }
+
+    public void setPanel_show(JPanel panel_show) {
+        this.panel_show = panel_show;
+    }
+
+    public JPanel getPanel_thongketien() {
+        return panel_thongketien;
+    }
+
+    public void setPanel_thongketien(JPanel panel_thongketien) {
+        this.panel_thongketien = panel_thongketien;
+    }
+
+    public JPanel getPanel_thongtinnhanvien() {
+        return panel_thongtinnhanvien;
+    }
+
+    public void setPanel_thongtinnhanvien(JPanel panel_thongtinnhanvien) {
+        this.panel_thongtinnhanvien = panel_thongtinnhanvien;
+    }
+
+    public JTextField getTf_casi() {
+        return tf_casi;
+    }
+
+    public void setTf_casi(JTextField tf_casi) {
+        this.tf_casi = tf_casi;
+    }
+
+    public JTextField getTf_chiphidinhkidenngay() {
+        return tf_chiphidinhkidenngay;
+    }
+
+    public void setTf_chiphidinhkidenngay(JTextField tf_chiphidinhkidenngay) {
+        this.tf_chiphidinhkidenngay = tf_chiphidinhkidenngay;
+    }
+
+    public JTextField getTf_chiphidinhkitungay() {
+        return tf_chiphidinhkitungay;
+    }
+
+    public void setTf_chiphidinhkitungay(JTextField tf_chiphidinhkitungay) {
+        this.tf_chiphidinhkitungay = tf_chiphidinhkitungay;
+    }
+
+    public JTextField getTf_chiphiphatsinhdenngay() {
+        return tf_chiphiphatsinhdenngay;
+    }
+
+    public void setTf_chiphiphatsinhdenngay(JTextField tf_chiphiphatsinhdenngay) {
+        this.tf_chiphiphatsinhdenngay = tf_chiphiphatsinhdenngay;
+    }
+
+    public JTextField getTf_chiphiphatsinhtungay() {
+        return tf_chiphiphatsinhtungay;
+    }
+
+    public void setTf_chiphiphatsinhtungay(JTextField tf_chiphiphatsinhtungay) {
+        this.tf_chiphiphatsinhtungay = tf_chiphiphatsinhtungay;
+    }
+
+    public JTextField getTf_daodien() {
+        return tf_daodien;
+    }
+
+    public void setTf_daodien(JTextField tf_daodien) {
+        this.tf_daodien = tf_daodien;
+    }
+
+    public JTextField getTf_diachi() {
+        return tf_diachi;
+    }
+
+    public void setTf_diachi(JTextField tf_diachi) {
+        this.tf_diachi = tf_diachi;
+    }
+
+    public JTextField getTf_dienvien() {
+        return tf_dienvien;
+    }
+
+    public void setTf_dienvien(JTextField tf_dienvien) {
+        this.tf_dienvien = tf_dienvien;
+    }
+
+    public JTextField getTf_email() {
+        return tf_email;
+    }
+
+    public void setTf_email(JTextField tf_email) {
+        this.tf_email = tf_email;
+    }
+
+    public JTextField getTf_giabandianhac() {
+        return tf_giabandianhac;
+    }
+
+    public void setTf_giabandianhac(JTextField tf_giabandianhac) {
+        this.tf_giabandianhac = tf_giabandianhac;
+    }
+
+    public JTextField getTf_giabandiaphim() {
+        return tf_giabandiaphim;
+    }
+
+    public void setTf_giabandiaphim(JTextField tf_giabandiaphim) {
+        this.tf_giabandiaphim = tf_giabandiaphim;
+    }
+
+    public JTextField getTf_giabansach() {
+        return tf_giabansach;
+    }
+
+    public void setTf_giabansach(JTextField tf_giabansach) {
+        this.tf_giabansach = tf_giabansach;
+    }
+
+    public JTextField getTf_giamuadianhac() {
+        return tf_giamuadianhac;
+    }
+
+    public void setTf_giamuadianhac(JTextField tf_giamuadianhac) {
+        this.tf_giamuadianhac = tf_giamuadianhac;
+    }
+
+    public JTextField getTf_giamuadiaphim() {
+        return tf_giamuadiaphim;
+    }
+
+    public void setTf_giamuadiaphim(JTextField tf_giamuadiaphim) {
+        this.tf_giamuadiaphim = tf_giamuadiaphim;
+    }
+
+    public JTextField getTf_giamuasach() {
+        return tf_giamuasach;
+    }
+
+    public void setTf_giamuasach(JTextField tf_giamuasach) {
+        this.tf_giamuasach = tf_giamuasach;
+    }
+
+    public JTextField getTf_hesoluong() {
+        return tf_hesoluong;
+    }
+
+    public void setTf_hesoluong(JTextField tf_hesoluong) {
+        this.tf_hesoluong = tf_hesoluong;
+    }
+
+    public JTextField getTf_iddianhac() {
+        return tf_iddianhac;
+    }
+
+    public void setTf_iddianhac(JTextField tf_iddianhac) {
+        this.tf_iddianhac = tf_iddianhac;
+    }
+
+    public JTextField getTf_iddiaphim() {
+        return tf_iddiaphim;
+    }
+
+    public void setTf_iddiaphim(JTextField tf_iddiaphim) {
+        this.tf_iddiaphim = tf_iddiaphim;
+    }
+
+    public JTextField getTf_idnhanvien() {
+        return tf_idnhanvien;
+    }
+
+    public void setTf_idnhanvien(JTextField tf_idnhanvien) {
+        this.tf_idnhanvien = tf_idnhanvien;
+    }
+
+    public JTextField getTf_idsach() {
+        return tf_idsach;
+    }
+
+    public void setTf_idsach(JTextField tf_idsach) {
+        this.tf_idsach = tf_idsach;
+    }
+
+    public JTextField getTf_luongcoban() {
+        return tf_luongcoban;
+    }
+
+    public void setTf_luongcoban(JTextField tf_luongcoban) {
+        this.tf_luongcoban = tf_luongcoban;
+    }
+
+    public JTextField getTf_nhaxuatban() {
+        return tf_nhaxuatban;
+    }
+
+    public void setTf_nhaxuatban(JTextField tf_nhaxuatban) {
+        this.tf_nhaxuatban = tf_nhaxuatban;
+    }
+
+    public JTextField getTf_sdt() {
+        return tf_sdt;
+    }
+
+    public void setTf_sdt(JTextField tf_sdt) {
+        this.tf_sdt = tf_sdt;
+    }
+
+    public JTextField getTf_soluongdianhac() {
+        return tf_soluongdianhac;
+    }
+
+    public void setTf_soluongdianhac(JTextField tf_soluongdianhac) {
+        this.tf_soluongdianhac = tf_soluongdianhac;
+    }
+
+    public JTextField getTf_soluongdiaphim() {
+        return tf_soluongdiaphim;
+    }
+
+    public void setTf_soluongdiaphim(JTextField tf_soluongdiaphim) {
+        this.tf_soluongdiaphim = tf_soluongdiaphim;
+    }
+
+    public JTextField getTf_soluongmua() {
+        return tf_soluongmua;
+    }
+
+    public void setTf_soluongmua(JTextField tf_soluongmua) {
+        this.tf_soluongmua = tf_soluongmua;
+    }
+
+    public JTextField getTf_soluongsach() {
+        return tf_soluongsach;
+    }
+
+    public void setTf_soluongsach(JTextField tf_soluongsach) {
+        this.tf_soluongsach = tf_soluongsach;
+    }
+
+    public JTextField getTf_tacgia() {
+        return tf_tacgia;
+    }
+
+    public void setTf_tacgia(JTextField tf_tacgia) {
+        this.tf_tacgia = tf_tacgia;
+    }
+
+    public JTextField getTf_tenchiphiphatsinh() {
+        return tf_tenchiphiphatsinh;
+    }
+
+    public void setTf_tenchiphiphatsinh(JTextField tf_tenchiphiphatsinh) {
+        this.tf_tenchiphiphatsinh = tf_tenchiphiphatsinh;
+    }
+
+    public JTextField getTf_tendianhac() {
+        return tf_tendianhac;
+    }
+
+    public void setTf_tendianhac(JTextField tf_tendianhac) {
+        this.tf_tendianhac = tf_tendianhac;
+    }
+
+    public JTextField getTf_tendiaphim() {
+        return tf_tendiaphim;
+    }
+
+    public void setTf_tendiaphim(JTextField tf_tendiaphim) {
+        this.tf_tendiaphim = tf_tendiaphim;
+    }
+
+    public JTextField getTf_tennhanvien() {
+        return tf_tennhanvien;
+    }
+
+    public void setTf_tennhanvien(JTextField tf_tennhanvien) {
+        this.tf_tennhanvien = tf_tennhanvien;
+    }
+
+    public JTextField getTf_tensach() {
+        return tf_tensach;
+    }
+
+    public void setTf_tensach(JTextField tf_tensach) {
+        this.tf_tensach = tf_tensach;
+    }
+
+    public JTextField getTf_tensanphammua() {
+        return tf_tensanphammua;
+    }
+
+    public void setTf_tensanphammua(JTextField tf_tensanphammua) {
+        this.tf_tensanphammua = tf_tensanphammua;
+    }
+
+    public JTextField getTf_theloai() {
+        return tf_theloai;
+    }
+
+    public void setTf_theloai(JTextField tf_theloai) {
+        this.tf_theloai = tf_theloai;
+    }
+
+    public JTextField getTf_thoigianchiphiphatsinh() {
+        return tf_thoigianchiphiphatsinh;
+    }
+
+    public void setTf_thoigianchiphiphatsinh(JTextField tf_thoigianchiphiphatsinh) {
+        this.tf_thoigianchiphiphatsinh = tf_thoigianchiphiphatsinh;
+    }
+
+    public JTextField getTf_thongkedenngay() {
+        return tf_thongkedenngay;
+    }
+
+    public void setTf_thongkedenngay(JTextField tf_thongkedenngay) {
+        this.tf_thongkedenngay = tf_thongkedenngay;
+    }
+
+    public JTextField getTf_thongketungay() {
+        return tf_thongketungay;
+    }
+
+    public void setTf_thongketungay(JTextField tf_thongketungay) {
+        this.tf_thongketungay = tf_thongketungay;
+    }
+
+    public JTextField getTf_tienchiphiphatsinh() {
+        return tf_tienchiphiphatsinh;
+    }
+
+    public void setTf_tienchiphiphatsinh(JTextField tf_tienchiphiphatsinh) {
+        this.tf_tienchiphiphatsinh = tf_tienchiphiphatsinh;
+    }
+
+    public JTextField getTf_tiendien() {
+        return tf_tiendien;
+    }
+
+    public void setTf_tiendien(JTextField tf_tiendien) {
+        this.tf_tiendien = tf_tiendien;
+    }
+
+    public JTextField getTf_tienthietbi() {
+        return tf_tienthietbi;
+    }
+
+    public void setTf_tienthietbi(JTextField tf_tienthietbi) {
+        this.tf_tienthietbi = tf_tienthietbi;
+    }
+
+    public JTextField getTf_tienthuecuahang() {
+        return tf_tienthuecuahang;
+    }
+
+    public void setTf_tienthuecuahang(JTextField tf_tienthuecuahang) {
+        this.tf_tienthuecuahang = tf_tienthuecuahang;
+    }
+
+    public JTextField getTf_timkiemdianhac() {
+        return tf_timkiemdianhac;
+    }
+
+    public void setTf_timkiemdianhac(JTextField tf_timkiemdianhac) {
+        this.tf_timkiemdianhac = tf_timkiemdianhac;
+    }
+
+    public JTextField getTf_timkiemdiaphim() {
+        return tf_timkiemdiaphim;
+    }
+
+    public void setTf_timkiemdiaphim(JTextField tf_timkiemdiaphim) {
+        this.tf_timkiemdiaphim = tf_timkiemdiaphim;
+    }
+
+    public JTextField getTf_timkiemhoadon() {
+        return tf_timkiemhoadon;
+    }
+
+    public void setTf_timkiemhoadon(JTextField tf_timkiemhoadon) {
+        this.tf_timkiemhoadon = tf_timkiemhoadon;
+    }
+
+    public JTextField getTf_timkiemnhanvien() {
+        return tf_timkiemnhanvien;
+    }
+
+    public void setTf_timkiemnhanvien(JTextField tf_timkiemnhanvien) {
+        this.tf_timkiemnhanvien = tf_timkiemnhanvien;
+    }
+
+    public JTextField getTf_timkiemsach() {
+        return tf_timkiemsach;
+    }
+
+    public void setTf_timkiemsach(JTextField tf_timkiemsach) {
+        this.tf_timkiemsach = tf_timkiemsach;
+    }
+
+    public JTextField getTf_tongchiphidinhki() {
+        return tf_tongchiphidinhki;
+    }
+
+    public void setTf_tongchiphidinhki(JTextField tf_tongchiphidinhki) {
+        this.tf_tongchiphidinhki = tf_tongchiphidinhki;
+    }
+
+    public JTextField getTf_tongchiphiphatsinh() {
+        return tf_tongchiphiphatsinh;
+    }
+
+    public void setTf_tongchiphiphatsinh(JTextField tf_tongchiphiphatsinh) {
+        this.tf_tongchiphiphatsinh = tf_tongchiphiphatsinh;
+    }
+
+    public JTextField getTf_tongluongnhanvien() {
+        return tf_tongluongnhanvien;
+    }
+
+    public void setTf_tongluongnhanvien(JTextField tf_tongluongnhanvien) {
+        this.tf_tongluongnhanvien = tf_tongluongnhanvien;
+    }
+
+    public JTextField getTf_tongtien() {
+        return tf_tongtien;
+    }
+
+    public void setTf_tongtien(JTextField tf_tongtien) {
+        this.tf_tongtien = tf_tongtien;
+    }
+
+    public JRootPane getRootPane() {
+        return rootPane;
+    }
+
+    public void setRootPane(JRootPane rootPane) {
+        this.rootPane = rootPane;
+    }
+
+    public boolean isRootPaneCheckingEnabled() {
+        return rootPaneCheckingEnabled;
+    }
+
+    public void setRootPaneCheckingEnabled(boolean rootPaneCheckingEnabled) {
+        this.rootPaneCheckingEnabled = rootPaneCheckingEnabled;
+    }
+
+    public AccessibleContext getAccessibleContext() {
+        return accessibleContext;
+    }
+
+    public void setAccessibleContext(AccessibleContext accessibleContext) {
+        this.accessibleContext = accessibleContext;
+    }
+
+    public AccessibleContext getAccessibleContext() {
+        return accessibleContext;
+    }
+
+    public void setAccessibleContext(AccessibleContext accessibleContext) {
+        this.accessibleContext = accessibleContext;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton button_canceldianhac;
     private javax.swing.JButton button_canceldiaphim;
@@ -3141,7 +4337,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton button_chiphi;
     private javax.swing.JButton button_chiphidinhki;
     private javax.swing.JButton button_chiphiphatsinh;
-    private javax.swing.JButton button_chitiethoadon;
     private javax.swing.JButton button_dangxuat;
     private javax.swing.JButton button_dianhac;
     private javax.swing.JButton button_diaphim;
@@ -3251,7 +4446,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel71;
     private javax.swing.JLabel jLabel72;
     private javax.swing.JLabel jLabel73;
-    private javax.swing.JLabel jLabel74;
     private javax.swing.JLabel jLabel75;
     private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel78;
