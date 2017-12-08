@@ -5,7 +5,6 @@
  */
 package model;
 
-import frame.MyConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,17 +47,63 @@ public class Employee {
     
     //them Nhan vien
     public void addEmployee(Employee employee){
-        
+        MyConnect connect = new MyConnect();
+        Connection connection = connect.connect();
+        Employee employ = null;
+        AutoId id = new AutoId();
+        idEmployee = id.autoId("employee", "EM");
+        try {
+            String sql = "insert into employee values (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+            prepareStatement.setString(1, idEmployee);
+            prepareStatement.setString(2, employee.getEmployeeName());
+            prepareStatement.setString(3, employee.getEmployeePhone());
+            prepareStatement.setString(4, employee.getEmployeeEmail());
+            prepareStatement.setString(5, employee.getEmployeePassword());
+            prepareStatement.setString(6, employee.getEmployeeAddress());
+            prepareStatement.setString(7, String.valueOf(employee.getEmployeeSalary()));
+            prepareStatement.setString(8, String.valueOf(employee.getStatus()));
+            prepareStatement.setString(9, String.valueOf(employee.checkAdmin));
+            
+            ResultSet resultSet = prepareStatement.executeQuery();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return employ;
     }
     
     //tim nhan vien theo id
-    public ResultSet searchID(Employee employee){
-        
+    public ResultSet searchEmployeeById(Employee employee){
+        MyConnect connect = new MyConnect();
+        Connection connection = connect.connect();
+        ResultSet rs = null;
+        try {
+            String sql = "select * from employee where idEmployee = ?";
+            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+            prepareStatement.setString(1, employee.getIdEmployee());
+            rs = prepareStatement.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
     
     //tim nhan vien theo ten
-    public ResultSet searchName(Employee employee){
-        
+    public Employee searchEmployeeByName (Employee employee){
+        MyConnect connect = new MyConnect();
+        Connection connection = connect.connect();
+        Employee employ = null;
+        try {
+            String sql = "select * from employee where employeeName = ?";
+            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+            prepareStatement.setString(1, employee.getEmployeeName());
+            ResultSet resultSet = prepareStatement.executeQuery();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return employ;
     } 
     
     //dang nhap cho nhan vien
@@ -79,10 +124,10 @@ public class Employee {
                 employee.setEmployeeName(resultSet.getString("employeeName"));
                 employee.setEmployeePhone(resultSet.getString("employeePhone"));
                 employee.setEmployeeEmail(resultSet.getString("employeeEmail"));
-                employee.setEmployeePassword(password);
+                employee.setEmployeePassword(resultSet.getString("employeePassword"));
                 employee.setEmployeeAddress(resultSet.getString("employeeAddress"));
                 employee.setEmployeeSalary(Integer.parseInt(resultSet.getString("employeeSalary")));
-                employee.setStatus(1);
+                employee.setStatus(Integer.parseInt(resultSet.getString("status")));
                 employee.setCheckAdmin(employee.checkAdmin.valueOf(resultSet.getString("checkAdmin")));
                 employee.setBeginDate(resultSet.getString("beginDate"));
                 employee.setEndDate(resultSet.getString("endDate"));
