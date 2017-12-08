@@ -5,7 +5,6 @@
  */
 package model;
 
-import frame.MyConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,9 +14,6 @@ import java.sql.ResultSet;
  * @author hoang
  */
 public class Employee {
-    public enum checkAdmin {
-        employee, manager;
-    }
     
     private String idEmployee;
     private String employeeName;
@@ -27,7 +23,7 @@ public class Employee {
     private String employeeAddress;
     private double employeeSalary;
     private int status;
-    private checkAdmin checkAdmin;
+    private String checkAdmin;
     private String beginDate;
     private String endDate;
 
@@ -79,11 +75,11 @@ public class Employee {
                 employee.setEmployeeName(resultSet.getString("employeeName"));
                 employee.setEmployeePhone(resultSet.getString("employeePhone"));
                 employee.setEmployeeEmail(resultSet.getString("employeeEmail"));
-                employee.setEmployeePassword(password);
+                employee.setEmployeePassword(resultSet.getString("employeePassword"));
                 employee.setEmployeeAddress(resultSet.getString("employeeAddress"));
                 employee.setEmployeeSalary(Integer.parseInt(resultSet.getString("employeeSalary")));
                 employee.setStatus(1);
-                employee.setCheckAdmin(employee.checkAdmin.valueOf(resultSet.getString("checkAdmin")));
+                employee.setCheckAdmin(resultSet.getString("checkAdmin"));
                 employee.setBeginDate(resultSet.getString("beginDate"));
                 employee.setEndDate(resultSet.getString("endDate"));
             }
@@ -173,13 +169,15 @@ public class Employee {
         this.endDate = endDate;
     }
 
-    public checkAdmin getCheckAdmin() {
+    public String getCheckAdmin() {
         return checkAdmin;
     }
 
-    public void setCheckAdmin(checkAdmin checkAdmin) {
+    public void setCheckAdmin(String checkAdmin) {
         this.checkAdmin = checkAdmin;
     }
+
+    
     
     
     

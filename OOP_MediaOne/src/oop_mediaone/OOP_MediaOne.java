@@ -5,7 +5,7 @@
  */
 package oop_mediaone;
 
-import frame.DangNhap;
+import view.DangNhap;
 import java.awt.HeadlessException;
 import java.sql.SQLException;
 import model.Employee;
