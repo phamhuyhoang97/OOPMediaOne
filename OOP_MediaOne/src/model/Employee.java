@@ -32,17 +32,61 @@ public class Employee {
 
     //xoa nhan vien
     public void deleteEmployee(Employee employee){
-        
+        MyConnect connect = new MyConnect();
+        Connection connection = connect.connect();
+
+        try {
+            String sql = "delete from employee where idEmployee = ?";
+            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+            prepareStatement.setString(1, employee.getIdEmployee());
+
+            ResultSet resultSet = prepareStatement.executeQuery();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     //sua thong tin nhan vien
     public void changeEmployee(Employee employee){
-        
+        MyConnect connect = new MyConnect();
+        Connection connection = connect.connect();
+        ResultSet rs = null;
+        try {
+            String sql = "update employee set employeeName = ?, employeePhone = ?, employeeEmail = ?, employeePassword = ?, employeeAddress = ?, employeeSalary = ?, status = ?, beginDate = ?, endDate = ? Where idEmployee = ?";
+            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+            
+            prepareStatement.setString(1, employee.getEmployeeName());
+            prepareStatement.setString(2, employee.getEmployeePhone());
+            prepareStatement.setString(3, employee.getEmployeeEmail());
+            prepareStatement.setString(4, employee.getEmployeePassword());
+            prepareStatement.setString(5, employee.getEmployeeAddress());
+            prepareStatement.setString(6, String.valueOf(employee.getEmployeeSalary()));            
+            prepareStatement.setString(7, String.valueOf(employee.getStatus()));
+            prepareStatement.setString(8, employee.getBeginDate());
+            prepareStatement.setString(9, employee.getEndDate());
+            
+            prepareStatement.setString(10, employee.getIdEmployee());
+            
+            rs = prepareStatement.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     //truy xuat du lieu len bang
     public ResultSet view(){
-        
+        MyConnect connect = new MyConnect();
+        Connection connection = connect.connect();
+        ResultSet rs = null;
+        try {
+            String sql = "select * from employee";
+            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+            rs = prepareStatement.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
     
     //them Nhan vien
@@ -51,11 +95,10 @@ public class Employee {
         Connection connection = connect.connect();
         Employee employ = null;
         AutoId id = new AutoId();
-        idEmployee = id.autoId("employee", "EM");
         try {
             String sql = "insert into employee values (?, ?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
-            prepareStatement.setString(1, idEmployee);
+            prepareStatement.setString(1, id.autoId("employee", "EM"));
             prepareStatement.setString(2, employee.getEmployeeName());
             prepareStatement.setString(3, employee.getEmployeePhone());
             prepareStatement.setString(4, employee.getEmployeeEmail());
@@ -70,7 +113,6 @@ public class Employee {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return employ;
     }
     
     //tim nhan vien theo id
@@ -90,20 +132,19 @@ public class Employee {
     }
     
     //tim nhan vien theo ten
-    public Employee searchEmployeeByName (Employee employee){
+    public ResultSet searchEmployeeByName (Employee employee){
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
-        Employee employ = null;
+        ResultSet rs = null;
         try {
             String sql = "select * from employee where employeeName = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
-            prepareStatement.setString(1, employee.getEmployeeName());
-            ResultSet resultSet = prepareStatement.executeQuery();
-            
+            prepareStatement.setString(1, employee.getIdEmployee());
+            rs = prepareStatement.executeQuery();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return employ;
+        return rs;
     } 
     
     //dang nhap cho nhan vien

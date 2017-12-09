@@ -42,4 +42,9 @@ public class AutoId {
     public void setId(String id) {
         this.id = id;
     }
+    
+    public static void main(String[] args) {
+        AutoId id = new AutoId();
+        System.out.println(id.autoId("book", "BK"));
+    }
 }
