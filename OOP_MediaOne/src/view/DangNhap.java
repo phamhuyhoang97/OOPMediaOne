@@ -57,7 +57,7 @@ public class DangNhap extends javax.swing.JFrame {
                 home.panel_banhang.setVisible(false);
                 home.panel_hoadon.setVisible(false);
                 
-                if (OOP_MediaOne.currentEmployee.getCheckAdmin().equals("employee")) {
+                if ((OOP_MediaOne.currentEmployee.getCheckAdmin()).equals("employee")) {
                     home.button_quanlinhanvien.setVisible(false);
                     home.button_chiphi.setVisible(false);
                     home.button_thongke.setVisible(false);

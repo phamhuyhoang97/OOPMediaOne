@@ -2352,7 +2352,6 @@ public class Home extends javax.swing.JFrame {
 /*Thong Ke Doanh Thu*/
     
 
-    
     private void button_xemthongkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_xemthongkeActionPerformed
         DefaultTableModel tableModel = new DefaultTableModel();
         controller.ManageRevenue manageRevenue = new ManageRevenue();
