@@ -23,14 +23,14 @@ public class ManageEmp {
     private DefaultTableModel tableModel = new DefaultTableModel();
     
     //lay du lieu o o nhap
-    public void setData(Employee nv, String employeeName, String employeePhone, 
+    public void setData(Employee nv, String idEmployee ,String employeeName, String employeePhone, 
             String employeeEmail, String employeeAddress, String employeeSalary, String employeePassword){
-        
+        nv.setIdEmployee(idEmployee);
         nv.setEmployeeName(employeeName);
         nv.setEmployeePhone(employeePhone);
         nv.setEmployeeEmail(employeeEmail);
         nv.setEmployeeAddress(employeeAddress);
-        nv.setEmployeeSalary(Double.parseDouble(employeeSalary)*1000);
+        nv.setEmployeeSalary(Double.parseDouble(employeeSalary));
         nv.setEmployeePassword(employeePassword);
         nv.setStatus(1);
         nv.setCheckAdmin(1);
@@ -62,14 +62,14 @@ public class ManageEmp {
         JOptionPane.showMessageDialog(null, "Đã xoa' nhân viên xong");
     }
     
-    public void changeEmp(String employeeName, String employeePhone, 
+    public void changeEmp(String idEmployee, String employeeName, String employeePhone, 
             String employeeEmail, String employeeAddress, String employeeSalary, String employeePassword){
         
         Employee nv = new Employee();
         //them dieu kien de xet xem da co Nhan Vien nay trong database chua
         
         //them thuoc tinh NhanVien
-        setData(nv, employeeName, employeePhone, employeeEmail, employeeAddress, employeeSalary, employeePassword);
+        setData(nv, idEmployee, employeeName, employeePhone, employeeEmail, employeeAddress, employeeSalary, employeePassword);
         
         //them vao database
         nv.changeEmployee(nv);
@@ -89,13 +89,13 @@ public class ManageEmp {
         System.out.println("ok");
     }
            
-    public void addEmp(String employeeName, String employeePhone, 
+    public void addEmp(String idEmployee, String employeeName, String employeePhone, 
         String employeeEmail, String employeeAddress, String employeeSalary, String employeePassword){
         Employee nv = new Employee();
         //them dieu kien de xet xem da co Nhan Vien nay trong database chua
         
         //them thuoc tinh NhanVien
-        setData(nv, employeeName, employeePhone, employeeEmail, employeeAddress, employeeSalary, employeePassword);
+        setData(nv, idEmployee, employeeName, employeePhone, employeeEmail, employeeAddress, employeeSalary, employeePassword);
         
         //them vao database
         nv.addEmployee(nv);

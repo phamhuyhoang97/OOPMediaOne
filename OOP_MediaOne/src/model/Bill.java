@@ -18,7 +18,6 @@ public class Bill {
     private String billDate;
     private int billType;
     private double billTotal;
-    private double idEmployee;
 
     // Them 1 bill
     public void addBill(Bill bill) {
@@ -27,15 +26,13 @@ public class Bill {
         Employee employ = null;
         AutoId id = new AutoId();
         try {
-            String sql = "insert into bill values (?, ?, ?, ?);";
+            String sql = "insert into bill values (?, current_date(),? ,?);";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
             prepareStatement.setString(1, id.autoId("bill", "BI"));
-            prepareStatement.setString(2, bill.getBillDate());
-            prepareStatement.setString(3, String.valueOf(bill.getBillType()));
-            prepareStatement.setString(4, String.valueOf(bill.getBillTotal()));
-            prepareStatement.setString(5, String.valueOf(bill.getIdEmployee()));
-                        
-            ResultSet resultSet = prepareStatement.executeQuery();
+            prepareStatement.setString(2, String.valueOf(bill.getBillType()));
+            prepareStatement.setString(3, String.valueOf(bill.getBillTotal()));
+            
+            int resultSet = prepareStatement.executeUpdate();
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -52,8 +49,25 @@ public class Bill {
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
             prepareStatement.setString(1, bill.getIdBill());
 
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int resultSet = prepareStatement.executeUpdate();
             
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void updatePriceBill(Bill bill, String idBill, double price) {
+        MyConnect connect = new MyConnect();
+        Connection connection = connect.connect();
+        try {
+            String sql = "update bill set billTotal = ? Where idBill = ?";
+            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+            
+            prepareStatement.setDouble(1, price);
+            prepareStatement.setString(2, idBill);
+            
+            
+            int resultSet = prepareStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -63,7 +77,6 @@ public class Bill {
     public void updateBill(Bill bill) {
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
-        ResultSet rs = null;
         try {
             String sql = "update bill set billDate = ?, billTotal = ? Where idBill = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -73,10 +86,42 @@ public class Bill {
             
             prepareStatement.setString(3, bill.getIdBill());
             
+            int resultSet = prepareStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public ResultSet searchBillById(Bill bill){
+        MyConnect connect = new MyConnect();
+        Connection connection = connect.connect();
+        ResultSet rs = null;
+        try {
+            String sql = "select idBill, billDate, billTotal from bill where idBill = ? and billType = 1";
+            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+            prepareStatement.setString(1, bill.getIdBill());
+            
+            System.out.println(prepareStatement);
             rs = prepareStatement.executeQuery();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return rs;
+    }
+    
+    public ResultSet searchBillByDate(Bill bill){
+        MyConnect connect = new MyConnect();
+        Connection connection = connect.connect();
+        ResultSet rs = null;
+        try {
+            String sql = "select idBill, billDate, billTotal from bill where billDate = ? and billType = 1";
+            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+            prepareStatement.setString(1, bill.getBillDate());
+            rs = prepareStatement.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 
     public String getIdBill() {
@@ -109,14 +154,6 @@ public class Bill {
 
     public void setBillTotal(double billTotal) {
         this.billTotal = billTotal;
-    }
-    
-    public double getIdEmployee() {
-        return idEmployee;
-    }
-
-    public void setIdEmployee(double idEmployee) {
-        this.idEmployee = idEmployee;
     }
     
 }

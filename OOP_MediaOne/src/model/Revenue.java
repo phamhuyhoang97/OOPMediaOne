@@ -56,7 +56,7 @@ public class Revenue {
             String sql = "select distinct \n" +
                 "(select sum(billTotal) from bill where billType = 1)\n" +
                 " -(select sum(costMoney) from other_cost ) \n" +
-                "   -(select sum(employeeSalary) from employee where status = 1 and checkAdmin = \"employee\")" +
+                "   -(select sum(employeeSalary) from employee where status = 1 and checkAdmin = 1)" +
                 "from bill, other_cost, employee\n" +
                 "where (billDate between '"+ tuNgay +"' and '"+ denNgay +"') "
                     + "and (costDate between '"+ tuNgay +"' and '"+ denNgay +"')";

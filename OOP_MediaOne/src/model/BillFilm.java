@@ -8,6 +8,7 @@ package model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -23,8 +24,6 @@ public class BillFilm {
     public void addFilmToBill(BillFilm billfilm){
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
-        Employee employ = null;
-        AutoId id = new AutoId();
         try {
             String sql = "insert into bill_film values (?, ?, ?);";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -32,11 +31,31 @@ public class BillFilm {
             prepareStatement.setString(2, billfilm.getIdFilm());
             prepareStatement.setString(3, String.valueOf(billfilm.getBillAmount()));
             
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int rs = prepareStatement.executeUpdate();
             
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    //lay don gia cua san pham
+    public double priceFilm(BillFilm billfilm){
+        MyConnect connect = new MyConnect();
+        Connection connection = connect.connect();
+        ResultSet rs = null;
+        double price = 0;
+        try {
+            String sql = "select filmPrice from bill_film natural join film where idBill = ? ";
+            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+            prepareStatement.setString(1, billfilm.getIdBill());
+            rs = prepareStatement.executeQuery();
+            rs.next();
+            price = Double.parseDouble(rs.getString("bookPrice"));
+            System.out.println(price);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return price;
     }
     
     //Delte book khoi bill
@@ -50,7 +69,7 @@ public class BillFilm {
             prepareStatement.setString(1, billfilm.getIdBill());
             prepareStatement.setString(2, billfilm.getIdFilm());
            
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int rs = prepareStatement.executeUpdate();
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,7 +80,6 @@ public class BillFilm {
     public void updateFilmToBill(BillFilm billfilm) {
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
-        ResultSet rs = null;
         try {
             String sql = "update bill_film set billAmount = ? Where idBill = ? and idFilm = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -70,7 +88,7 @@ public class BillFilm {
             prepareStatement.setString(2, billfilm.getIdBill());
             prepareStatement.setString(2, billfilm.getIdFilm());
                                 
-            rs = prepareStatement.executeQuery();
+            int rs = prepareStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -82,7 +100,7 @@ public class BillFilm {
         Connection connection = connect.connect();
         ResultSet rs = null;
         try {
-            String sql = "select * from bill_film where idBill = ?";
+            String sql = "select idBill, bookFilm, billAmount from bill_film natural join film where idBill = ? ";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
             prepareStatement.setString(1, billfilm.getIdBill());
             rs = prepareStatement.executeQuery();

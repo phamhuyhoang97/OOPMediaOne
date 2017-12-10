@@ -59,10 +59,9 @@ public class Employee {
             prepareStatement.setString(3, employee.getEmployeeEmail());
             prepareStatement.setString(4, employee.getEmployeePassword());
             prepareStatement.setString(5, employee.getEmployeeAddress());
-            prepareStatement.setString(6, String.valueOf(employee.getEmployeeSalary()));            
-            prepareStatement.setString(7, String.valueOf(employee.getStatus()));
+            prepareStatement.setString(6, String.valueOf(employee.getEmployeeSalary()));       
             
-            prepareStatement.setString(8, employee.getIdEmployee());
+            prepareStatement.setString(7, employee.getIdEmployee());
             
             System.out.println(prepareStatement);
             rs = prepareStatement.executeUpdate();
@@ -94,7 +93,8 @@ public class Employee {
         Connection connection = connect.connect();
         ResultSet rs = null;
         try {
-            String sql = "select * from employee where status = '1'";
+            String sql = "select idEmployee, employeeName, employeePhone, employeeEmail, "
+                    + "employeeAddress, employeeSalary, beginDate from employee where status = '1'";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
             rs = prepareStatement.executeQuery();
         } catch (Exception e) {
@@ -137,7 +137,7 @@ public class Employee {
         Connection connection = connect.connect();
         ResultSet rs = null;
         try {
-            String sql = "select * from employee where idEmployee = ?";
+            String sql = "select * from employee where idEmployee = ? and status = '1'";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
             prepareStatement.setString(1, employee.getIdEmployee());
             rs = prepareStatement.executeQuery();
@@ -153,7 +153,7 @@ public class Employee {
         Connection connection = connect.connect();
         ResultSet rs = null;
         try {
-            String sql = "select * from employee where employeeName = ?";
+            String sql = "select * from employee where employeeName = ? and status = '1'";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
             prepareStatement.setString(1, employee.getEmployeeName());
             rs = prepareStatement.executeQuery();

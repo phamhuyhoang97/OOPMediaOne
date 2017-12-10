@@ -8,6 +8,7 @@ package model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -22,8 +23,6 @@ public class BillMusic {
     public void addMusicToBill(BillMusic billmusic){
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
-        Employee employ = null;
-        AutoId id = new AutoId();
         try {
             String sql = "insert into bill_music values (?, ?, ?);";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -31,11 +30,31 @@ public class BillMusic {
             prepareStatement.setString(2, billmusic.getIdMusic());
             prepareStatement.setString(3, String.valueOf(billmusic.getBillAmount()));
             
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int rs = prepareStatement.executeUpdate();
             
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    //lay don gia cua san pham
+    public double priceMusic(BillMusic  billmusic){
+        MyConnect connect = new MyConnect();
+        Connection connection = connect.connect();
+        ResultSet rs = null;
+        double price = 0;
+        try {
+            String sql = "select musicPrice from bill_music natural join music where idBill = ? ";
+            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+            prepareStatement.setString(1, billmusic.getIdBill());
+            rs = prepareStatement.executeQuery();
+            rs.next();
+            price = Double.parseDouble(rs.getString("bookPrice"));
+            System.out.println(price);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return price;
     }
     
     //Delte book khoi bill
@@ -49,7 +68,7 @@ public class BillMusic {
             prepareStatement.setString(1, billmusic.getIdBill());
             prepareStatement.setString(2, billmusic.getIdMusic());
            
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int rs = prepareStatement.executeUpdate();
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -60,7 +79,7 @@ public class BillMusic {
     public void updateMusicToBill(BillMusic billmusic) {
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
-        ResultSet rs = null;
+       
         try {
             String sql = "update bill_music set billAmount = ? Where idBill = ? and idMusic = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -69,7 +88,7 @@ public class BillMusic {
             prepareStatement.setString(2, billmusic.getIdBill());
             prepareStatement.setString(2, billmusic.getIdMusic());
                                 
-            rs = prepareStatement.executeQuery();
+            int rs = prepareStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -81,7 +100,7 @@ public class BillMusic {
         Connection connection = connect.connect();
         ResultSet rs = null;
         try {
-            String sql = "select * from bill_music where idBill = ?";
+            String sql = "select idBill, musicName, billAmount from bill_music natural join music where idBill = ? ";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
             prepareStatement.setString(1, billmusic.getIdBill());
             rs = prepareStatement.executeQuery();

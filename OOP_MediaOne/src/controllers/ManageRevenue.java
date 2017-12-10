@@ -22,8 +22,8 @@ public class ManageRevenue {
     public void updateDataRevenue(ResultSet rs, DefaultTableModel tableModel){
             try {
                 while(rs.next()){ // nếu còn đọc tiếp được một dòng dữ liệu
-                    String rows[] = new String[4];
-                    for(int i=0; i<4; i++){
+                    String rows[] = new String[3];
+                    for(int i=0; i<3; i++){
                         rows[i] = rs.getString(i+1);
                         System.out.println(rows[i]);// lấy dữ liệu tại cột số i (ứng với mã hàng)
                     }
@@ -37,7 +37,7 @@ public class ManageRevenue {
     
     public void showRevenue(DefaultTableModel tableModel){
         Revenue revenue = new Revenue();
-        String []colsName = {"Thời Gian", "Doanh Thu", "Chi Phí Định Kì", "Chi Phí Phát Sinh"};
+        String []colsName = {"Thời Gian", "Doanh Thu", "Chi Phí"};
         tableModel.setColumnIdentifiers(colsName);  // đặt tiêu đề cột cho tableModel
         tableModel.setRowCount(0);  //de refresh lai bang jtable
         updateDataRevenue(revenue.view(), tableModel);   //truy xuat du lieu len bang

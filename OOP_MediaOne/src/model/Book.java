@@ -49,8 +49,9 @@ public class Book {
         try {
             String sql = "select * from book where idBook = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
-            rs = prepareStatement.executeQuery();
+            
             prepareStatement.setString(1, book.getIdBook());
+            rs = prepareStatement.executeQuery();
         } catch (SQLException e) {
             System.out.println("select error \n" + e.toString());
         }
@@ -64,8 +65,8 @@ public class Book {
         try {
             String sql = "select * from book where bookName = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
-            rs = prepareStatement.executeQuery();
             prepareStatement.setString(1, book.getBookName());
+            rs = prepareStatement.executeQuery();
         } catch (SQLException e) {
             System.out.println("select error \n" + e.toString());
         }
@@ -79,8 +80,10 @@ public class Book {
         try {
             String sql = "select * from book where bookAuthor = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
-            rs = prepareStatement.executeQuery();
+            
             prepareStatement.setString(1, book.getBookAuthor());
+            rs = prepareStatement.executeQuery();
+            
         } catch (SQLException e) {
             System.out.println("select error \n" + e.toString());
         }
@@ -94,8 +97,9 @@ public class Book {
         try {
             String sql = "select * from book where bookPublic = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
-            rs = prepareStatement.executeQuery();
+            
             prepareStatement.setString(1, book.getBookPublic());
+            rs = prepareStatement.executeQuery();
         } catch (SQLException e) {
             System.out.println("select error \n" + e.toString());
         }
@@ -104,17 +108,19 @@ public class Book {
     public void addBook(Book book) {
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
+        AutoId id = new AutoId();
         try {
             String sql = "insert into book values (? , ?, ? , ? , ? , ? , ?) ";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
-            prepareStatement.setString(1, book.getIdBook());
+            prepareStatement.setString(1, id.autoId("book", "BK"));
             prepareStatement.setString(2, book.getBookName());
             prepareStatement.setString(3, String.valueOf(book.getBookAmount()));
             prepareStatement.setString(4, String.valueOf(book.getBookPrice()));
             prepareStatement.setString(5, String.valueOf(book.getBookCost()));
             prepareStatement.setString(6, book.getBookAuthor());
             prepareStatement.setString(7, book.getBookPublic());
-            ResultSet resultSet = prepareStatement.executeQuery();
+            
+            int rs = prepareStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -135,12 +141,39 @@ public class Book {
             prepareStatement.setString(5, book.getBookAuthor());
             prepareStatement.setString(6, book.getBookPublic());
             prepareStatement.setString(7, book.getIdBook());
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int rs = prepareStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+    
+    public void updateBookAmountById(String idBook, int Amount) throws SQLException {
+        MyConnect connect = new MyConnect();
+        Connection connection = connect.connect();
+        
+        Book book = new Book();
+        book.setIdBook(idBook);
+        ResultSet rs = book.findBookById(book);
+        rs.next();
+        book.setBookAmount(Integer.parseInt(rs.getString("bookAmount")));
+        
+        try {
+            String sql = "update book set bookAmount = ? where idBook = ?";
+            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+
+            prepareStatement.setString(1, String.valueOf(book.getBookAmount()- Amount));
+            prepareStatement.setString(2, String.valueOf(book.getIdBook()));
+            
+            System.out.println(prepareStatement);
+
+            int rs1 = prepareStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void deleteBook(Book book) {
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
@@ -148,7 +181,7 @@ public class Book {
             String sql = "delete from book where idBook=?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
             prepareStatement.setString(1, book.getIdBook());
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int rs = prepareStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();

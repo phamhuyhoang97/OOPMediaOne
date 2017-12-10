@@ -23,6 +23,21 @@ public class OtherCost {
             String costName;
             double costMoney;
             int costType;
+            
+    public ResultSet view(){
+        MyConnect connect = new MyConnect();
+        Connection connection = connect.connect();
+        ResultSet rs = null;
+        try {
+            String sql = "select costDate, costName, costMoney from other_cost";
+            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+            rs = prepareStatement.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+    
     public ResultSet getDataOtherCost() {
         ResultSet rs = null;
         MyConnect connect = new MyConnect();
@@ -37,15 +52,18 @@ public class OtherCost {
         }
         return rs;
     }
-     public ResultSet findCostByDate(OtherCost otherCost) {
+     public ResultSet findCostByDate(String begin, String end) {
         ResultSet rs = null;
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
         try {
             String sql = "select * from other_cost where costDate between ? and ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
+            
+            prepareStatement.setString(1, begin);
+            prepareStatement.setString(1, end);
             rs = prepareStatement.executeQuery();
-            prepareStatement.setString(1, otherCost.getCostDate());
+            
         } catch (SQLException e) {
             System.out.println("select error \n" + e.toString());
         }
@@ -58,8 +76,9 @@ public class OtherCost {
         try {
             String sql = "select * from other_cost where costName = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
-            rs = prepareStatement.executeQuery();
+            
             prepareStatement.setString(1, otherCost.getCostName());
+            rs = prepareStatement.executeQuery();
         } catch (SQLException e) {
             System.out.println("select error \n" + e.toString());
         }
@@ -68,15 +87,17 @@ public class OtherCost {
      public void addCost(OtherCost otherCost) {
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
+        AutoId id = new AutoId();
         try {
             String sql = "insert into other_cost values (? , ?, ? , ? , ?) ";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
-            prepareStatement.setString(1, String.valueOf(otherCost.getIdCost()));
+            prepareStatement.setString(1, id.autoId("other_cost", "OC"));
             prepareStatement.setString(2, otherCost.getCostDate());
             prepareStatement.setString(3, otherCost.getCostName());
             prepareStatement.setString(4, String.valueOf(otherCost.getCostMoney()));
             prepareStatement.setString(5, String.valueOf(otherCost.getCostType()));
-            ResultSet resultSet = prepareStatement.executeQuery();
+            
+            int resultSet = prepareStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -86,14 +107,14 @@ public class OtherCost {
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
         try {
-            String sql = "update other_cost set costDate = ? , costName = ? , costMoney = ? , costtype = ? where idCost = ?";
+            String sql = "update other_cost set costDate = ? , costName = ? , costMoney = ? , costType = ? where idCost = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
             prepareStatement.setString(1, otherCost.getCostDate());
             prepareStatement.setString(2, otherCost.getCostName());
             prepareStatement.setString(3, String.valueOf(otherCost.getCostMoney()));
             prepareStatement.setString(4, String.valueOf(otherCost.getCostType()));
             prepareStatement.setString(5, String.valueOf(otherCost.getIdCost()));
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int resultSet = prepareStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -106,7 +127,7 @@ public class OtherCost {
             String sql = "delete from other_cost where idCost=?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
             prepareStatement.setString(1, String.valueOf(otherCost.getIdCost()));
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int resultSet = prepareStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
