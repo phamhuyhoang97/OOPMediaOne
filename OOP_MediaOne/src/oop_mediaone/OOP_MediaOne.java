@@ -5,17 +5,24 @@
  */
 package oop_mediaone;
 
-/**
- *
- * @author Khoa Nguyen
- */
+import view.DangNhap;
+import java.awt.HeadlessException;
+import java.sql.SQLException;
+import model.Employee;
+
+
 public class OOP_MediaOne {
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    
+    public static Employee currentEmployee;
+    public static void main(String[] args) throws HeadlessException, ClassNotFoundException, SQLException {
+        DangNhap dn = new DangNhap();
+        dn.setVisible(true);
+        dn.setLocation(500, 150);
+        
     }
     
 }
