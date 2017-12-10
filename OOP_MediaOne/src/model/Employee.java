@@ -14,9 +14,6 @@ import java.sql.ResultSet;
  * @author hoang
  */
 public class Employee {
-    public enum checkAdmin {
-        employee, manager;
-    }
     
     private String idEmployee;
     private String employeeName;
@@ -26,7 +23,7 @@ public class Employee {
     private String employeeAddress;
     private double employeeSalary;
     private int status;
-    private checkAdmin checkAdmin;
+    private int checkAdmin;
     private String beginDate;
     private String endDate;
 
@@ -40,20 +37,21 @@ public class Employee {
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
             prepareStatement.setString(1, employee.getIdEmployee());
 
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int resultSet = prepareStatement.executeUpdate();
             
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
     
     //sua thong tin nhan vien
     public void changeEmployee(Employee employee){
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
-        ResultSet rs = null;
+        int rs = 0;
         try {
-            String sql = "update employee set employeeName = ?, employeePhone = ?, employeeEmail = ?, employeePassword = ?, employeeAddress = ?, employeeSalary = ?, status = ?, beginDate = ?, endDate = ? Where idEmployee = ?";
+            String sql = "update employee set employeeName = ?, employeePhone = ?, employeeEmail = ?, employeePassword = ?, employeeAddress = ?, employeeSalary = ?, status = ? Where idEmployee = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
             
             prepareStatement.setString(1, employee.getEmployeeName());
@@ -63,15 +61,15 @@ public class Employee {
             prepareStatement.setString(5, employee.getEmployeeAddress());
             prepareStatement.setString(6, String.valueOf(employee.getEmployeeSalary()));            
             prepareStatement.setString(7, String.valueOf(employee.getStatus()));
-            prepareStatement.setString(8, employee.getBeginDate());
-            prepareStatement.setString(9, employee.getEndDate());
             
-            prepareStatement.setString(10, employee.getIdEmployee());
+            prepareStatement.setString(8, employee.getIdEmployee());
             
-            rs = prepareStatement.executeQuery();
+            System.out.println(prepareStatement);
+            rs = prepareStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
     
     //truy xuat du lieu len bang
@@ -95,9 +93,11 @@ public class Employee {
         Connection connection = connect.connect();
         Employee employ = null;
         AutoId id = new AutoId();
-        try {
-            String sql = "insert into employee values (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+
+        try {            
+            String sql = "insert into employee values (?, ?, ?, ?, ?, ?, ?, ?, ?, current_date, null);";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
+
             prepareStatement.setString(1, id.autoId("employee", "EM"));
             prepareStatement.setString(2, employee.getEmployeeName());
             prepareStatement.setString(3, employee.getEmployeePhone());
@@ -106,13 +106,14 @@ public class Employee {
             prepareStatement.setString(6, employee.getEmployeeAddress());
             prepareStatement.setString(7, String.valueOf(employee.getEmployeeSalary()));
             prepareStatement.setString(8, String.valueOf(employee.getStatus()));
-            prepareStatement.setString(9, String.valueOf(employee.checkAdmin));
+            prepareStatement.setString(9, String.valueOf(employee.getCheckAdmin()));
             
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int resultSet = prepareStatement.executeUpdate();
             
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
     
     //tim nhan vien theo id
@@ -128,6 +129,7 @@ public class Employee {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
         return rs;
     }
     
@@ -139,11 +141,12 @@ public class Employee {
         try {
             String sql = "select * from employee where employeeName = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
-            prepareStatement.setString(1, employee.getIdEmployee());
+            prepareStatement.setString(1, "%"+employee.getEmployeeName()+"%");
             rs = prepareStatement.executeQuery();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
         return rs;
     } 
     
@@ -169,14 +172,33 @@ public class Employee {
                 employee.setEmployeeAddress(resultSet.getString("employeeAddress"));
                 employee.setEmployeeSalary(Integer.parseInt(resultSet.getString("employeeSalary")));
                 employee.setStatus(Integer.parseInt(resultSet.getString("status")));
-                employee.setCheckAdmin(employee.checkAdmin.valueOf(resultSet.getString("checkAdmin")));
+                employee.setCheckAdmin(Integer.parseInt(resultSet.getString("checkAdmin")));
                 employee.setBeginDate(resultSet.getString("beginDate"));
                 employee.setEndDate(resultSet.getString("endDate"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
         return employee;
+    }
+    
+    public static void main(String[] args) throws ClassNotFoundException {
+        Employee emp = new Employee();
+        
+        Employee employ = new Employee();
+        employ.setIdEmployee("EM001");
+        employ.setEmployeeName("hieu");
+        employ.setEmployeeEmail("hieu1");
+        employ.setEmployeePhone("1234");
+        employ.setEmployeePassword("1");
+        employ.setEmployeeAddress("ha noi");
+        employ.setEmployeeSalary(20145);
+        employ.setStatus(1);
+        employ.setCheckAdmin(1);
+        employ.setBeginDate("2017-01-21");
+        
+        emp.deleteEmployee(employ);
     }
     
     public String getIdEmployee() {
@@ -259,14 +281,14 @@ public class Employee {
         this.endDate = endDate;
     }
 
-    public checkAdmin getCheckAdmin() {
+    public int getCheckAdmin() {
         return checkAdmin;
     }
 
-    public void setCheckAdmin(checkAdmin checkAdmin) {
+    public void setCheckAdmin(int checkAdmin) {
         this.checkAdmin = checkAdmin;
     }
-    
-    
-    
+
+
+
 }

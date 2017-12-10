@@ -22,7 +22,6 @@ public class BillBook {
     public void addBookToBill(BillBook billbook){
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
-        Employee employ = null;
         AutoId id = new AutoId();
         try {
             String sql = "insert into bill_book values (?, ?, ?);";
@@ -31,7 +30,7 @@ public class BillBook {
             prepareStatement.setString(2, billbook.getIdBook());
             prepareStatement.setString(3, String.valueOf(billbook.getBillAmount()));
             
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int rs = prepareStatement.executeUpdate();
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -49,7 +48,7 @@ public class BillBook {
             prepareStatement.setString(1, billbook.getIdBill());
             prepareStatement.setString(2, billbook.getIdBook());
            
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int rs = prepareStatement.executeUpdate();
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -60,7 +59,6 @@ public class BillBook {
     public void updateBookToBill(BillBook billbook) {
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
-        ResultSet rs = null;
         try {
             String sql = "update bill_book set billAmount = ? Where idBill = ? and idBook = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -69,7 +67,7 @@ public class BillBook {
             prepareStatement.setString(2, billbook.getIdBill());
             prepareStatement.setString(2, billbook.getIdBook());
                                 
-            rs = prepareStatement.executeQuery();
+            int rs = prepareStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }

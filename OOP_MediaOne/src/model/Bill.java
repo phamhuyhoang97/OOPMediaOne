@@ -18,7 +18,8 @@ public class Bill {
     private String billDate;
     private int billType;
     private double billTotal;
-    
+    private double idEmployee;
+
     // Them 1 bill
     public void addBill(Bill bill) {
         MyConnect connect = new MyConnect();
@@ -32,8 +33,9 @@ public class Bill {
             prepareStatement.setString(2, bill.getBillDate());
             prepareStatement.setString(3, String.valueOf(bill.getBillType()));
             prepareStatement.setString(4, String.valueOf(bill.getBillTotal()));
-            
-            ResultSet resultSet = prepareStatement.executeQuery();
+            prepareStatement.setString(5, String.valueOf(bill.getIdEmployee()));
+                        
+            int resultSet = prepareStatement.executeUpdate();
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,7 +52,7 @@ public class Bill {
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
             prepareStatement.setString(1, bill.getIdBill());
 
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int resultSet = prepareStatement.executeUpdate();
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,7 +63,6 @@ public class Bill {
     public void updateBill(Bill bill) {
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
-        ResultSet rs = null;
         try {
             String sql = "update bill set billDate = ?, billTotal = ? Where idBill = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -71,7 +72,7 @@ public class Bill {
             
             prepareStatement.setString(3, bill.getIdBill());
             
-            rs = prepareStatement.executeQuery();
+            int resultSet = prepareStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -108,4 +109,13 @@ public class Bill {
     public void setBillTotal(double billTotal) {
         this.billTotal = billTotal;
     }
+    
+    public double getIdEmployee() {
+        return idEmployee;
+    }
+
+    public void setIdEmployee(double idEmployee) {
+        this.idEmployee = idEmployee;
+    }
+    
 }

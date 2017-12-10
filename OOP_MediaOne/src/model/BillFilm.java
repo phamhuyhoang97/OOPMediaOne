@@ -32,7 +32,7 @@ public class BillFilm {
             prepareStatement.setString(2, billfilm.getIdFilm());
             prepareStatement.setString(3, String.valueOf(billfilm.getBillAmount()));
             
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int rs = prepareStatement.executeUpdate();
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,7 +50,7 @@ public class BillFilm {
             prepareStatement.setString(1, billfilm.getIdBill());
             prepareStatement.setString(2, billfilm.getIdFilm());
            
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int rs = prepareStatement.executeUpdate();
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,7 +61,6 @@ public class BillFilm {
     public void updateFilmToBill(BillFilm billfilm) {
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
-        ResultSet rs = null;
         try {
             String sql = "update bill_film set billAmount = ? Where idBill = ? and idFilm = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -70,7 +69,7 @@ public class BillFilm {
             prepareStatement.setString(2, billfilm.getIdBill());
             prepareStatement.setString(2, billfilm.getIdFilm());
                                 
-            rs = prepareStatement.executeQuery();
+            int rs = prepareStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }

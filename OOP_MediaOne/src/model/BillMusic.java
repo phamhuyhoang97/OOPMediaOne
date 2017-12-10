@@ -31,7 +31,7 @@ public class BillMusic {
             prepareStatement.setString(2, billmusic.getIdMusic());
             prepareStatement.setString(3, String.valueOf(billmusic.getBillAmount()));
             
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int rs = prepareStatement.executeUpdate();
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -49,7 +49,7 @@ public class BillMusic {
             prepareStatement.setString(1, billmusic.getIdBill());
             prepareStatement.setString(2, billmusic.getIdMusic());
            
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int rs = prepareStatement.executeUpdate();
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -60,7 +60,7 @@ public class BillMusic {
     public void updateMusicToBill(BillMusic billmusic) {
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
-        ResultSet rs = null;
+       
         try {
             String sql = "update bill_music set billAmount = ? Where idBill = ? and idMusic = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -69,7 +69,7 @@ public class BillMusic {
             prepareStatement.setString(2, billmusic.getIdBill());
             prepareStatement.setString(2, billmusic.getIdMusic());
                                 
-            rs = prepareStatement.executeQuery();
+            int rs = prepareStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
