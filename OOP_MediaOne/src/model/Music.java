@@ -30,7 +30,7 @@ public class Music {
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
         try {
-            String sql = "select * from music;";
+            String sql = "select * from music ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
             rs = prepareStatement.executeQuery();
 
@@ -47,8 +47,9 @@ public class Music {
         try {
             String sql = "select * from music where idMusic = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
-            rs = prepareStatement.executeQuery();
+            
             prepareStatement.setString(1, music.getIdMusic());
+            rs = prepareStatement.executeQuery();
         } catch (SQLException e) {
             System.out.println("select error \n" + e.toString());
         }
@@ -62,8 +63,9 @@ public class Music {
         try {
             String sql = "select * from music where musicName = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
-            rs = prepareStatement.executeQuery();
+            
             prepareStatement.setString(1, music.getMusicName());
+            rs = prepareStatement.executeQuery();
         } catch (SQLException e) {
             System.out.println("select error \n" + e.toString());
         }
@@ -77,8 +79,9 @@ public class Music {
         try {
             String sql = "select * from music where musicCategory = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
-            rs = prepareStatement.executeQuery();
+            
             prepareStatement.setString(1, music.getMusicCategory());
+            rs = prepareStatement.executeQuery();
         } catch (SQLException e) {
             System.out.println("select error \n" + e.toString());
         }
@@ -102,17 +105,19 @@ public class Music {
     public void addMusic(Music music) {
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
+        AutoId id = new AutoId();
         try {
             String sql = "insert into music values (? , ?, ? , ? , ? , ? , ?) ";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
-            prepareStatement.setString(1, music.getIdMusic());
+            prepareStatement.setString(1, id.autoId("music", "MU"));
             prepareStatement.setString(2, music.getMusicName());
             prepareStatement.setString(3, String.valueOf(music.getMusicAmount()));
             prepareStatement.setString(4, String.valueOf(music.getMusicPrice()));
             prepareStatement.setString(5, String.valueOf(music.getMusicCost()));
             prepareStatement.setString(6, music.getMusicSinger());
             prepareStatement.setString(7, music.getMusicCategory());
-            ResultSet resultSet = prepareStatement.executeQuery();
+            
+            int resultSet = prepareStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -132,7 +137,8 @@ public class Music {
             prepareStatement.setString(4, String.valueOf(music.getMusicCost()));
             prepareStatement.setString(5, music.getMusicSinger());
             prepareStatement.setString(6, music.getMusicCategory());
-            ResultSet resultSet = prepareStatement.executeQuery();
+                        
+            int resultSet = prepareStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -145,7 +151,8 @@ public class Music {
             String sql = "delete from music where idMusic=?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
             prepareStatement.setString(1, music.getIdMusic());
-            ResultSet resultSet = prepareStatement.executeQuery();
+            
+            int resultSet = prepareStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();

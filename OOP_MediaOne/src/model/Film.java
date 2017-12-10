@@ -47,8 +47,9 @@ public class Film {
         try {
             String sql = "select * from film where idFilm = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
-            rs = prepareStatement.executeQuery();
             prepareStatement.setString(1, film.getIdFilm());
+            
+            rs = prepareStatement.executeQuery();
         } catch (SQLException e) {
             System.out.println("select error \n" + e.toString());
         }
@@ -62,8 +63,9 @@ public class Film {
         try {
             String sql = "select * from film where filmName = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
-            rs = prepareStatement.executeQuery();
+            
             prepareStatement.setString(1, film.getFilmName());
+            rs = prepareStatement.executeQuery();
         } catch (SQLException e) {
             System.out.println("select error \n" + e.toString());
         }
@@ -77,8 +79,9 @@ public class Film {
         try {
             String sql = "select * from film where filmDirector = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
-            rs = prepareStatement.executeQuery();
+            
             prepareStatement.setString(1, film.getFilmDirector());
+            rs = prepareStatement.executeQuery();
         } catch (SQLException e) {
             System.out.println("select error \n" + e.toString());
         }
@@ -92,8 +95,9 @@ public class Film {
         try {
             String sql = "select * from film where filmActor = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
-            rs = prepareStatement.executeQuery();
+            
             prepareStatement.setString(1, film.getFilmActor());
+            rs = prepareStatement.executeQuery();
         } catch (SQLException e) {
             System.out.println("select error \n" + e.toString());
         }
@@ -102,17 +106,19 @@ public class Film {
     public void addFilm(Film film) {
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
+        AutoId id = new AutoId();
         try {
             String sql = "insert into film values (? , ?, ? , ? , ? , ? , ?) ";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
-            prepareStatement.setString(1, film.getIdFilm());
+            prepareStatement.setString(1, id.autoId("film", "FI"));
             prepareStatement.setString(2, film.getFilmName());
             prepareStatement.setString(3, String.valueOf(film.getFilmAmount()));
             prepareStatement.setString(4, String.valueOf(film.getFilmPrice()));
             prepareStatement.setString(5, String.valueOf(film.getFilmCost()));
             prepareStatement.setString(6, film.getFilmActor());
             prepareStatement.setString(7, film.getFilmDirector());
-            ResultSet resultSet = prepareStatement.executeQuery();
+            
+            int resultSet = prepareStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -132,7 +138,7 @@ public class Film {
             prepareStatement.setString(4, String.valueOf(film.getFilmCost()));
             prepareStatement.setString(5, film.getFilmActor());
             prepareStatement.setString(6, film.getFilmDirector());
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int resultSet = prepareStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -145,7 +151,7 @@ public class Film {
             String sql = "delete from film where idFilm=?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
             prepareStatement.setString(1, film.getIdFilm());
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int resultSet = prepareStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();

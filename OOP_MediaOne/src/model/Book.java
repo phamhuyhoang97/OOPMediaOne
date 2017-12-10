@@ -104,17 +104,19 @@ public class Book {
     public void addBook(Book book) {
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
+        AutoId id = new AutoId();
         try {
             String sql = "insert into book values (? , ?, ? , ? , ? , ? , ?) ";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
-            prepareStatement.setString(1, book.getIdBook());
+            prepareStatement.setString(1, id.autoId("book", "BK"));
             prepareStatement.setString(2, book.getBookName());
             prepareStatement.setString(3, String.valueOf(book.getBookAmount()));
             prepareStatement.setString(4, String.valueOf(book.getBookPrice()));
             prepareStatement.setString(5, String.valueOf(book.getBookCost()));
             prepareStatement.setString(6, book.getBookAuthor());
             prepareStatement.setString(7, book.getBookPublic());
-            ResultSet resultSet = prepareStatement.executeQuery();
+            
+            int rs = prepareStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -135,7 +137,7 @@ public class Book {
             prepareStatement.setString(5, book.getBookAuthor());
             prepareStatement.setString(6, book.getBookPublic());
             prepareStatement.setString(7, book.getIdBook());
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int rs = prepareStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -148,7 +150,7 @@ public class Book {
             String sql = "delete from book where idBook=?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
             prepareStatement.setString(1, book.getIdBook());
-            ResultSet resultSet = prepareStatement.executeQuery();
+            int rs = prepareStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();

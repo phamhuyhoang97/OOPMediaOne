@@ -18,7 +18,6 @@ public class Bill {
     private String billDate;
     private int billType;
     private double billTotal;
-    private double idEmployee;
 
     // Them 1 bill
     public void addBill(Bill bill) {
@@ -27,13 +26,12 @@ public class Bill {
         Employee employ = null;
         AutoId id = new AutoId();
         try {
-            String sql = "insert into bill values (?, ?, ?, ?);";
+            String sql = "insert into bill values (?, ?, ?);";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
             prepareStatement.setString(1, id.autoId("bill", "BI"));
             prepareStatement.setString(2, bill.getBillDate());
             prepareStatement.setString(3, String.valueOf(bill.getBillType()));
             prepareStatement.setString(4, String.valueOf(bill.getBillTotal()));
-            prepareStatement.setString(5, String.valueOf(bill.getIdEmployee()));
                         
             int resultSet = prepareStatement.executeUpdate();
             
@@ -108,14 +106,6 @@ public class Bill {
 
     public void setBillTotal(double billTotal) {
         this.billTotal = billTotal;
-    }
-    
-    public double getIdEmployee() {
-        return idEmployee;
-    }
-
-    public void setIdEmployee(double idEmployee) {
-        this.idEmployee = idEmployee;
     }
     
 }

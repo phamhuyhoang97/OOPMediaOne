@@ -22,8 +22,6 @@ public class BillMusic {
     public void addMusicToBill(BillMusic billmusic){
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
-        Employee employ = null;
-        AutoId id = new AutoId();
         try {
             String sql = "insert into bill_music values (?, ?, ?);";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);

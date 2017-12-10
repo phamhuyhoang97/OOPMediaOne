@@ -22,7 +22,6 @@ public class BillBook {
     public void addBookToBill(BillBook billbook){
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
-        AutoId id = new AutoId();
         try {
             String sql = "insert into bill_book values (?, ?, ?);";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);

@@ -23,8 +23,6 @@ public class BillFilm {
     public void addFilmToBill(BillFilm billfilm){
         MyConnect connect = new MyConnect();
         Connection connection = connect.connect();
-        Employee employ = null;
-        AutoId id = new AutoId();
         try {
             String sql = "insert into bill_film values (?, ?, ?);";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
