@@ -23,38 +23,145 @@ public class Employee {
     private String employeeAddress;
     private double employeeSalary;
     private int status;
-    private String checkAdmin;
+    private int checkAdmin;
     private String beginDate;
     private String endDate;
 
     //xoa nhan vien
     public void deleteEmployee(Employee employee){
-        
+        MyConnect connect = new MyConnect();
+        Connection connection = connect.connect();
+
+        try {
+            String sql = "delete from employee where idEmployee = ?";
+            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+            prepareStatement.setString(1, employee.getIdEmployee());
+
+            int resultSet = prepareStatement.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     //sua thong tin nhan vien
     public void changeEmployee(Employee employee){
-        
+        MyConnect connect = new MyConnect();
+        Connection connection = connect.connect();
+        int rs = 0;
+        try {
+            String sql = "update employee set employeeName = ?, employeePhone = ?, employeeEmail = ?,"
+                    + " employeePassword = ?, employeeAddress = ?, employeeSalary = ? Where idEmployee = ?";
+            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+            
+            prepareStatement.setString(1, employee.getEmployeeName());
+            prepareStatement.setString(2, employee.getEmployeePhone());
+            prepareStatement.setString(3, employee.getEmployeeEmail());
+            prepareStatement.setString(4, employee.getEmployeePassword());
+            prepareStatement.setString(5, employee.getEmployeeAddress());
+            prepareStatement.setString(6, String.valueOf(employee.getEmployeeSalary()));            
+            prepareStatement.setString(7, String.valueOf(employee.getStatus()));
+            
+            prepareStatement.setString(8, employee.getIdEmployee());
+            
+            System.out.println(prepareStatement);
+            rs = prepareStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void deleteEmployeeByUpdateStatus(Employee employee){
+        MyConnect connect = new MyConnect();
+        Connection connection = connect.connect();
+        int rs = 0;
+        try {
+            String sql = "update employee set status = '0', endDate = current_date() Where idEmployee = ?";
+            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+            
+            prepareStatement.setString(1, employee.getIdEmployee());
+            
+            System.out.println(prepareStatement);
+            rs = prepareStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     //truy xuat du lieu len bang
     public ResultSet view(){
-        
+        MyConnect connect = new MyConnect();
+        Connection connection = connect.connect();
+        ResultSet rs = null;
+        try {
+            String sql = "select * from employee where status = '1'";
+            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+            rs = prepareStatement.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
     
     //them Nhan vien
     public void addEmployee(Employee employee){
-        
+        MyConnect connect = new MyConnect();
+        Connection connection = connect.connect();
+        Employee employ = null;
+        AutoId id = new AutoId();
+
+        try {            
+            String sql = "insert into employee values (?, ?, ?, ?, ?, ?, ?, ?, ?, current_date, null);";
+            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+
+            prepareStatement.setString(1, id.autoId("employee", "EM"));
+            prepareStatement.setString(2, employee.getEmployeeName());
+            prepareStatement.setString(3, employee.getEmployeePhone());
+            prepareStatement.setString(4, employee.getEmployeeEmail());
+            prepareStatement.setString(5, employee.getEmployeePassword());
+            prepareStatement.setString(6, employee.getEmployeeAddress());
+            prepareStatement.setString(7, String.valueOf(employee.getEmployeeSalary()));
+            prepareStatement.setString(8, String.valueOf(employee.getStatus()));
+            prepareStatement.setString(9, String.valueOf(employee.getCheckAdmin()));
+            
+            int resultSet = prepareStatement.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     //tim nhan vien theo id
-    public ResultSet searchID(Employee employee){
-        
+    public ResultSet searchEmployeeById(Employee employee){
+        MyConnect connect = new MyConnect();
+        Connection connection = connect.connect();
+        ResultSet rs = null;
+        try {
+            String sql = "select * from employee where idEmployee = ?";
+            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+            prepareStatement.setString(1, employee.getIdEmployee());
+            rs = prepareStatement.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
     
     //tim nhan vien theo ten
-    public ResultSet searchName(Employee employee){
+    public ResultSet searchEmployeeByName (Employee employee){
+        MyConnect connect = new MyConnect();
+        Connection connection = connect.connect();
+        ResultSet rs = null;
+        try {
+            String sql = "select * from employee where employeeName = ?";
+            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+            prepareStatement.setString(1, employee.getEmployeeName());
+            rs = prepareStatement.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
+        return rs;
     } 
     
     //dang nhap cho nhan vien
@@ -78,15 +185,38 @@ public class Employee {
                 employee.setEmployeePassword(resultSet.getString("employeePassword"));
                 employee.setEmployeeAddress(resultSet.getString("employeeAddress"));
                 employee.setEmployeeSalary(Integer.parseInt(resultSet.getString("employeeSalary")));
-                employee.setStatus(1);
-                employee.setCheckAdmin(resultSet.getString("checkAdmin"));
+                employee.setStatus(Integer.parseInt(resultSet.getString("status")));
+                employee.setCheckAdmin(Integer.parseInt(resultSet.getString("checkAdmin")));
                 employee.setBeginDate(resultSet.getString("beginDate"));
                 employee.setEndDate(resultSet.getString("endDate"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        if (employee.getStatus() == 0) {
+            employee = null;
+        }
+        
         return employee;
+    }
+    
+    public static void main(String[] args) throws ClassNotFoundException {
+        Employee emp = new Employee();
+        
+        Employee employ = new Employee();
+        employ.setIdEmployee("EM001");
+        employ.setEmployeeName("hieu");
+        employ.setEmployeeEmail("hieu1");
+        employ.setEmployeePhone("1234");
+        employ.setEmployeePassword("1");
+        employ.setEmployeeAddress("ha noi");
+        employ.setEmployeeSalary(20145);
+        employ.setStatus(1);
+        employ.setCheckAdmin(1);
+        employ.setBeginDate("2017-01-21");
+        
+        emp.deleteEmployee(employ);
     }
     
     public String getIdEmployee() {
@@ -169,16 +299,14 @@ public class Employee {
         this.endDate = endDate;
     }
 
-    public String getCheckAdmin() {
+    public int getCheckAdmin() {
         return checkAdmin;
     }
 
-    public void setCheckAdmin(String checkAdmin) {
+    public void setCheckAdmin(int checkAdmin) {
         this.checkAdmin = checkAdmin;
     }
 
-    
-    
-    
-    
+
+
 }

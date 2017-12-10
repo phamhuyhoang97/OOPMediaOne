@@ -6,6 +6,7 @@
 package model;
 
 import java.sql.*;
+import java.util.logging.Logger;
 import static javax.swing.UIManager.getString;
 
 /**
@@ -18,7 +19,7 @@ public class MyConnect {
     private final String url = "jdbc:mysql://localhost:3306/mydb";
     private final String user = "root";
     
-    private Connection connection;
+    private static Connection connection;
 
     // connect to database
     public Connection connect() {
@@ -32,5 +33,13 @@ public class MyConnect {
             System.out.println("Error connection!");
         }
         return connection;
+    }
+    
+    public void freeConnect(){
+        try{
+            connection.close();
+        } catch (SQLException ex){
+            System.out.println(ex);
+        }
     }
 }

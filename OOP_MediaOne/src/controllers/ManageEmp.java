@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controllers;
 import view.Home;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -23,27 +23,27 @@ public class ManageEmp {
     private DefaultTableModel tableModel = new DefaultTableModel();
     
     //lay du lieu o o nhap
-    public void getData(Employee nv){
-        Home home = new Home();
-        nv.setIdEmployee(home.tf_idnhanvien.getText().trim());
-        nv.setEmployeeName(home.tf_tennhanvien.getText().trim());
-        nv.setEmployeePhone(home.tf_sdt.getText().trim());
-        nv.setEmployeeEmail(home.tf_email.getText().trim());
-        nv.setEmployeeAddress(home.tf_diachi.getText().trim());
-        nv.setEmployeeSalary(Double.parseDouble(home.tf_luongnhanvien.getText())*1000);
-        nv.setBeginDate(home.tf_ngaybatdau.getText().trim());
-        nv.setEmployeePassword(home.tf_password.getText().trim());
+    public void setData(Employee nv, String employeeName, String employeePhone, 
+            String employeeEmail, String employeeAddress, String employeeSalary, String employeePassword){
+        
+        nv.setEmployeeName(employeeName);
+        nv.setEmployeePhone(employeePhone);
+        nv.setEmployeeEmail(employeeEmail);
+        nv.setEmployeeAddress(employeeAddress);
+        nv.setEmployeeSalary(Double.parseDouble(employeeSalary)*1000);
+        nv.setEmployeePassword(employeePassword);
         nv.setStatus(1);
-        nv.setCheckAdmin("employee");
+        nv.setCheckAdmin(1);
     }
     
     //luu du lieu len  DefaultTableModel de jt_hienthinhanvien doc
-    public void updateData(ResultSet rs){
+    public void updateData(ResultSet rs, DefaultTableModel tableModel){
             try {
                 while(rs.next()){ // nếu còn đọc tiếp được một dòng dữ liệu
-                    String rows[] = new String[8];
-                    for(int i=0; i<8; i++){
+                    String rows[] = new String[7];
+                    for(int i=0; i<7; i++){
                         rows[i] = rs.getString(i+1); // lấy dữ liệu tại cột số i (ứng với mã hàng)
+                        System.out.println(rows[i]);
                     }
                     tableModel.addRow(rows); // đưa dòng dữ liệu vào tableModel để hiện thị lên jtable
                     //mỗi lần có sự thay đổi dữ liệu ở tableModel thì Jtable sẽ tự động update lại trên frame
@@ -53,22 +53,23 @@ public class ManageEmp {
             }
         }    
     
-    public void deleteEmp(){
-        Home home = new Home();
+    public void deleteEmp(String idEmployee){
         Employee nv = new Employee();
         
-        nv.setIdEmployee(home.tf_idnhanvien.getText().trim());
+        nv.setIdEmployee(idEmployee);
+        nv.deleteEmployeeByUpdateStatus(nv);
         //xoa thong tin nhanvien
-        nv.deleteEmployee(nv);
         JOptionPane.showMessageDialog(null, "Đã xoa' nhân viên xong");
     }
     
-    public void changeEmp(){
+    public void changeEmp(String employeeName, String employeePhone, 
+            String employeeEmail, String employeeAddress, String employeeSalary, String employeePassword){
+        
         Employee nv = new Employee();
         //them dieu kien de xet xem da co Nhan Vien nay trong database chua
         
         //them thuoc tinh NhanVien
-        getData(nv);
+        setData(nv, employeeName, employeePhone, employeeEmail, employeeAddress, employeeSalary, employeePassword);
         
         //them vao database
         nv.changeEmployee(nv);
@@ -76,26 +77,25 @@ public class ManageEmp {
         JOptionPane.showMessageDialog(null, "Đã sửa nhân viên xong");
     }
     
-    public void showEmp(){
-        Home home = new Home();
+    public void showEmp(DefaultTableModel tableModel){
         Employee nv = new Employee();
         //
         String []colsName = {"ID Nhân Viên", "Họ Tên Nhân Viên", "SDT", "Email", "Địa Chỉ",
-            "Lương Cơ Bản", "Hệ Số Lương", "Lương Nhân Viên"};
+             "Lương Nhân Viên", "Ngày Bắt Đầu Làm"};
         tableModel.setColumnIdentifiers(colsName);  // đặt tiêu đề cột cho tableModel
         tableModel.setRowCount(0);  //de refresh lai bang jtable
-        home.jt_hienthinhanvien.setModel(tableModel);//ket noi jtalbe voi TableModel
         
-        updateData(nv.view());   //truy xuat du lieu len bang
+        updateData(nv.view(), tableModel);   //truy xuat du lieu len bang
         System.out.println("ok");
     }
            
-    public void addEmp(){
+    public void addEmp(String employeeName, String employeePhone, 
+        String employeeEmail, String employeeAddress, String employeeSalary, String employeePassword){
         Employee nv = new Employee();
         //them dieu kien de xet xem da co Nhan Vien nay trong database chua
         
         //them thuoc tinh NhanVien
-        getData(nv);
+        setData(nv, employeeName, employeePhone, employeeEmail, employeeAddress, employeeSalary, employeePassword);
         
         //them vao database
         nv.addEmployee(nv);
@@ -104,21 +104,19 @@ public class ManageEmp {
     }
     
     
-    public void searchEmp(){
-        Home home = new Home();
+    public void searchEmp(DefaultTableModel model, String itemText, String employee){
         ResultSet rs = null;
         Employee nv = new Employee();
         
-        String itemText = (String)home.jcb_timkiemnhanvien.getSelectedItem( );
-        if (itemText.equals(home.jcb_timkiemnhanvien.getItemAt(0))) {
-            nv.setIdEmployee(home.tf_timkiemnhanvien.getText());
-            rs = nv.searchID(nv);
+        if (itemText.equals(" ID Nhân Viên")) {
+            nv.setIdEmployee(employee);
+            rs = nv.searchEmployeeById(nv);
         } else {
-            nv.setEmployeeName(home.tf_timkiemnhanvien.getText());
-            rs = nv.searchName(nv);
+            nv.setEmployeeName(employee);
+            rs = nv.searchEmployeeByName(nv);
         }
 
-        DefaultTableModel model = new DefaultTableModel();
+        
         try {
             ResultSetMetaData rsMD = rs.getMetaData();
             int colNumber = rsMD.getColumnCount();
@@ -137,9 +135,9 @@ public class ManageEmp {
 
         } catch (SQLException e) {
         }
-        String []colsName = {"ID Nhân Viên", "Họ Tên Nhân Viên", "SDT", "Email", "Địa Chỉ", 
-            "Lương Cơ Bản", "Hệ Số Lương", "Lương Nhân Viên"};
+        String []colsName = {"ID Nhân Viên", "Họ Tên Nhân Viên", "SDT", "Email", "Địa Chỉ",
+             "Lương Nhân Viên", "Ngày Bắt Đầu Làm"};
         model.setColumnIdentifiers(colsName);  // đặt tiêu đề cột cho tableModel
-        home.jt_hienthinhanvien.setModel(model);
+        
     }
 }
