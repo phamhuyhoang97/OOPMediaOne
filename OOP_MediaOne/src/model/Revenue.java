@@ -17,12 +17,11 @@ import javax.swing.JOptionPane;
  */
 public class Revenue {
     
-    MyConnect connect = new MyConnect();
-    Connection connection = connect.connect();
-    
     
     //thuc hien truy xuat trong database
-        public ResultSet view(){
+        public ResultSet view() throws SQLException{
+            MyConnect connect = MyConnect.getInstance();
+            Connection connection = connect.getConnection();
             ResultSet result = null;
             String sql = "select distinct billDate ThoiGian , " +
                     " (select sum(billTotal) from bill where billType = 1) DoanhThu, " +
@@ -37,26 +36,16 @@ public class Revenue {
             }
             return result;
         }
+
         
-//        public ResultSet tongdoanhthu(){
-//            ResultSet result = null;
-//            String sql = "select sum(total_money) from bill";
-//            try {
-//                Statement statement = (Statement)connection.createStatement();
-//                return statement.executeQuery(sql);
-//            } catch (SQLException e) {
-//                JOptionPane.showMessageDialog(null, "Có Lỗi, Hãy Nhập Lại");
-//            }
-//            System.out.println(result);
-//            return result;
-//        }
-        
-        public ResultSet profit(String tuNgay, String denNgay){
+        public ResultSet profit(String tuNgay, String denNgay) throws SQLException{
+            MyConnect connect = MyConnect.getInstance();
+            Connection connection = connect.getConnection();
             ResultSet result = null;
             String sql = "select distinct \n" +
                 "(select sum(billTotal) from bill where billType = 1)\n" +
                 " -(select sum(costMoney) from other_cost ) \n" +
-                "   -(select sum(employeeSalary) from employee where status = 1 and checkAdmin = \"employee\")" +
+                "   -(select sum(employeeSalary) from employee where status = 1 and checkAdmin = 1)" +
                 "from bill, other_cost, employee\n" +
                 "where (billDate between '"+ tuNgay +"' and '"+ denNgay +"') "
                     + "and (costDate between '"+ tuNgay +"' and '"+ denNgay +"')";
@@ -70,36 +59,5 @@ public class Revenue {
             return result;
         }
         
-//        public ResultSet thongKeTienThang(String chonThang){
-//            ResultSet result = null;
-//            String sql = "SELECT   SUM(total_money) totalCOunt " +
-//                "FROM bill " +
-//                "where extract(year_month from created_at) like '"+ chonThang +"' " +
-//                "GROUP BY  DATE(created_at)";
-//            try {
-//                Statement statement = (Statement)connection.createStatement();
-//                return statement.executeQuery(sql);
-//            } catch (SQLException e) {
-//                JOptionPane.showMessageDialog(null, "Có Lỗi, Hãy Nhập Lại");
-//            }
-//            System.out.println(result);
-//            return result;
-//        }
-        
-//        public ResultSet thongKeNgayThang(String chonThang){
-//            ResultSet result = null;
-//            String sql = "SELECT   DATE(created_at) as DATE " +
-//                "FROM bill " +
-//                "where extract(year_month from created_at) like '"+ chonThang +"' " +
-//                "GROUP BY  DATE(created_at)";
-//            try {
-//                Statement statement = (Statement)connection.createStatement();
-//                return statement.executeQuery(sql);
-//            } catch (SQLException e) {
-//                JOptionPane.showMessageDialog(null, "Có Lỗi, Hãy Nhập Lại");
-//            }
-//            System.out.println(result);
-//            return result;
-//        }
-        
+    
 }
