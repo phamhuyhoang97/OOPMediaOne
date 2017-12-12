@@ -20,9 +20,9 @@ public class BillMusic {
     private int billAmount;
     
     // Them 1 book vao hoa don
-    public void addMusicToBill(BillMusic billmusic){
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void addMusicToBill(BillMusic billmusic) throws SQLException{
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "insert into bill_music values (?, ?, ?);";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -38,9 +38,9 @@ public class BillMusic {
     }
     
     //lay don gia cua san pham
-    public double priceMusic(BillMusic  billmusic){
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public double priceMusic(BillMusic  billmusic) throws SQLException{
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         ResultSet rs = null;
         double price = 0;
         try {
@@ -49,7 +49,7 @@ public class BillMusic {
             prepareStatement.setString(1, billmusic.getIdBill());
             rs = prepareStatement.executeQuery();
             rs.next();
-            price = Double.parseDouble(rs.getString("bookPrice"));
+            price = Double.parseDouble(rs.getString("musicPrice"));
             System.out.println(price);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -58,9 +58,9 @@ public class BillMusic {
     }
     
     //Delte book khoi bill
-    public void deleteMusicToBill(BillMusic billmusic) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void deleteMusicToBill(BillMusic billmusic) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
 
         try {
             String sql = "delete from bill_music where idBill = ? and idMusic = ?";
@@ -76,9 +76,9 @@ public class BillMusic {
     }
     
     //Update book khoi bill
-    public void updateMusicToBill(BillMusic billmusic) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void updateMusicToBill(BillMusic billmusic) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
        
         try {
             String sql = "update bill_music set billAmount = ? Where idBill = ? and idMusic = ?";
@@ -95,9 +95,9 @@ public class BillMusic {
     }
     
     // Find all book of bill 
-    public ResultSet findMusicOfBill(BillMusic billmusic) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public ResultSet findMusicOfBill(BillMusic billmusic) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         ResultSet rs = null;
         try {
             String sql = "select idBill, musicName, billAmount from bill_music natural join music where idBill = ? ";

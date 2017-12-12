@@ -17,10 +17,10 @@ import java.sql.SQLException;
 public class AutoId {
     private String id;
     
-    public String autoId(String tableName, String charId) {
+    public String autoId(String tableName, String charId) throws SQLException {
         int count = 0;
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "select count(1) from " + tableName  ;
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -43,7 +43,7 @@ public class AutoId {
         this.id = id;
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         AutoId id = new AutoId();
         System.out.println(id.autoId("employee", "EM"));
     }

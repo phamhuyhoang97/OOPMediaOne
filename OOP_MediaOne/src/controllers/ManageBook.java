@@ -19,7 +19,7 @@ import model.Book;
  */
 public class ManageBook {
     
-    public void loadDataBook(DefaultTableModel model) {
+    public void loadDataBook(DefaultTableModel model) throws SQLException {
         // create table model
         //jt_hienthisach.setModel(new DefaultTableModel());
         //DefaultTableModel model = new DefaultTableModel();
@@ -50,7 +50,7 @@ public class ManageBook {
         //jt_hienthisach.setModel(model);
     }
     
-    public void searchBook(DefaultTableModel model, String itemText, String text){
+    public void searchBook(DefaultTableModel model, String itemText, String text) throws SQLException{
         ResultSet rs = null;
         Book book = new Book();
         System.out.println(itemText);
@@ -87,7 +87,7 @@ public class ManageBook {
         //jt_hienthisach.setModel(model);
     }
     
-    public void deleteBook(String idBook){
+    public void deleteBook(String idBook) throws SQLException{
         Book book = new Book();
         BillBook bb = new BillBook();
         book.setIdBook(idBook);
@@ -97,7 +97,7 @@ public class ManageBook {
         JOptionPane.showMessageDialog(null, "Đã xóa sách xong");
     }
     
-    public void addBook(String bookName, int bookAmount, double bookPrice, double bookCost, String bookAuthor, String bookPublic){
+    public void addBook(String bookName, int bookAmount, double bookPrice, double bookCost, String bookAuthor, String bookPublic) throws SQLException{
         Book book = new Book();
         book.setBookAmount(bookAmount);
         book.setBookAuthor(bookAuthor);
@@ -109,7 +109,7 @@ public class ManageBook {
         JOptionPane.showMessageDialog(null, "Đã thêm sách xong");
     }
     
-    public void updateBook(String idBook, String bookName, int bookAmount, double bookPrice, double bookCost, String bookAuthor, String bookPublic){
+    public void updateBook(String idBook, String bookName, int bookAmount, double bookPrice, double bookCost, String bookAuthor, String bookPublic) throws SQLException{
         Book book = new Book();
         book.setIdBook(idBook);
         book.setBookAmount(bookAmount);

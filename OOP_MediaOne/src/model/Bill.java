@@ -8,6 +8,7 @@ package model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -20,9 +21,9 @@ public class Bill {
     private double billTotal;
 
     // Them 1 bill
-    public void addBill(Bill bill) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void addBill(Bill bill) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         Employee employ = null;
         AutoId id = new AutoId();
         try {
@@ -40,9 +41,9 @@ public class Bill {
     }
     
     // Delete 1 bill
-    public void deleteBill(Bill bill) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void deleteBill(Bill bill) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
 
         try {
             String sql = "delete from bill where idBill = ?";
@@ -56,9 +57,9 @@ public class Bill {
         }
     }
     
-    public void updatePriceBill(Bill bill, String idBill, double price) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void updatePriceBill(Bill bill, String idBill, double price) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "update bill set billTotal = ? Where idBill = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -74,9 +75,9 @@ public class Bill {
     }
     
     // Update 1 bill (tinh lai total)
-    public void updateBill(Bill bill) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void updateBill(Bill bill) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "update bill set billDate = ?, billTotal = ? Where idBill = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -92,9 +93,9 @@ public class Bill {
         }
     }
     
-    public ResultSet searchBillById(Bill bill){
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public ResultSet searchBillById(Bill bill) throws SQLException{
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         ResultSet rs = null;
         try {
             String sql = "select idBill, billDate, billTotal from bill where idBill = ? and billType = 1";
@@ -109,9 +110,9 @@ public class Bill {
         return rs;
     }
     
-    public ResultSet searchBillByDate(Bill bill){
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public ResultSet searchBillByDate(Bill bill) throws SQLException{
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         ResultSet rs = null;
         try {
             String sql = "select idBill, billDate, billTotal from bill where billDate = ? and billType = 1";

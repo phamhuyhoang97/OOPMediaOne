@@ -17,7 +17,7 @@ import model.Music;
  * @author Khoa Nguyen
  */
 public class ManageMusic {
-    public void loadDataMusic(DefaultTableModel model) {
+    public void loadDataMusic(DefaultTableModel model) throws SQLException {
         // create table model
         //jt_hienthisach.setModel(new DefaultTableModel());
         //DefaultTableModel model = new DefaultTableModel();
@@ -47,7 +47,7 @@ public class ManageMusic {
         }
     }
     
-    public void searchMusic(DefaultTableModel model, String itemText, String text){
+    public void searchMusic(DefaultTableModel model, String itemText, String text) throws SQLException{
         ResultSet rs = null;
         Music music = new Music();
                 
@@ -84,14 +84,14 @@ public class ManageMusic {
         }
     }
     
-    public void deleteMusic(String idMusic){
+    public void deleteMusic(String idMusic) throws SQLException{
         Music music = new Music();
         music.setIdMusic(idMusic);
         music.deleteMusic(music);
         JOptionPane.showMessageDialog(null, "Đã xóa sách xong");
     }
     
-    public void addMusic(String musicName, int musicAmount, double musicPrice, double musicCost, String musicSinger, String musicCategory){
+    public void addMusic(String musicName, int musicAmount, double musicPrice, double musicCost, String musicSinger, String musicCategory) throws SQLException{
         Music music = new Music();
         music.setMusicAmount(musicAmount);
         music.setMusicCategory(musicCategory);
@@ -103,7 +103,7 @@ public class ManageMusic {
         JOptionPane.showMessageDialog(null, "Đã thêm sách xong");
     }
     
-    public void updateMusic(String idMusic, String musicName, int musicAmount, double musicPrice, double musicCost, String musicSinger, String musicCategory){
+    public void updateMusic(String idMusic, String musicName, int musicAmount, double musicPrice, double musicCost, String musicSinger, String musicCategory) throws SQLException{
         Music music = new Music();
         music.setIdMusic(idMusic);
         music.setMusicAmount(musicAmount);

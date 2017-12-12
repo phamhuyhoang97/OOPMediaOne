@@ -53,7 +53,7 @@ public class ManageEmp {
             }
         }    
     
-    public void deleteEmp(String idEmployee){
+    public void deleteEmp(String idEmployee) throws SQLException{
         Employee nv = new Employee();
         
         nv.setIdEmployee(idEmployee);
@@ -63,7 +63,7 @@ public class ManageEmp {
     }
     
     public void changeEmp(String idEmployee, String employeeName, String employeePhone, 
-            String employeeEmail, String employeeAddress, String employeeSalary, String employeePassword){
+            String employeeEmail, String employeeAddress, String employeeSalary, String employeePassword) throws SQLException{
         
         Employee nv = new Employee();
         //them dieu kien de xet xem da co Nhan Vien nay trong database chua
@@ -77,7 +77,7 @@ public class ManageEmp {
         JOptionPane.showMessageDialog(null, "Đã sửa nhân viên xong");
     }
     
-    public void showEmp(DefaultTableModel tableModel){
+    public void showEmp(DefaultTableModel tableModel) throws SQLException{
         Employee nv = new Employee();
         //
         String []colsName = {"ID Nhân Viên", "Họ Tên Nhân Viên", "SDT", "Email", "Địa Chỉ",
@@ -90,10 +90,8 @@ public class ManageEmp {
     }
            
     public void addEmp(String idEmployee, String employeeName, String employeePhone, 
-        String employeeEmail, String employeeAddress, String employeeSalary, String employeePassword){
-        Employee nv = new Employee();
-        //them dieu kien de xet xem da co Nhan Vien nay trong database chua
-        
+        String employeeEmail, String employeeAddress, String employeeSalary, String employeePassword) throws SQLException{
+        Employee nv = new Employee();        
         //them thuoc tinh NhanVien
         setData(nv, idEmployee, employeeName, employeePhone, employeeEmail, employeeAddress, employeeSalary, employeePassword);
         
@@ -104,7 +102,7 @@ public class ManageEmp {
     }
     
     
-    public void searchEmp(DefaultTableModel model, String itemText, String employee){
+    public void searchEmp(DefaultTableModel model, String itemText, String employee) throws SQLException{
         ResultSet rs = null;
         Employee nv = new Employee();
         

@@ -35,7 +35,7 @@ public class ManageRevenue {
             }
         }
     
-    public void showRevenue(DefaultTableModel tableModel){
+    public void showRevenue(DefaultTableModel tableModel) throws SQLException{
         Revenue revenue = new Revenue();
         String []colsName = {"Thời Gian", "Doanh Thu", "Chi Phí"};
         tableModel.setColumnIdentifiers(colsName);  // đặt tiêu đề cột cho tableModel
@@ -44,7 +44,7 @@ public class ManageRevenue {
         
     }
     
-    public double calculateProfit(String tuNgay, String denNgay){
+    public double calculateProfit(String tuNgay, String denNgay) throws SQLException{
         Revenue revenue = new Revenue();
         double profit = 0;
         ResultSet rs = null;

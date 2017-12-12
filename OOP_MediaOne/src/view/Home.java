@@ -1777,7 +1777,11 @@ public class Home extends javax.swing.JFrame {
         DefaultTableModel tableModel = new DefaultTableModel();
         ManageCost manageCost = new ManageCost();
         
-        manageCost.showRevenue(tableModel);
+        try {
+            manageCost.showRevenue(tableModel);
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jt_chiphi.setModel(tableModel);//ket noi jtalbe voi TableModel
         
         System.out.println("ok");
@@ -1835,7 +1839,11 @@ public class Home extends javax.swing.JFrame {
         panel_banhang.setVisible(false);
         panel_hoadon.setVisible(false);
         
-        loadDataBook();
+        try {
+            loadDataBook();
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_button_sachActionPerformed
 
     private void button_diaphimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_diaphimActionPerformed
@@ -1863,7 +1871,11 @@ public class Home extends javax.swing.JFrame {
         panel_banhang.setVisible(false);
         panel_hoadon.setVisible(false);
         
-        loadDataFilm();
+        try {
+            loadDataFilm();
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_button_diaphimActionPerformed
 
     private void button_dianhacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_dianhacActionPerformed
@@ -1896,7 +1908,11 @@ public class Home extends javax.swing.JFrame {
         panel_banhang.setVisible(false);
         panel_hoadon.setVisible(false);
         
-        loadDataMusic();
+        try {
+            loadDataMusic();
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_button_dianhacActionPerformed
 
     private void button_quanlikhohangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_quanlikhohangActionPerformed
@@ -1985,7 +2001,11 @@ public class Home extends javax.swing.JFrame {
         
         // Lay id bill
         AutoId id = new AutoId();
-        idBill = id.autoId("bill", "BI");
+        try {
+            idBill = id.autoId("bill", "BI");
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
         price = 0;
         
         
@@ -2006,7 +2026,7 @@ public class Home extends javax.swing.JFrame {
         tf_soluongsach.setText("");
     }
     
-    private void loadDataBook(){
+    private void loadDataBook() throws SQLException{
         ManageBook manageBook = new ManageBook();
         DefaultTableModel model = new DefaultTableModel();
         manageBook.loadDataBook(model);
@@ -2015,10 +2035,18 @@ public class Home extends javax.swing.JFrame {
     
     private void button_themsachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_themsachActionPerformed
         controllers.ManageBook manageBook = new ManageBook();
-        manageBook.addBook(tf_tensach.getText().trim(), Integer.parseInt(tf_soluongsach.getText().trim()), Double.parseDouble(tf_giamuasach.getText().trim()), 
-                Double.parseDouble(tf_giabansach.getText().trim()), tf_tacgia.getText().trim(), 
-                tf_nhaxuatban.getText().trim());
-        loadDataBook();
+        try {
+            manageBook.addBook(tf_tensach.getText().trim(), Integer.parseInt(tf_soluongsach.getText().trim()), Double.parseDouble(tf_giamuasach.getText().trim()),
+                    Double.parseDouble(tf_giabansach.getText().trim()), tf_tacgia.getText().trim(),
+                    tf_nhaxuatban.getText().trim());
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            loadDataBook();
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
         clearBook();
     }//GEN-LAST:event_button_themsachActionPerformed
 
@@ -2031,10 +2059,15 @@ public class Home extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
-        manageBook.updateBook(tf_idsach.getText().trim(), tf_tensach.getText().trim(), Integer.parseInt(tf_soluongsach.getText().trim()), Double.parseDouble(tf_giamuasach.getText().trim()), 
-                Double.parseDouble(tf_giabansach.getText().trim()), tf_tacgia.getText().trim(), 
-                tf_nhaxuatban.getText().trim());
-        loadDataBook();
+        try {
+            manageBook.updateBook(tf_idsach.getText().trim(), tf_tensach.getText().trim(), Integer.parseInt(tf_soluongsach.getText().trim()), Double.parseDouble(tf_giamuasach.getText().trim()),
+                    Double.parseDouble(tf_giabansach.getText().trim()), tf_tacgia.getText().trim(),
+                    tf_nhaxuatban.getText().trim());
+            loadDataBook();
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         clearBook();
     }//GEN-LAST:event_button_suasachActionPerformed
 
@@ -2050,8 +2083,13 @@ public class Home extends javax.swing.JFrame {
         int select = JOptionPane.showOptionDialog(null, "Are you want delete?",
                 "Delete", 0, JOptionPane.YES_NO_OPTION, null, null, 1);
         if (select == 0) {
-            manageBook.deleteBook((String) jt_hienthisach.getValueAt(row, 0));
-            loadDataBook();
+            try {
+                manageBook.deleteBook((String) jt_hienthisach.getValueAt(row, 0));
+                loadDataBook();
+            } catch (SQLException ex) {
+                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
     }//GEN-LAST:event_button_xoasachActionPerformed
 
@@ -2060,8 +2098,12 @@ public class Home extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel();
         String itemText = (String)jcb_timkiemsach.getSelectedItem( );
         String text = tf_timkiemsach.getText();
-        //System.out.println(itemText);
-        manageBook.searchBook(model, itemText, text);
+        try {
+            //System.out.println(itemText);
+            manageBook.searchBook(model, itemText, text);
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jt_hienthisach.setModel(model);
     }//GEN-LAST:event_button_timKiemSachActionPerformed
 
@@ -2074,7 +2116,7 @@ public class Home extends javax.swing.JFrame {
         tf_daodien.setText("");
     }
     
-    private void loadDataFilm(){
+    private void loadDataFilm() throws SQLException{
         ManageFilm manageFilm = new ManageFilm();
         DefaultTableModel model = new DefaultTableModel();
         manageFilm.loadDataFilm(model);
@@ -2084,9 +2126,14 @@ public class Home extends javax.swing.JFrame {
     
     private void button_themdiaphimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_themdiaphimActionPerformed
         controllers.ManageFilm manageFilm = new ManageFilm();
-        manageFilm.addFilm(tf_tendiaphim.getText().trim(), Integer.parseInt(tf_soluongdiaphim.getText().trim()), Double.parseDouble(tf_giamuadiaphim.getText().trim()), 
-                Double.parseDouble(tf_giabandiaphim.getText().trim()), tf_dienvien.getText().trim(), tf_daodien.getText().trim());
-        loadDataFilm();
+        try {
+            manageFilm.addFilm(tf_tendiaphim.getText().trim(), Integer.parseInt(tf_soluongdiaphim.getText().trim()), Double.parseDouble(tf_giamuadiaphim.getText().trim()),
+                    Double.parseDouble(tf_giabandiaphim.getText().trim()), tf_dienvien.getText().trim(), tf_daodien.getText().trim());
+            loadDataFilm();
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         clearFilm();
     }//GEN-LAST:event_button_themdiaphimActionPerformed
 
@@ -2099,9 +2146,14 @@ public class Home extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
-        manageFilm.updateFilm(tf_idphim.getText().trim(), tf_tendiaphim.getText().trim(), Integer.parseInt(tf_soluongdiaphim.getText().trim()), Double.parseDouble(tf_giamuadiaphim.getText().trim()), 
-                Double.parseDouble(tf_giabandiaphim.getText().trim()), tf_dienvien.getText().trim(), tf_daodien.getText().trim());
-        loadDataFilm();
+        try {
+            manageFilm.updateFilm(tf_idphim.getText().trim(), tf_tendiaphim.getText().trim(), Integer.parseInt(tf_soluongdiaphim.getText().trim()), Double.parseDouble(tf_giamuadiaphim.getText().trim()),
+                    Double.parseDouble(tf_giabandiaphim.getText().trim()), tf_dienvien.getText().trim(), tf_daodien.getText().trim());
+            loadDataFilm();
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         clearFilm();
     }//GEN-LAST:event_button_suadiaphimActionPerformed
 
@@ -2117,8 +2169,13 @@ public class Home extends javax.swing.JFrame {
         int select = JOptionPane.showOptionDialog(null, "Are you want delete?",
                 "Delete", 0, JOptionPane.YES_NO_OPTION, null, null, 1);
         if (select == 0) {
-            manageFilm.deleteFilm((String) jt_hienthidiaphim.getValueAt(row, 0));
-            loadDataFilm();
+            try {
+                manageFilm.deleteFilm((String) jt_hienthidiaphim.getValueAt(row, 0));
+                loadDataFilm();
+            } catch (SQLException ex) {
+                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
     }//GEN-LAST:event_button_xoadiaphimActionPerformed
 
@@ -2127,8 +2184,12 @@ public class Home extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel();
         String itemText = (String)jcb_timkiemdiaphim.getSelectedItem( );
         String text = tf_timkiemdiaphim.getText();
-        //System.out.println(itemText);
-        manageFilm.searchFilm(model, itemText, text);
+        try {
+            //System.out.println(itemText);
+            manageFilm.searchFilm(model, itemText, text);
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jt_hienthidiaphim.setModel(model);
     }//GEN-LAST:event_button_timKiemPhimActionPerformed
 
@@ -2141,7 +2202,7 @@ public class Home extends javax.swing.JFrame {
         tf_theloai.setText("");
     }
     
-    private void loadDataMusic(){
+    private void loadDataMusic() throws SQLException{
         ManageMusic manageMusic = new ManageMusic();
         DefaultTableModel model = new DefaultTableModel();
         manageMusic.loadDataMusic(model);
@@ -2150,9 +2211,14 @@ public class Home extends javax.swing.JFrame {
     
     private void button_themdianhacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_themdianhacActionPerformed
         controllers.ManageMusic manageMusic = new ManageMusic();
-        manageMusic.addMusic(tf_tendianhac.getText().trim(), Integer.parseInt(tf_soluongdianhac.getText().trim()), Double.parseDouble(tf_giamuadianhac.getText().trim()), 
-                Double.parseDouble(tf_giabandianhac.getText().trim()), tf_casi.getText().trim(), tf_theloai.getText().trim());
-        loadDataMusic();
+        try {
+            manageMusic.addMusic(tf_tendianhac.getText().trim(), Integer.parseInt(tf_soluongdianhac.getText().trim()), Double.parseDouble(tf_giamuadianhac.getText().trim()),
+                    Double.parseDouble(tf_giabandianhac.getText().trim()), tf_casi.getText().trim(), tf_theloai.getText().trim());
+            loadDataMusic();
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         clearMusic();
     }//GEN-LAST:event_button_themdianhacActionPerformed
 
@@ -2165,9 +2231,14 @@ public class Home extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
-        manageMusic.updateMusic(tf_idnhac.getText().trim(), tf_tendianhac.getText().trim(), Integer.parseInt(tf_soluongdianhac.getText().trim()), Double.parseDouble(tf_giamuadianhac.getText().trim()), 
-                Double.parseDouble(tf_giabandianhac.getText().trim()), tf_casi.getText().trim(), tf_theloai.getText().trim());
-        loadDataMusic();
+        try {
+            manageMusic.updateMusic(tf_idnhac.getText().trim(), tf_tendianhac.getText().trim(), Integer.parseInt(tf_soluongdianhac.getText().trim()), Double.parseDouble(tf_giamuadianhac.getText().trim()),
+                    Double.parseDouble(tf_giabandianhac.getText().trim()), tf_casi.getText().trim(), tf_theloai.getText().trim());
+            loadDataMusic();
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         clearMusic();
     }//GEN-LAST:event_button_suadianhacActionPerformed
 
@@ -2183,8 +2254,13 @@ public class Home extends javax.swing.JFrame {
         int select = JOptionPane.showOptionDialog(null, "Are you want delete?",
                 "Delete", 0, JOptionPane.YES_NO_OPTION, null, null, 1);
         if (select == 0) {
-            manageMusic.deleteMusic((String) jt_hienthidianhac.getValueAt(row, 0));
-            loadDataMusic();
+            try {
+                manageMusic.deleteMusic((String) jt_hienthidianhac.getValueAt(row, 0));
+                loadDataMusic();
+            } catch (SQLException ex) {
+                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
     }//GEN-LAST:event_button_xoadianhacActionPerformed
 
@@ -2193,8 +2269,12 @@ public class Home extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel();
         String itemText = (String)jcb_timkiemdianhac.getSelectedItem( );
         String text = tf_timkiemdianhac.getText();
-        //System.out.println(itemText);
-        manageMusic.searchMusic(model, itemText, text);
+        try {
+            //System.out.println(itemText);
+            manageMusic.searchMusic(model, itemText, text);
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jt_hienthidianhac.setModel(model);
     }//GEN-LAST:event_button_timKiemDiaNhacActionPerformed
     
@@ -2202,14 +2282,22 @@ public class Home extends javax.swing.JFrame {
     
     private void button_xoanhanvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_xoanhanvienActionPerformed
         controllers.ManageEmp manageEmp = new ManageEmp();
-        manageEmp.deleteEmp(tf_idnhanvien.getText().trim());
+        try {
+            manageEmp.deleteEmp(tf_idnhanvien.getText().trim());
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_button_xoanhanvienActionPerformed
 
     private void button_suanhanvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_suanhanvienActionPerformed
         controllers.ManageEmp manageEmp = new ManageEmp();
-        manageEmp.changeEmp(tf_idnhanvien.getText(), tf_tennhanvien.getText(), tf_sdt.getText(), 
-                tf_email.getText(), tf_diachi.getText(), tf_luongnhanvien.getText()
-               , tf_password.getText());
+        try {
+            manageEmp.changeEmp(tf_idnhanvien.getText(), tf_tennhanvien.getText(), tf_sdt.getText(),
+                    tf_email.getText(), tf_diachi.getText(), tf_luongnhanvien.getText()
+                    , tf_password.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_button_suanhanvienActionPerformed
 
@@ -2217,7 +2305,11 @@ public class Home extends javax.swing.JFrame {
         controllers.ManageEmp manageEmp = new ManageEmp();
         DefaultTableModel tableModel = new DefaultTableModel();
         
-        manageEmp.showEmp(tableModel);
+        try {
+            manageEmp.showEmp(tableModel);
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jt_hienthinhanvien.setModel(tableModel);//ket noi jtalbe voi TableModel
         
         System.out.println("ok");
@@ -2225,8 +2317,12 @@ public class Home extends javax.swing.JFrame {
 
     private void button_themnhanvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_themnhanvienActionPerformed
         controllers.ManageEmp manageEmp = new ManageEmp();
-        manageEmp.addEmp(tf_idnhanvien.getText(), tf_tennhanvien.getText(), tf_sdt.getText(), 
-                tf_email.getText(), tf_diachi.getText(), tf_luongnhanvien.getText(), tf_password.getText());
+        try {
+            manageEmp.addEmp(tf_idnhanvien.getText(), tf_tennhanvien.getText(), tf_sdt.getText(),
+                    tf_email.getText(), tf_diachi.getText(), tf_luongnhanvien.getText(), tf_password.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_button_themnhanvienActionPerformed
 
@@ -2236,7 +2332,11 @@ public class Home extends javax.swing.JFrame {
         String itemText = (String)jcb_timkiemnhanvien.getSelectedItem( );
         String employee = tf_timkiemnhanvien.getText();
         System.out.println(itemText);
-        manageEmp.searchEmp(model, itemText, employee);
+        try {
+            manageEmp.searchEmp(model, itemText, employee);
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jt_hienthinhanvien.setModel(model);
     }//GEN-LAST:event_button_timkiemnhanvienActionPerformed
 
@@ -2250,12 +2350,15 @@ public class Home extends javax.swing.JFrame {
 
 /*Thong Ke Doanh Thu*/
     
-
     private void button_xemthongkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_xemthongkeActionPerformed
         DefaultTableModel tableModel = new DefaultTableModel();
         controllers.ManageRevenue manageRevenue = new ManageRevenue();
         
-        manageRevenue.showRevenue(tableModel);
+        try {
+            manageRevenue.showRevenue(tableModel);
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jt_thongke.setModel(tableModel);//ket noi jtalbe voi TableModel
         
         System.out.println("ok");
@@ -2264,7 +2367,11 @@ public class Home extends javax.swing.JFrame {
     private void button_tinhloinhuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tinhloinhuanActionPerformed
         controllers.ManageRevenue manageRevenue = new ManageRevenue();
         double profit = 0;
-        profit = manageRevenue.calculateProfit(tf_thongketungay.getText(), tf_thongkedenngay.getText());
+        try {
+            profit = manageRevenue.calculateProfit(tf_thongketungay.getText(), tf_thongkedenngay.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         tf_loinhuan.setText(String.valueOf(profit));
     }//GEN-LAST:event_button_tinhloinhuanActionPerformed
@@ -2280,15 +2387,19 @@ public class Home extends javax.swing.JFrame {
         dn.setVisible(true);
         dn.setLocation(500, 150);
     }//GEN-LAST:event_button_dangxuatActionPerformed
-/* Quan Li Hoa Don */
-    
+
+    /* Quan Li Hoa Don */
     
     private void button_timkiemhoadonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_timkiemhoadonActionPerformed
         ManageBill manageBill = new ManageBill();
         DefaultTableModel model = new DefaultTableModel();
         String itemText = (String)jcb_timkiemhoadon.getSelectedItem( );
         String employee = tf_timkiemhoadon.getText();
-        manageBill.searchBill(model, itemText, employee);
+        try {
+            manageBill.searchBill(model, itemText, employee);
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jt_hoadon.setModel(model);
     }//GEN-LAST:event_button_timkiemhoadonActionPerformed
 
@@ -2310,7 +2421,7 @@ public class Home extends javax.swing.JFrame {
             manageSell.searchBillDetails(tableModel, itemText, idBill, tf_tensanphammua.getText(), Integer.parseInt(tf_soluongmua.getText()));
             jt_chitiethoadon.setModel(tableModel);
         } catch (SQLException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Không có sản phẩm trong kho hàng");
         }
         tf_tongtien.setText(String.valueOf(price));
     }//GEN-LAST:event_button_themvaogiohangActionPerformed
@@ -2340,6 +2451,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_button_xoakhoigiohangActionPerformed
 
     private void button_thanhtoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_thanhtoanActionPerformed
+        //tro ve giao dien hoa don
         JOptionPane.showMessageDialog(null,"Thanh Toán Thành Công");
         // Quan Ly Ban Hang:
         // Set màu button:

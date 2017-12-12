@@ -217,7 +217,7 @@ public class ManageSell {
             mu.setMusicName(Name);
             rs = mu.findMusicByName(mu);
             rs.next();
-            System.out.println("IdBook: "+rs.getString("idBook"));
+            System.out.println("IdBook: "+rs.getString("idMusic"));
             mu.setIdMusic(rs.getString("idMusic"));
 
             // Tao book ket noi vao bill
@@ -234,7 +234,7 @@ public class ManageSell {
             mu.setFilmName(Name);
             rs = mu.findFilmByName(mu);
             rs.next();
-            System.out.println("IdBook: "+rs.getString("idBook"));
+            System.out.println("IdBook: "+rs.getString("idFilm"));
             mu.setIdFilm(rs.getString("idFilm"));
 
             // Tao book ket noi vao bill

@@ -5,6 +5,9 @@
  */
 package view;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.Employee;
@@ -24,7 +27,7 @@ public class DangNhap extends javax.swing.JFrame {
         initComponents();
     }
     
-    public void dangnhap() {
+    public void dangnhap() throws SQLException {
             try {
             // TODO add your handling code here:
             
@@ -162,7 +165,11 @@ public class DangNhap extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_dangnhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_dangnhapActionPerformed
-        dangnhap();
+        try {
+            dangnhap();
+        } catch (SQLException ex) {
+            Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_button_dangnhapActionPerformed
 
     private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
@@ -171,7 +178,11 @@ public class DangNhap extends javax.swing.JFrame {
 
     private void passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            dangnhap();
+            try {
+                dangnhap();
+            } catch (SQLException ex) {
+                Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_passwordKeyPressed
 

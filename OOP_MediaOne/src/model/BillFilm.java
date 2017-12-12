@@ -21,9 +21,9 @@ public class BillFilm {
     private int billAmount;
     
     // Them 1 book vao hoa don
-    public void addFilmToBill(BillFilm billfilm){
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void addFilmToBill(BillFilm billfilm) throws SQLException{
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "insert into bill_film values (?, ?, ?);";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -39,9 +39,9 @@ public class BillFilm {
     }
     
     //lay don gia cua san pham
-    public double priceFilm(BillFilm billfilm){
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public double priceFilm(BillFilm billfilm) throws SQLException{
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         ResultSet rs = null;
         double price = 0;
         try {
@@ -50,7 +50,7 @@ public class BillFilm {
             prepareStatement.setString(1, billfilm.getIdBill());
             rs = prepareStatement.executeQuery();
             rs.next();
-            price = Double.parseDouble(rs.getString("bookPrice"));
+            price = Double.parseDouble(rs.getString("filmPrice"));
             System.out.println(price);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -59,9 +59,9 @@ public class BillFilm {
     }
     
     //Delte book khoi bill
-    public void deleteFilmToBill(BillFilm billfilm) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void deleteFilmToBill(BillFilm billfilm) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
 
         try {
             String sql = "delete from bill_film where idBill = ? and idFilm = ?";
@@ -77,9 +77,9 @@ public class BillFilm {
     }
     
     //Update book khoi bill
-    public void updateFilmToBill(BillFilm billfilm) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void updateFilmToBill(BillFilm billfilm) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "update bill_film set billAmount = ? Where idBill = ? and idFilm = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -95,9 +95,9 @@ public class BillFilm {
     }
     
     // Find all book of bill 
-    public ResultSet findFilmOfBill(BillFilm billfilm) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public ResultSet findFilmOfBill(BillFilm billfilm) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         ResultSet rs = null;
         try {
             String sql = "select idBill, bookFilm, billAmount from bill_film natural join film where idBill = ? ";

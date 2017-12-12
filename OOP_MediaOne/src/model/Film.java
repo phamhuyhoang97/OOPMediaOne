@@ -25,10 +25,10 @@ public class Film {
         int filmAmount;
         String filmDirector;
 
-    public ResultSet getDataFilm() {
+    public ResultSet getDataFilm() throws SQLException {
         ResultSet rs = null;
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "select * from film;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -40,10 +40,10 @@ public class Film {
         return rs;
     }
 
-    public ResultSet findFilmById(Film film) {
+    public ResultSet findFilmById(Film film) throws SQLException {
         ResultSet rs = null;
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "select * from film where idFilm = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -56,10 +56,10 @@ public class Film {
         return rs;
     }
 
-    public ResultSet findFilmByName(Film film) {
+    public ResultSet findFilmByName(Film film) throws SQLException {
         ResultSet rs = null;
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "select * from film where filmName = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -72,10 +72,10 @@ public class Film {
         return rs;
     }
 
-    public ResultSet findFilmByDirector(Film film) {
+    public ResultSet findFilmByDirector(Film film) throws SQLException {
         ResultSet rs = null;
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "select * from film where filmDirector = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -88,10 +88,10 @@ public class Film {
         return rs;
     }
 
-    public ResultSet findFilmByActor(Film film) {
+    public ResultSet findFilmByActor(Film film) throws SQLException {
         ResultSet rs = null;
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "select * from film where filmActor = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -103,9 +103,9 @@ public class Film {
         }
         return rs;
     }
-    public void addFilm(Film film) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void addFilm(Film film) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         AutoId id = new AutoId();
         try {
             String sql = "insert into film values (? , ?, ? , ? , ? , ? , ?) ";
@@ -125,9 +125,9 @@ public class Film {
         }
     }
 
-    public void updateFilm(Film film) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void updateFilm(Film film) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "update film set filmName = ? , filmAmount = ? , filmPrice = ? , filmCost = ? , filmActor = ? , filmDirector = ?  ";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -144,9 +144,9 @@ public class Film {
             e.printStackTrace();
         }
     }
-    public void deleteFilm(Film film) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void deleteFilm(Film film) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "delete from film where idFilm=?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);

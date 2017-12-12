@@ -25,10 +25,10 @@ public class Music {
         String musicSinger;
         String musicCategory;
 
-    public ResultSet getDataMusic() {
+    public ResultSet getDataMusic() throws SQLException {
         ResultSet rs = null;
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "select * from music ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -40,10 +40,10 @@ public class Music {
         return rs;
     }
 
-    public ResultSet findMusicById(Music music) {
+    public ResultSet findMusicById(Music music) throws SQLException {
         ResultSet rs = null;
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "select * from music where idMusic = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -56,10 +56,10 @@ public class Music {
         return rs;
     }
 
-    public ResultSet findMusicByName(Music music) {
+    public ResultSet findMusicByName(Music music) throws SQLException {
         ResultSet rs = null;
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "select * from music where musicName = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -72,10 +72,10 @@ public class Music {
         return rs;
     }
 
-    public ResultSet findMusicByCategory(Music music) {
+    public ResultSet findMusicByCategory(Music music) throws SQLException {
         ResultSet rs = null;
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "select * from music where musicCategory = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -88,10 +88,10 @@ public class Music {
         return rs;
     }
 
-    public ResultSet findMusicBySinger(Music music) {
+    public ResultSet findMusicBySinger(Music music) throws SQLException {
         ResultSet rs = null;
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "select * from music where musicSinger = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -102,9 +102,9 @@ public class Music {
         }
         return rs;
     }
-    public void addMusic(Music music) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void addMusic(Music music) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         AutoId id = new AutoId();
         try {
             String sql = "insert into music values (? , ?, ? , ? , ? , ? , ?) ";
@@ -124,9 +124,9 @@ public class Music {
         }
     }
 
-    public void updateMusic(Music music) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void updateMusic(Music music) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "update music set musicName = ? , musicAmount = ? , musicPrice = ? , musicCost = ? , musicSinger = ? , bookCategory = ?  ";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -144,9 +144,9 @@ public class Music {
             e.printStackTrace();
         }
     }
-    public void deleteMusic(Music music) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void deleteMusic(Music music) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "delete from music where idMusic=?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);

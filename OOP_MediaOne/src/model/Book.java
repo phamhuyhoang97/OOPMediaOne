@@ -27,10 +27,10 @@ public class Book {
         int bookAmount;
         String bookPublic;
     
-    public ResultSet getDataBook() {
+    public ResultSet getDataBook() throws SQLException {
         ResultSet rs = null;
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "select * from book;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -42,10 +42,10 @@ public class Book {
         return rs;
     }
 
-    public ResultSet findBookById(Book book) {
+    public ResultSet findBookById(Book book) throws SQLException {
         ResultSet rs = null;
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "select * from book where idBook = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -58,10 +58,10 @@ public class Book {
         return rs;
     }
 
-    public ResultSet findBookByName(Book book) {
+    public ResultSet findBookByName(Book book) throws SQLException {
         ResultSet rs = null;
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "select * from book where bookName = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -73,10 +73,10 @@ public class Book {
         return rs;
     }
 
-    public ResultSet findBookByAuthor(Book book) {
+    public ResultSet findBookByAuthor(Book book) throws SQLException {
         ResultSet rs = null;
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "select * from book where bookAuthor = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -90,10 +90,10 @@ public class Book {
         return rs;
     }
 
-    public ResultSet findBookByPublic(Book book) {
+    public ResultSet findBookByPublic(Book book) throws SQLException {
         ResultSet rs = null;
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "select * from book where bookPublic = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -105,9 +105,9 @@ public class Book {
         }
         return rs;
     }
-    public void addBook(Book book) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void addBook(Book book) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         AutoId id = new AutoId();
         try {
             String sql = "insert into book values (? , ?, ? , ? , ? , ? , ?) ";
@@ -127,9 +127,9 @@ public class Book {
         }
     }
 
-    public void updateBook(Book book) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void updateBook(Book book) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "update book set bookName = ? , bookAmount = ? , bookPrice = ? , bookCost = ? , bookAuthor = ? , bookPublic = ?  where idBook = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -149,8 +149,8 @@ public class Book {
     }
     
     public void updateBookAmountById(String idBook, int Amount) throws SQLException {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         
         Book book = new Book();
         book.setIdBook(idBook);
@@ -174,9 +174,9 @@ public class Book {
         }
     }
     
-    public void deleteBook(Book book) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void deleteBook(Book book) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "delete from book where idBook=?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);

@@ -8,6 +8,7 @@ package model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -28,10 +29,9 @@ public class Employee {
     private String endDate;
 
     //xoa nhan vien
-    public void deleteEmployee(Employee employee){
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
-
+    public void deleteEmployee(Employee employee) throws SQLException{
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "delete from employee where idEmployee = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -45,9 +45,9 @@ public class Employee {
     }
     
     //sua thong tin nhan vien
-    public void changeEmployee(Employee employee){
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void changeEmployee(Employee employee) throws SQLException{
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         int rs = 0;
         try {
             String sql = "update employee set employeeName = ?, employeePhone = ?, employeeEmail = ?,"
@@ -60,27 +60,22 @@ public class Employee {
             prepareStatement.setString(4, employee.getEmployeePassword());
             prepareStatement.setString(5, employee.getEmployeeAddress());
             prepareStatement.setString(6, String.valueOf(employee.getEmployeeSalary()));       
-            
             prepareStatement.setString(7, employee.getIdEmployee());
             
-            System.out.println(prepareStatement);
             rs = prepareStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     
-    public void deleteEmployeeByUpdateStatus(Employee employee){
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void deleteEmployeeByUpdateStatus(Employee employee) throws SQLException{
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         int rs = 0;
         try {
             String sql = "update employee set status = '0', endDate = current_date() Where idEmployee = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
-            
             prepareStatement.setString(1, employee.getIdEmployee());
-            
-            System.out.println(prepareStatement);
             rs = prepareStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,9 +83,9 @@ public class Employee {
     }
     
     //truy xuat du lieu len bang
-    public ResultSet view(){
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public ResultSet view() throws SQLException{
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         ResultSet rs = null;
         try {
             String sql = "select idEmployee, employeeName, employeePhone, employeeEmail, "
@@ -104,9 +99,9 @@ public class Employee {
     }
     
     //them Nhan vien
-    public void addEmployee(Employee employee){
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void addEmployee(Employee employee) throws SQLException{
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         Employee employ = null;
         AutoId id = new AutoId();
 
@@ -132,9 +127,9 @@ public class Employee {
     }
     
     //tim nhan vien theo id
-    public ResultSet searchEmployeeById(Employee employee){
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public ResultSet searchEmployeeById(Employee employee) throws SQLException{
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         ResultSet rs = null;
         try {
             String sql = "select * from employee where idEmployee = ? and status = '1'";
@@ -148,9 +143,9 @@ public class Employee {
     }
     
     //tim nhan vien theo ten
-    public ResultSet searchEmployeeByName (Employee employee){
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public ResultSet searchEmployeeByName (Employee employee) throws SQLException{
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         ResultSet rs = null;
         try {
             String sql = "select * from employee where employeeName = ? and status = '1'";
@@ -165,10 +160,10 @@ public class Employee {
     } 
     
     //dang nhap cho nhan vien
-    public static Employee login(String username, String password) throws ClassNotFoundException {
+    public static Employee login(String username, String password) throws ClassNotFoundException, SQLException {
         //Them ket noi CSDL vao duoi
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         Employee employee = null;
         try {
             String sql = "select * from employee where employeeEmail = ? and employeePassword = ?";
@@ -201,7 +196,7 @@ public class Employee {
         return employee;
     }
     
-    public static void main(String[] args) throws ClassNotFoundException {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
         Employee emp = new Employee();
         
         Employee employ = new Employee();

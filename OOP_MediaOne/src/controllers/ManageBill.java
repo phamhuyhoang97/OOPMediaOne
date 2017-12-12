@@ -17,7 +17,7 @@ import model.Employee;
  * @author hoang
  */
 public class ManageBill {
-    public void searchBill(DefaultTableModel model, String itemText, String bill){
+    public void searchBill(DefaultTableModel model, String itemText, String bill) throws SQLException{
         ResultSet rs = null;
         Bill bi = new Bill();
         if (itemText.equals("ID Hóa Đơn")) {

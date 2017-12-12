@@ -17,7 +17,7 @@ import model.Film;
  * @author Khoa Nguyen
  */
 public class ManageFilm {
-    public void loadDataFilm(DefaultTableModel model) {
+    public void loadDataFilm(DefaultTableModel model) throws SQLException {
         // create table model
         //jt_hienthisach.setModel(new DefaultTableModel());
         //DefaultTableModel model = new DefaultTableModel();
@@ -47,7 +47,7 @@ public class ManageFilm {
         }
     }
     
-    public void searchFilm(DefaultTableModel model, String itemText, String text){
+    public void searchFilm(DefaultTableModel model, String itemText, String text) throws SQLException{
         ResultSet rs = null;
         Film film = new Film();
                 
@@ -84,14 +84,14 @@ public class ManageFilm {
         }
     }
     
-    public void deleteFilm(String idFilm){
+    public void deleteFilm(String idFilm) throws SQLException{
         Film film = new Film();
         film.setIdFilm(idFilm);
         film.deleteFilm(film);
         JOptionPane.showMessageDialog(null, "Đã xóa sách xong");
     }
     
-    public void addFilm(String filmName, int filmAmount, double filmPrice, double filmCost, String filmActor, String filmDirector){
+    public void addFilm(String filmName, int filmAmount, double filmPrice, double filmCost, String filmActor, String filmDirector) throws SQLException{
         Film film = new Film();
         film.setFilmActor(filmActor);
         film.setFilmAmount(filmAmount);
@@ -103,7 +103,7 @@ public class ManageFilm {
         JOptionPane.showMessageDialog(null, "Đã thêm sách xong");
     }
     
-    public void updateFilm(String idFilm, String filmName, int filmAmount, double filmPrice, double filmCost, String filmActor, String filmDirector){
+    public void updateFilm(String idFilm, String filmName, int filmAmount, double filmPrice, double filmCost, String filmActor, String filmDirector) throws SQLException{
         Film film = new Film();
         film.setIdFilm(idFilm);
         film.setFilmActor(filmActor);

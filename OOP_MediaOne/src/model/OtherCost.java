@@ -24,9 +24,9 @@ public class OtherCost {
             double costMoney;
             int costType;
             
-    public ResultSet view(){
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public ResultSet view() throws SQLException{
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         ResultSet rs = null;
         try {
             String sql = "select costDate, costName, costMoney from other_cost";
@@ -38,10 +38,10 @@ public class OtherCost {
         return rs;
     }
     
-    public ResultSet getDataOtherCost() {
+    public ResultSet getDataOtherCost() throws SQLException {
         ResultSet rs = null;
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "select * from other_cost;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -52,10 +52,10 @@ public class OtherCost {
         }
         return rs;
     }
-     public ResultSet findCostByDate(String begin, String end) {
+     public ResultSet findCostByDate(String begin, String end) throws SQLException {
         ResultSet rs = null;
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "select * from other_cost where costDate between ? and ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -69,10 +69,10 @@ public class OtherCost {
         }
         return rs;
     }
-     public ResultSet findCostByName(OtherCost otherCost) {
+     public ResultSet findCostByName(OtherCost otherCost) throws SQLException {
         ResultSet rs = null;
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "select * from other_cost where costName = ? ;";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -84,9 +84,9 @@ public class OtherCost {
         }
         return rs;
     }
-     public void addCost(OtherCost otherCost) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+     public void addCost(OtherCost otherCost) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         AutoId id = new AutoId();
         try {
             String sql = "insert into other_cost values (? , ?, ? , ? , ?) ";
@@ -103,9 +103,9 @@ public class OtherCost {
             e.printStackTrace();
         }
     }
-     public void updateCost(OtherCost otherCost) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+     public void updateCost(OtherCost otherCost) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "update other_cost set costDate = ? , costName = ? , costMoney = ? , costType = ? where idCost = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -120,9 +120,9 @@ public class OtherCost {
             e.printStackTrace();
         }
     }
-    public void deleteCost(OtherCost otherCost) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void deleteCost(OtherCost otherCost) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "delete from other_cost where idCost=?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);

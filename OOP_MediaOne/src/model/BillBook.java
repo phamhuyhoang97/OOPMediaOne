@@ -20,9 +20,9 @@ public class BillBook {
     private int billAmount;
     
     // Them 1 book vao hoa don
-    public void addBookToBill(BillBook billbook){
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void addBookToBill(BillBook billbook) throws SQLException{
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "insert into bill_book values (?, ?, ?);";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -41,9 +41,9 @@ public class BillBook {
     }
     
     //lay don gia cua san pham
-    public double priceBook(BillBook billbook){
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public double priceBook(BillBook billbook) throws SQLException{
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         ResultSet rs = null;
         double price = 0;
         try {
@@ -61,9 +61,9 @@ public class BillBook {
     }
     
     //Delte book khoi bill
-    public void deleteBookToBill(BillBook billbook) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void deleteBookToBill(BillBook billbook) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
 
         try {
             String sql = "delete from bill_book where idBill = ? and idBook = ?";
@@ -80,9 +80,9 @@ public class BillBook {
     }
     
     //Update book khoi bill
-    public void updateBookToBill(BillBook billbook) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public void updateBookToBill(BillBook billbook) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         try {
             String sql = "update bill_book set billAmount = ? Where idBill = ? and idBook = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -98,9 +98,9 @@ public class BillBook {
     }
     
     // Find all book of bill 
-    public ResultSet findBookOfBill(BillBook billbook) {
-        MyConnect connect = new MyConnect();
-        Connection connection = connect.connect();
+    public ResultSet findBookOfBill(BillBook billbook) throws SQLException {
+        MyConnect connect = MyConnect.getInstance();
+        Connection connection = connect.getConnection();
         ResultSet rs = null;
         try {
             String sql = "select idBill, bookName, billAmount from bill_book natural join book where idBill = ? ";

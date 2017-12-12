@@ -37,7 +37,7 @@ public class ManageCost {
             }
         }
     
-    public void showRevenue(DefaultTableModel tableModel){
+    public void showRevenue(DefaultTableModel tableModel) throws SQLException{
         OtherCost cost = new OtherCost();
         String []colsName = {"Thời Gian", "Tên Chi Phí", "Số Tiền"};
         tableModel.setColumnIdentifiers(colsName);  // đặt tiêu đề cột cho tableModel
